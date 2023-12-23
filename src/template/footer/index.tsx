@@ -1,4 +1,4 @@
-function Layout () {
+function Footer() {
   return (
     <div>
       
@@ -6,4 +6,4 @@ function Layout () {
   )
 }
 
-export default Layout
+export default Footer

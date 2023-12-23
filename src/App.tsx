@@ -1,9 +1,17 @@
-function App() {
+import { FC } from 'react'
+import { Route, Routes } from 'react-router-dom'
+import HomePage from './pages/home'
+import Layout from './layout'
+
+const App: FC = () : JSX.Element => {
   return (
-    <div className="container">
-      TS-Projects
-      <div className="bg-red-400 h-4"></div>
-    </div>
+    <>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+        </Routes>
+      </Layout>
+    </>
   )
 }
 

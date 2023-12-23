@@ -5,11 +5,12 @@ export default {
     extend: {
       colors: {
         primary: {
-          500: "",
-          400: "",
-          300: "",
-          200: "",
-          100: "",
+          500: "#0023d0",
+          400: "#072bdd",
+          300: "#0e33ea",
+          200: "#193df3",
+          100: "#3051f8",
+          50: "#6b82f7",
         },
         secondary: {
           500: "",
@@ -25,10 +26,17 @@ export default {
       },
       borderRadius: {
         normal: "",
-        fix:""
+        fix: "",
       },
-      fontFamily: {},
       boxShadow: {},
+    },
+    fontFamily: {
+      "Yek-Light": "Yek-Light",
+      "Yek-Regular": "Yek-Regular",
+      "Yek-Bold": "Yek-Bold",
+      "Yek-SemiBold": "Yek-SemiBold",
+      "Yek-ExtraBlack": "Yek-ExtraBlack",
+      "Yek-ExtraBold": "Yek-ExtraBold",
     },
   },
   plugins: [],

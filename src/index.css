@@ -3,10 +3,47 @@
 @tailwind utilities;
 
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: rgb(248, 248, 248);
+    background-color: rgb(245, 248, 252);
+}
+
+@font-face {
+  font-family: "Yek-Light";
+  src: local("Yekan"), url("./assets/fonts/woff2/YekanBakh-Light.woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Yek-Regular";
+  src: local("Yekan"), url("./assets/fonts/woff2/YekanBakh-Regular.woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Yek-Bold";
+  src: local("Yekan"), url("./assets/fonts/woff2/YekanBakh-Bold.woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Yek-SemiBold";
+  src: local("Yekan"), url("./assets/fonts/woff2/YekanBakh-SemiBold.woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Yek-ExtraBlack";
+  src: local("Yekan"), url("./assets/fonts/woff2/YekanBakh-ExtraBlack.woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Yek-ExtraBold";
+  src: local("Yekan"), url("./assets/fonts/woff2/YekanBakh-ExtraBold.woff2");
+  font-display: swap;
 }
