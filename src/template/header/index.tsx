@@ -23,15 +23,15 @@ const Header: FC = () => {
         </div>
         <div className="flex gap-x-4">
           <Button
-            styles="hover:bg-gray-200 hover:rounded-lg transition-all duration-300"
+            styles=""
             clickHandler={clickHandler}
           >
-            <h1 className="font-Yek-Bold text-primary-100 border-[1px] p-3 rounded-lg hover:text-gray-500 transition-all duration-300">
+            <h1 className="font-Yek-Bold text-primary-100 border-[1px] p-3 rounded-lg">
               ورود
             </h1>
           </Button>
           <Button
-            styles="flex items-center gap-x-2 bg-primary-100 p-3 rounded-lg hover:bg-primary-50 transition-all duration-300"
+            styles="flex items-center gap-x-2 bg-primary-100 p-3 rounded-lg btn-shine"
             clickHandler={clickHandler}
           >
             <RiUserLine color="#fff" size={25} />

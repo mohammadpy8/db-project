@@ -145,7 +145,7 @@ const Arz: FC = () => {
       </div>
       <div className="flex justify-center">
         <button
-          className="text-white bg-primary-300 px-5 rounded-xl py-3 absolute mt-12 font-Yek-Bold"
+          className="text-white bg-primary-300 px-5 rounded-xl py-3 btn-shine absolute mt-12 font-Yek-Bold"
           onClick={() => setOpen(!open)}
         >
           {open ? "مشاهده کمتر" : "مشاهده بیشتر"}
