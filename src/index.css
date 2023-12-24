@@ -62,5 +62,31 @@ body {
   background: url("https://kifpool.me/ui_v2/images/bg-8.svg"), #3051f8;
   background-repeat: no-repeat;
   background-size: 240px;
-  background-position: right -85px center
+  background-position: right -85px center;
 }
+
+.detailsSider {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(174, 187, 253, 1) 0%,
+    rgba(48, 81, 248, 1) 100%
+  );
+  z-index: -10;
+}
+
+.cartDetails {
+  background: rgba(255, 255, 255, 0.21);
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(255,255,255,.1);
+  z-index: -1;
+  box-shadow: 0 0 30px rgba(0,0,0,.1);
+}
+
+.info {
+  z-index: 2;
+}
+
+
+
