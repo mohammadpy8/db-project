@@ -1,13 +1,14 @@
 import { FC } from 'react'
 import Button from '../../interface/Button'
 import { RiUserLine } from 'react-icons/ri'
+import ScrollIndicator from '../../module/scrollIndicator'
 
 const Header: FC = () => {
   const clickHandler = () => {}
 
   return (
-    <div>
-      <div className="container border-b-[1px] border-gray-200 h-16 flex justify-between items-center mt-2">
+    <div className='w-full fixed bg-gray-100 z-50'>
+      <div className="container w-full border-b-[1px] border-gray-200 h-16 flex justify-between items-center mt-2">
         <div className="text-3xl font-Yek-ExtraBlack text-primary-400">
           <h1>ارز دیجیتال ایرانیان</h1>
         </div>
@@ -38,6 +39,7 @@ const Header: FC = () => {
           </Button>
         </div>
       </div>
+      <ScrollIndicator />
     </div>
   )
 }

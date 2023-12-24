@@ -25,7 +25,7 @@ const Details: FC = () => {
             <img
               src={LockIcon}
               alt="lockicon"
-              className="absolute top-[-55px] right-10"
+              className="absolute top-[-55px] right-10 hover:rotate-12 transition-all duration-300"
             />
             <div className="text-gray-700 flex flex-col gap-y-2 items-center mt-24">
               <h1 className="text-lg font-Yek-Bold">بالاترین امنیت برداشت</h1>
@@ -39,7 +39,7 @@ const Details: FC = () => {
             <img
               src={ZeroIcon}
               alt="lockicon"
-              className="absolute top-[-55px] right-10"
+              className="absolute top-[-55px] right-10 hover:rotate-12 transition-all duration-500"
             />
             <div className="text-gray-700 flex flex-col gap-y-2 items-center mt-24">
               <h1 className="text-lg font-Yek-Bold">کارمزد نگهداری رمز ارز</h1>
@@ -53,7 +53,7 @@ const Details: FC = () => {
             <img
               src={AlarmIcon}
               alt="lockicon"
-              className="absolute top-[-55px] right-12"
+              className="absolute top-[-55px] right-12 hover:rotate-12 transition-all duration-500"
             />
             <div className="text-gray-700 flex flex-col gap-y-2 items-center mt-24">
               <h1 className="text-lg font-Yek-Bold">پرداخت قبوض</h1>
@@ -67,7 +67,7 @@ const Details: FC = () => {
             <img
               src={BilingIcon}
               alt="lockicon"
-              className="absolute top-[-55px] right-10"
+              className="absolute top-[-55px] right-10 hover:rotate-12 transition-all duration-500"
             />
             <div className="text-gray-700 flex flex-col gap-y-2 items-center mt-24">
               <h1 className="text-lg font-Yek-Bold"> بسته اینترنت و شارژ</h1>

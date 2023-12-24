@@ -4,7 +4,7 @@ import ChangeCrypto from '../../module/changeCrypto'
 
 const Main: FC = () => {
   return (
-    <div className='flex'>
+    <div className='flex pt-16'>
       <MainText />
       <ChangeCrypto />
     </div>
