@@ -58,6 +58,10 @@ body {
   );
 }
 
+.circleCahnge {
+  z-index: -10;
+}
+
 .masterCart {
   background: url("https://kifpool.me/ui_v2/images/bg-8.svg"), #3051f8;
   background-repeat: no-repeat;
