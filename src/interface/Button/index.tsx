@@ -9,7 +9,7 @@ const Button: FC<PropsWithChildren<ButtonTypes>> = ({
   return (
     <div>
       <button
-        className={`${styles} text-md btn-shine`}
+        className={`${styles} text-md`}
         onClick={clickHandler}
       >
         {children}

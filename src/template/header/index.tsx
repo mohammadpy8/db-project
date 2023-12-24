@@ -31,7 +31,7 @@ const Header: FC = () => {
             </h1>
           </Button>
           <Button
-            styles="flex items-center gap-x-2 bg-primary-100 p-3 rounded-lg btn-shine"
+            styles="flex items-center gap-x-2 bg-primary-100 p-3 rounded-lg"
             clickHandler={clickHandler}
           >
             <RiUserLine color="#fff" size={25} />
