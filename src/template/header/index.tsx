@@ -7,7 +7,7 @@ const Header: FC = () => {
 
   return (
     <div>
-      <div className="container border-b-[1px] border-gray-200 h-16 flex justify-between mt-8">
+      <div className="container border-b-[1px] border-gray-200 h-16 flex justify-between items-center mt-2">
         <div className="text-3xl font-Yek-ExtraBlack text-primary-400">
           <h1>ارز دیجیتال ایرانیان</h1>
         </div>

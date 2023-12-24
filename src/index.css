@@ -9,7 +9,7 @@
 }
 
 body {
-    background-color: rgb(245, 248, 252);
+  background-color: rgb(245, 248, 252);
 }
 
 @font-face {
@@ -46,4 +46,21 @@ body {
   font-family: "Yek-ExtraBold";
   src: local("Yekan"), url("./assets/fonts/woff2/YekanBakh-ExtraBold.woff2");
   font-display: swap;
+}
+
+.change-crypto {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(174, 187, 253, 1) 0%,
+    rgba(48, 81, 248, 1) 100%
+  );
+}
+
+.masterCart {
+  background: url("https://kifpool.me/ui_v2/images/bg-8.svg"), #3051f8;
+  background-repeat: no-repeat;
+  background-size: 240px;
+  background-position: right -85px center
 }
