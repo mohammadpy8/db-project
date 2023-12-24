@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { FaArrowUpLong } from 'react-icons/fa6'
 import { FaArrowDownLong } from 'react-icons/fa6'
 import BTCIcon from '../../assets/images/bitcoin.png'
@@ -7,6 +7,21 @@ import IRIIcon from '../../assets/images/iran.png'
 const ChangeCrypto: FC = () => {
   const [BTCPrice, setBTCPrice] = useState<number>(2203001816)
   const [dollor, setDolollor] = useState<number>(43883)
+  const [priceIRI, setPriceIRI] = useState<string | number>('')
+  const [BTCValue, setBTCValue] = useState<number | string>(0)
+
+  useEffect(() => {
+    const SumationPrice = () => {
+      const formola = +BTCValue * dollor * 50000
+      setPriceIRI(formola)
+    }
+
+    SumationPrice()
+  }, [BTCValue])
+
+  const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBTCValue(event.target.value)
+  }
 
   return (
     <div className="mt-12 mr-8 group">
@@ -33,6 +48,8 @@ const ChangeCrypto: FC = () => {
                   type="text"
                   placeholder="تعداد را وارد کنید"
                   className="w-[250px] outline-none"
+                  value={BTCValue}
+                  onChange={changeHandler}
                 />
               </div>
               <div className="flex gap-x-2 items-center">
@@ -43,7 +60,7 @@ const ChangeCrypto: FC = () => {
           </div>
           <div className="relative">
             <div className="bg-white text-[12px] font-Yek-Regular absolute top-6 right-4">
-              <label>مقدار زیر را می گیرد</label>
+              <label>مقدار زیر را می دهید</label>
             </div>
             <div className="border-2 w-[360px] py-4 px-2 rounded-xl mt-8 flex justify-between">
               <div>
@@ -51,6 +68,7 @@ const ChangeCrypto: FC = () => {
                   type="text"
                   placeholder="قیمت نهایی"
                   className="w-[250px] outline-none"
+                  value={priceIRI.toLocaleString()}
                 />
               </div>
               <div className="flex gap-x-2 items-center">
