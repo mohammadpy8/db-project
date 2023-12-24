@@ -8,7 +8,7 @@ const ChangeCrypto: FC = () => {
   const [BTCPrice, setBTCPrice] = useState<number>(2203001816)
   const [dollor, setDolollor] = useState<number>(43883)
   const [priceIRI, setPriceIRI] = useState<string | number>('')
-  const [BTCValue, setBTCValue] = useState<number | string>(0)
+  const [BTCValue, setBTCValue] = useState<number | string>('')
 
   useEffect(() => {
     const SumationPrice = () => {
@@ -21,6 +21,14 @@ const ChangeCrypto: FC = () => {
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBTCValue(event.target.value)
+  }
+
+  const showText = () => {
+    if (priceIRI.toString().length === 0) {
+      return ''
+    } else {
+      return priceIRI.toLocaleString()
+    }
   }
 
   return (
@@ -68,7 +76,7 @@ const ChangeCrypto: FC = () => {
                   type="text"
                   placeholder="قیمت نهایی"
                   className="w-[250px] outline-none"
-                  value={priceIRI.toLocaleString()}
+                  value={showText()}
                 />
               </div>
               <div className="flex gap-x-2 items-center">
