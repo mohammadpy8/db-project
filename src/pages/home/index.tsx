@@ -5,6 +5,7 @@ import MasterCart from "../../template/masterCart";
 import Details from "../../template/details";
 import PriceCrypto from "../../template/priceCrypto";
 import SupportCrypto from "../../template/supportCrypto";
+import Arz from "../../template/Arz";
 
 const HomePage: FC = () => {
   return (
@@ -15,6 +16,7 @@ const HomePage: FC = () => {
       <Details />
       <PriceCrypto />
       <SupportCrypto />
+      <Arz />
     </div>
   );
 };
