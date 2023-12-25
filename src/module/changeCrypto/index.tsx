@@ -1,36 +1,38 @@
-import { FC, useEffect, useState } from 'react'
-import { FaArrowUpLong } from 'react-icons/fa6'
-import { FaArrowDownLong } from 'react-icons/fa6'
-import BTCIcon from '../../assets/images/bitcoin.png'
-import IRIIcon from '../../assets/images/iran.png';
-import numberConvertToPersian from '../../shared/numberConvertToPersian';
+import { FC, useEffect, useState } from "react";
+import { FaArrowUpLong } from "react-icons/fa6";
+import { FaArrowDownLong } from "react-icons/fa6";
+import BTCIcon from "../../assets/images/bitcoin.png";
+import IRIIcon from "../../assets/images/iran.png";
+import numberConvertToPersian from "../../shared/numberConvertToPersian";
 
 const ChangeCrypto: FC = () => {
-  const [BTCPrice, setBTCPrice] = useState<number>(2203001816)
-  const [dollor, setDollor] = useState<number>(43883)
-  const [priceIRI, setPriceIRI] = useState<string | number>('')
-  const [BTCValue, setBTCValue] = useState<number | string>('')
+  const [BTCPrice, setBTCPrice] = useState<number>(2203001816);
+  const [dollor, setDollor] = useState<number>(43883);
+  const [priceIRI, setPriceIRI] = useState<string | number>("");
+  const [BTCValue, setBTCValue] = useState<number | string>("");
 
   useEffect(() => {
     const SumationPrice = () => {
-      const formola = +BTCValue * dollor * 50000
-      setPriceIRI(formola)
-    }
+      const formola = +BTCValue * dollor * 50000;
+      setPriceIRI(formola);
+    };
 
-    SumationPrice()
-  }, [BTCValue])
+    SumationPrice();
+  }, [BTCValue]);
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setBTCValue(event.target.value)
-  }
+    setBTCValue(event.target.value);
+  };
 
-  const showText = () : number | string =>  {
+  const showText = (): number | string => {
     if (priceIRI.toString().length === 0) {
-      return ''
+      return "";
     } else {
-      return priceIRI.toLocaleString()
+      return priceIRI.toLocaleString();
     }
-  }
+  };
+
+  console.log(numberConvertToPersian(BTCValue));
 
   return (
     <div className="mt-12 mr-8 group">
@@ -108,17 +110,15 @@ const ChangeCrypto: FC = () => {
               </div>
             </div>
           </div>
-          <div className="w-full bg-primary-200 flex justify-center py-2 rounded-lg btn-shine mt-2">
-            <div>
-              <button className="text-white font-Yek-Regular">
-                خرید بیت کوین
-              </button>
-            </div>
+          <div className="w-full bg-primary-200 flex justify-center py-2 rounded-lg mt-2  h-12">
+            <button className="text-white font-Yek-Regular">
+              خرید بیت کوین
+            </button>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ChangeCrypto
+export default ChangeCrypto;

@@ -26,8 +26,6 @@ const ShowCoin: FC = () => {
     window.scrollTo(0, 0);
   }, [page, currency]);
 
-  console.log(coins);
-
   return (
     <div>
       <TableCoin coins={coins} isLoading={isLoading} currency={currency} />

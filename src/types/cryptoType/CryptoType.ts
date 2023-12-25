@@ -1,4 +1,4 @@
-type crypto = {
+interface crypto {
   total_volume: number;
   total_supply: number;
   price_change_percentage_24h: number;
@@ -29,6 +29,6 @@ type crypto = {
     currency: string;
     percentage: number;
   };
-};
+}
 
 export default crypto;
