@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import Button from "../../interface/Button";
 import { RiUserLine } from "react-icons/ri";
 import ScrollIndicator from "../../module/scrollIndicator";
@@ -7,10 +7,27 @@ import SliderHeader from "../sliderHeader";
 const Header: FC = () => {
   const clickHandler = () => {};
 
+  const [scrollCount, setScrollCount] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScroll = window.scrollY > 104;
+      setScrollCount(isScroll);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [window.scrollY]);
+
+  console.log(window.scrollY);
+
   return (
     <>
     <SliderHeader />
-      <div className="w-full fixed bg-gray-100 z-50">
+      <div className={scrollCount ? "w-full bg-gray-100 z-50 fixed top-0 transition-all duration-500" : "w-full bg-gray-100 z-50 transition-all duration-500"}>
         <div className="container w-full border-b-[1px] border-gray-200 h-16 flex justify-between items-center mt-2">
           <div className="text-3xl font-Yek-ExtraBlack text-primary-400">
             <h1>ارز دیجیتال ایرانیان</h1>

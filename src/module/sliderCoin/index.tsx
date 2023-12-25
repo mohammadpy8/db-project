@@ -33,7 +33,7 @@ const SliderCoin: FC = () => {
       modules={[Autoplay]}
       loop={true}
       autoplay={{ delay: 0 }}
-      slidesPerView={4}
+      slidesPerView={6}
       speed={5000}
     >
       {getCoin.map((coins: crypto) => (

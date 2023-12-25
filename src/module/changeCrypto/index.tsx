@@ -34,10 +34,33 @@ const ChangeCrypto: FC = () => {
 
   console.log(numberConvertToPersian(BTCValue));
 
+  const [scrollCount, setScrollCount] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const isScroll = window.scrollY > 104;
+      setScrollCount(isScroll);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [window.scrollY]);
+
+  console.log(window.scrollY);
+
   return (
     <div className="mt-12 mr-8 group">
       <div className="w-[500px] h-[500px] change-crypto rounded-full circleCahnge relative transition-all duration-300 group-hover:scale-110 group-hover:opacity-15"></div>
-      <div className="w-[400px] h-[430px]  bg-white rounded-lg shadow-lg absolute top-40 left-[230px] group-hover:scale-105 transition-all duration-300 group-hover:opacity-100">
+      <div
+        className={
+          scrollCount
+            ? "w-[400px] h-[430px]  bg-white rounded-lg shadow-lg absolute top-56 left-[230px] group-hover:scale-105 transition-all duration-300 group-hover:opacity-100"
+            : "w-[400px] h-[430px]  bg-white rounded-lg shadow-lg absolute top-72 left-[230px] group-hover:scale-105 transition-all duration-300 group-hover:opacity-100"
+        }
+      >
         <div className="flex flex-col px-5">
           <div className="bg-[#f3f3f3] w-[360px] h-[70px] mt-5 rounded-xl flex justify-between font-Yek-SemiBold p-2">
             <div className="flex items-center gap-x-2 bg-white px-14 rounded-xl shadow-lg">
@@ -96,7 +119,7 @@ const ChangeCrypto: FC = () => {
               <div className="flex gap-x-1 items-center">
                 <div>
                   <h1 className="text-primary-300 font-Yek-Bold text-xl">
-                    {BTCPrice.toLocaleString()}
+                    {numberConvertToPersian(BTCPrice.toLocaleString())}
                   </h1>
                 </div>
                 <div>

@@ -4,11 +4,9 @@ import SliderCoin from "../../module/sliderCoin";
 const SliderHeader: FC = () => {
   return (
     <div className="sliderHeader h-16">
-      <div></div>
-      <div>
+      <div className="overflow-hidden">
         <SliderCoin />
       </div>
-      <div></div>
     </div>
   );
 };

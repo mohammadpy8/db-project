@@ -8,6 +8,7 @@ import SupportCrypto from "../../template/supportCrypto";
 import Arz from "../../template/Arz";
 
 const HomePage: FC = () => {
+
   return (
     <div className="container">
       <Main />
