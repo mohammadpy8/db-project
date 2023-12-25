@@ -1,6 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import { getCoinList } from "../../services/cryptoApi";
 import crypto from "../../types/cryptoType/CryptoType";
+import TableCoin from "../../module/tableCoin";
 
 const ShowCoin: FC = () => {
   const [coins, setCoins] = useState<crypto[]>([]);
@@ -13,7 +14,7 @@ const ShowCoin: FC = () => {
     const getData = async () => {
       try {
         const res = await fetch(getCoinList(page, currency));
-        const json = await res.json() as crypto[];
+        const json = (await res.json()) as crypto[];
         setCoins(json);
         setIsLoading(false);
       } catch (error) {
@@ -27,7 +28,11 @@ const ShowCoin: FC = () => {
 
   console.log(coins);
 
-  return <div></div>;
+  return (
+    <div>
+      <TableCoin coins={coins} isLoading={isLoading} currency={currency} />
+    </div>
+  );
 };
 
 export default ShowCoin;

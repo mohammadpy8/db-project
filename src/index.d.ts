@@ -5,5 +5,6 @@ declare module '*.svg';
 declare module '*.png';
 declare module '*.webp';
 declare module 'swiper';
+declare module "*.module.css"
 
 

@@ -15,7 +15,7 @@ const PriceCrypto: FC = () => {
           </h1>
         </div>
       </div>
-      <div className="h-24">
+      <div className="">
         <ShowCoin />
       </div>
     </div>
