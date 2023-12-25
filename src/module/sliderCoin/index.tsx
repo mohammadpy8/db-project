@@ -1,31 +1,31 @@
-import { FC, useEffect, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper";
-import "swiper/css";
-import crypto from "../../types/cryptoType/CryptoType";
-import { getCoinList } from "../../services/cryptoApi";
-import numberConvertToPersian from "../../shared/numberConvertToPersian";
+import { FC, useEffect, useState } from 'react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay } from 'swiper'
+import 'swiper/css'
+import crypto from '../../types/cryptoType/CryptoType'
+import { getCoinList } from '../../services/cryptoApi'
+import numberConvertToPersian from '../../shared/numberConvertToPersian'
 
 const SliderCoin: FC = () => {
-  const [getCoin, setGetCoin] = useState<crypto[]>([]);
-  const [page, setPage] = useState<number>(1);
-  const [currency, setCurrency] = useState<string>("usd");
+  const [getCoin, setGetCoin] = useState<crypto[]>([])
+  const [page, setPage] = useState<number>(1)
+  const [currency, setCurrency] = useState<string>('usd')
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await fetch(getCoinList(page, currency));
-        const json = (await res.json()) as crypto[];
-        setGetCoin(json);
+        const res = await fetch(getCoinList(page, currency))
+        const json = (await res.json()) as crypto[]
+        setGetCoin(json)
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
-    };
+    }
 
-    getData();
-  }, [page, currency]);
+    getData()
+  }, [page, currency])
 
-  console.log(getCoin);
+  console.log(getCoin)
 
   return (
     <Swiper
@@ -33,7 +33,7 @@ const SliderCoin: FC = () => {
       modules={[Autoplay]}
       loop={true}
       autoplay={{ delay: 0 }}
-      slidesPerView={4}
+      slidesPerView={5}
       speed={5000}
     >
       {getCoin?.map((coins: crypto) => (
@@ -58,7 +58,13 @@ const SliderCoin: FC = () => {
             </div>
             <div className="flex justify-center items-center ml-2">
               <div className="bg-white text-[12px] font-Yek-Bold px-1 py-1 rounded-md">
-                <h1 className="text-green-600">
+                <h1
+                  className={
+                    coins?.market_cap_change_24h > 1
+                      ? 'text-green-600'
+                      : 'text-red-600'
+                  }
+                >
                   {numberConvertToPersian(coins?.price_change_percentage_24h)}
                 </h1>
               </div>
@@ -67,7 +73,7 @@ const SliderCoin: FC = () => {
         </SwiperSlide>
       ))}
     </Swiper>
-  );
-};
+  )
+}
 
-export default SliderCoin;
+export default SliderCoin
