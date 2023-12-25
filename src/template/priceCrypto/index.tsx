@@ -5,15 +5,27 @@ import { TbClipboardList } from 'react-icons/tb'
 
 const PriceCrypto: FC = () => {
   return (
-    <div className="mt-60 mb-24">
-      <div className="flex items-center gap-x-2">
-        <div>
-          <FiBarChart2 size={30} color="#3051f8" />
+    <div className="mt-72 mb-24">
+      <div className="flex justify-between">
+        <div className="flex items-center gap-x-2">
+          <div>
+            <FiBarChart2 size={30} color="#3051f8" />
+          </div>
+          <div>
+            <h1 className="text-xl font-Yek-SemiBold pt-2">
+              قیمت لحظه ای ارزدیجیتال
+            </h1>
+          </div>
         </div>
-        <div>
-          <h1 className="text-xl font-Yek-SemiBold pt-2">
-            قیمت لحظه ای ارزدیجیتال
-          </h1>
+        <div className='flex items-center gap-x-8 bg-gray-200 px-4 py-2 rounded-lg'>
+          <div className='font-Yek-SemiBold'>
+            <h1>قیمت براساس:</h1>
+          </div>
+          <div className='flex items-center font-Yek-SemiBold gap-x-8 text-primary-100'>
+            <button className='bg-white w-24 h-12 rounded-lg shadow-lg'>دلار</button>
+            <button>یورو</button>
+            <button>ین ژاپن</button>
+          </div>
         </div>
       </div>
       <div>

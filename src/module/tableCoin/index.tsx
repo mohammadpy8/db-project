@@ -61,7 +61,7 @@ const TableCoin: FC<table> = ({ isLoading, coins, currency }) => {
             </tr>
           </thead>
           <tbody>
-            {coins.map((coin, index) => (
+            {coins.slice(0,10).map((coin, index) => (
               <tr
                 className="TD hover:bg-gray-100 hover:scale-105 transition-all duration-500"
                 style={{
