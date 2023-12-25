@@ -28,7 +28,7 @@ const Header: FC = () => {
     <>
     <SliderHeader />
       <div className={scrollCount ? "w-full bg-gray-100 z-50 sticky top-0 transition-all duration-500" : "w-full bg-gray-100 z-50 sticky transition-all duration-500"}>
-        <div className="container w-full border-b-[1px] border-gray-200 h-16 flex justify-between items-center">
+        <div className="container w-full border-b-[1px] border-gray-200 h-20 flex justify-between items-center">
           <div className="text-3xl font-Yek-ExtraBlack text-primary-400">
             <h1>ارز دیجیتال ایرانیان</h1>
           </div>

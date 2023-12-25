@@ -3,6 +3,10 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens : {
+        "desktop": "1100px",
+        "extra-desktop": "1200px",
+      },
       colors: {
         primary: {
           500: "#0023d0",
@@ -12,17 +16,11 @@ export default {
           100: "#3051f8",
           50: "#6b82f7",
         },
-        secondary: {
-          500: "",
-          400: "",
-          300: "",
-          200: "",
-          100: "",
-        },
       },
       container: {
         center: true,
         padding: "6rem",
+
       },
       borderRadius: {
         normal: "",

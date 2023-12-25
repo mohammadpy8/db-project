@@ -6,10 +6,11 @@ import IRIIcon from "../../assets/images/iran.png";
 import numberConvertToPersian from "../../shared/numberConvertToPersian";
 
 const ChangeCrypto: FC = () => {
-  const [BTCPrice, setBTCPrice] = useState<number>(2203001816);
   const [dollor, setDollor] = useState<number>(43883);
   const [priceIRI, setPriceIRI] = useState<string | number>("");
   const [BTCValue, setBTCValue] = useState<number | string>("");
+  const [step, setStep] = useState<number>(0);
+  const [BTCPrice, setBTCPrice] = useState<number | string>(0);
 
   useEffect(() => {
     const SumationPrice = () => {
@@ -17,8 +18,18 @@ const ChangeCrypto: FC = () => {
       setPriceIRI(formola);
     };
 
+    const changeNumber = () => {
+      if (step === 0) {
+        setBTCPrice(2203001816);
+      } else {
+        setBTCPrice(2103001800);
+      }
+    };
+
+    changeNumber();
+
     SumationPrice();
-  }, [BTCValue]);
+  }, [BTCValue, step]);
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBTCValue(event.target.value);
@@ -50,29 +61,46 @@ const ChangeCrypto: FC = () => {
   }, [window.scrollY]);
 
   console.log(window.scrollY);
+  console.log(step);
 
   return (
     <div className="mt-12 mr-8 group">
       <div className="w-[500px] h-[500px] change-crypto rounded-full circleCahnge relative transition-all duration-300 group-hover:scale-110 group-hover:opacity-15"></div>
       <div
-        className={
-          scrollCount
-            ? "w-[400px] h-[430px]  bg-white rounded-lg shadow-lg absolute top-56 left-[230px] group-hover:scale-105 transition-all duration-300 group-hover:opacity-100"
-            : "w-[400px] h-[430px]  bg-white rounded-lg shadow-lg absolute top-72 left-[230px] group-hover:scale-105 transition-all duration-300 group-hover:opacity-100"
-        }
+        className="w-[400px] h-[430px]  bg-white rounded-lg shadow-lg absolute top-80 left-[230px] group-hover:scale-105 transition-all duration-300 group-hover:opacity-100"
       >
         <div className="flex flex-col px-5">
           <div className="bg-[#f3f3f3] w-[360px] h-[70px] mt-5 rounded-xl flex justify-between font-Yek-SemiBold p-2">
-            <div className="flex items-center gap-x-2 bg-white px-14 rounded-xl shadow-lg">
+            <div
+              className={
+                step === 0
+                  ? "flex items-center gap-x-2 bg-white px-14 rounded-xl shadow-lg transition-all duration-500"
+                  : "flex items-center gap-x-2 px-14"
+              }
+              onClick={() => setStep(0)}
+            >
               <FaArrowUpLong />
               <button>خرید</button>
             </div>
-            <div className="flex items-center gap-x-2 px-14">
+            <div
+              className={
+                step === 1
+                  ? "flex items-center gap-x-2 bg-white px-14 rounded-xl shadow-lg transition-all duration-500"
+                  : "flex items-center gap-x-2 px-14"
+              }
+              onClick={() => setStep(1)}
+            >
               <FaArrowDownLong />
               <button>فروش</button>
             </div>
           </div>
-          <div className="relative">
+          <div
+            className={
+              step === 0
+                ? "relative transition-all duration-300"
+                : "relative translate-y-[100px] transition-all duration-300"
+            }
+          >
             <div className="bg-white text-[12px] font-Yek-Regular absolute top-6 right-4">
               <label>مقدار زیر را می گیرد</label>
             </div>
@@ -92,7 +120,13 @@ const ChangeCrypto: FC = () => {
               </div>
             </div>
           </div>
-          <div className="relative">
+          <div
+            className={
+              step === 0
+                ? "relative transition-all duration-300"
+                : "relative translate-y-[-100px]  transition-all duration-300"
+            }
+          >
             <div className="bg-white text-[12px] font-Yek-Regular absolute top-6 right-4">
               <label>مقدار زیر را می دهید</label>
             </div>
@@ -135,7 +169,7 @@ const ChangeCrypto: FC = () => {
           </div>
           <div className="w-full bg-primary-200 flex justify-center py-2 rounded-lg mt-2  h-12">
             <button className="text-white font-Yek-Regular">
-              خرید بیت کوین
+              {step === 0 ? "خرید بیت کوین" : "فروش بین کوین"}
             </button>
           </div>
         </div>

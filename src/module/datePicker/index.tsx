@@ -11,12 +11,12 @@ const DatePickers: FC = () => {
     <div>
       <DatePicker
         value={value}
-        render={(value: any, openCalendar: any) => {
-          return <button onClick={openCalendar}>{value}</button>;
+        render={(value: any) => {
+          return <button  className="font-Yek-Bold">{value}</button>;
         }}
         calendar={persian}
         locale={persian_fa}
-        calendarPosition="bottom-left"
+        calendarPosition="bottom-right"
       />
     </div>
   );
