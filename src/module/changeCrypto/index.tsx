@@ -2,11 +2,12 @@ import { FC, useEffect, useState } from 'react'
 import { FaArrowUpLong } from 'react-icons/fa6'
 import { FaArrowDownLong } from 'react-icons/fa6'
 import BTCIcon from '../../assets/images/bitcoin.png'
-import IRIIcon from '../../assets/images/iran.png'
+import IRIIcon from '../../assets/images/iran.png';
+import numberConvertToPersian from '../../shared/numberConvertToPersian';
 
 const ChangeCrypto: FC = () => {
   const [BTCPrice, setBTCPrice] = useState<number>(2203001816)
-  const [dollor, setDolollor] = useState<number>(43883)
+  const [dollor, setDollor] = useState<number>(43883)
   const [priceIRI, setPriceIRI] = useState<string | number>('')
   const [BTCValue, setBTCValue] = useState<number | string>('')
 
@@ -23,7 +24,7 @@ const ChangeCrypto: FC = () => {
     setBTCValue(event.target.value)
   }
 
-  const showText = () => {
+  const showText = () : number | string =>  {
     if (priceIRI.toString().length === 0) {
       return ''
     } else {
@@ -34,7 +35,7 @@ const ChangeCrypto: FC = () => {
   return (
     <div className="mt-12 mr-8 group">
       <div className="w-[500px] h-[500px] change-crypto rounded-full circleCahnge relative transition-all duration-300 group-hover:scale-110 group-hover:opacity-15"></div>
-      <div className="w-[400px] h-[430px]  bg-white rounded-lg shadow-lg absolute top-40 left-48 group-hover:scale-105 transition-all duration-300 group-hover:opacity-100">
+      <div className="w-[400px] h-[430px]  bg-white rounded-lg shadow-lg absolute top-40 left-[230px] group-hover:scale-105 transition-all duration-300 group-hover:opacity-100">
         <div className="flex flex-col px-5">
           <div className="bg-[#f3f3f3] w-[360px] h-[70px] mt-5 rounded-xl flex justify-between font-Yek-SemiBold p-2">
             <div className="flex items-center gap-x-2 bg-white px-14 rounded-xl shadow-lg">
@@ -76,7 +77,7 @@ const ChangeCrypto: FC = () => {
                   type="text"
                   placeholder="قیمت نهایی"
                   className="w-[250px] outline-none"
-                  value={showText()}
+                  value={numberConvertToPersian(showText())}
                 />
               </div>
               <div className="flex gap-x-2 items-center">

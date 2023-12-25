@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { FiBarChart2 } from "react-icons/fi";
+import ShowCoin from "../showCoin";
 
 const PriceCrypto: FC = () => {
   return (
@@ -14,7 +15,9 @@ const PriceCrypto: FC = () => {
           </h1>
         </div>
       </div>
-      <div className="h-24"></div>
+      <div className="h-24">
+        <ShowCoin />
+      </div>
     </div>
   );
 };
