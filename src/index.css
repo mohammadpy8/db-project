@@ -9,7 +9,7 @@
 }
 
 body {
-  background-color: rgb(245, 248, 252);
+  background-color: #f5f8fc;
   overflow-x: hidden;
 }
 
@@ -176,4 +176,20 @@ body {
   100% {
     opacity: 0.1;
   }
+}
+
+.TH th {
+  padding: 15px;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.TD td {
+  padding: 15px;
+  white-space: nowrap;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 1rem;
 }
