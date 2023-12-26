@@ -2,14 +2,16 @@ import { FC } from 'react'
 import crypto from '../../types/cryptoType/CryptoType'
 import numberConvertToPersian from '../../shared/numberConvertToPersian'
 import { FiBarChart2 } from 'react-icons/fi'
+import { marketChart } from '../../services/cryptoApi'
 
 interface table {
-  isLoading: boolean
+  isLoading?: boolean
   currency: string
   coins: crypto[]
+  setChart: any
 }
 
-const TableCoin: FC<table> = ({ isLoading, coins, currency }) => {
+const TableCoin: FC<table> = ({ isLoading, coins, currency, setChart }) => {
   const changeCurrency = (price: string) => {
     if (price === 'usd') {
       return '$'
@@ -43,6 +45,18 @@ const TableCoin: FC<table> = ({ isLoading, coins, currency }) => {
       return '#f4f6ff;'
     }
   }
+
+  // const showHandler = async (id: string) => {
+  //   setChart(true)
+  //   try {
+  //     const res = await fetch(marketChart(id));
+  //     const json = res.json();
+  //     setChart(json)
+  //   } catch (error) {
+  //     setChart(null)
+  //   }
+  // };
+
   return (
     <div className="mt-8 mb-8 rounded-2xl relative z-0 border-[1px] border-[#f0f3ff]">
       {isLoading ? (
@@ -104,7 +118,16 @@ const TableCoin: FC<table> = ({ isLoading, coins, currency }) => {
                   />
                 </td>
                 <td>
-                  <button className="border-2 p-2 rounded-lg">
+                  <button className="border-2 p-2 rounded-lg" onClick={async() => {
+                        setChart(true)
+                        try {
+                          const res = await fetch(marketChart(coin.id));
+                          const json = await res.json();
+                          setChart(json)
+                        } catch (error) {
+                          setChart(null)
+                        }
+                  }}>
                     <FiBarChart2 size={30} color="#3051f8" />
                   </button>
                 </td>

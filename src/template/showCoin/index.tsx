@@ -2,12 +2,15 @@ import { FC, useState, useEffect } from "react";
 import { getCoinList } from "../../services/cryptoApi";
 import crypto from "../../types/cryptoType/CryptoType";
 import TableCoin from "../../module/tableCoin";
+import Chart from "../../module/chart";
+import { chartType } from "../../types/chartType/ChartType";
 
 const ShowCoin: FC = () => {
   const [coins, setCoins] = useState<crypto[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [page, setPage] = useState<number>(1);
   const [currency, setCurrency] = useState<string>("usd");
+  const [chart, setChart] = useState<any>(false)
 
   useEffect(() => {
     setIsLoading(true);
@@ -28,7 +31,8 @@ const ShowCoin: FC = () => {
 
   return (
     <div>
-      <TableCoin coins={coins} isLoading={isLoading} currency={currency} />
+      <TableCoin coins={coins} isLoading={isLoading} currency={currency} setChart={setChart} />
+      {!!chart && <Chart setChart={setChart} chart={chart} />}
     </div>
   );
 };
