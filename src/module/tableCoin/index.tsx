@@ -3,6 +3,7 @@ import crypto from '../../types/cryptoType/CryptoType'
 import numberConvertToPersian from '../../shared/numberConvertToPersian'
 import { FiBarChart2 } from 'react-icons/fi'
 import { marketChart } from '../../services/cryptoApi'
+import { chartType } from '../../types/chartType/ChartType'
 
 interface table {
   isLoading?: boolean
@@ -16,9 +17,9 @@ const TableCoin: FC<table> = ({ isLoading, coins, currency, setChart }) => {
     if (price === 'usd') {
       return '$'
     } else if (price === 'eur') {
-      return '#'
+      return '€'
     } else {
-      return '*'
+      return '¥'
     }
   }
 
@@ -46,17 +47,6 @@ const TableCoin: FC<table> = ({ isLoading, coins, currency, setChart }) => {
     }
   }
 
-  // const showHandler = async (id: string) => {
-  //   setChart(true)
-  //   try {
-  //     const res = await fetch(marketChart(id));
-  //     const json = res.json();
-  //     setChart(json)
-  //   } catch (error) {
-  //     setChart(null)
-  //   }
-  // };
-
   return (
     <div className="mt-8 mb-8 rounded-2xl relative z-0 border-[1px] border-[#f0f3ff]">
       {isLoading ? (
@@ -77,9 +67,9 @@ const TableCoin: FC<table> = ({ isLoading, coins, currency, setChart }) => {
           <tbody>
             {coins.slice(0,10).map((coin, index) => (
               <tr
-                className="TD hover:bg-gray-100 hover:scale-105 transition-all duration-500"
+                className="TD hover:scale-105 transition-all duration-500"
                 style={{
-                  backgroundColor: colorRandom(index),
+                  background: colorRandom(index),
                 }}
               >
                 <td>
@@ -122,7 +112,7 @@ const TableCoin: FC<table> = ({ isLoading, coins, currency, setChart }) => {
                         setChart(true)
                         try {
                           const res = await fetch(marketChart(coin.id));
-                          const json = await res.json();
+                          const json = await res.json() as chartType;
                           setChart(json)
                         } catch (error) {
                           setChart(null)

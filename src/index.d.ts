@@ -8,5 +8,7 @@ declare module 'swiper';
 declare module "*.module.css"
 declare module "react-multi-date-picker"
 declare module "react-date-object/*"
+declare module "recharts"
+
 
 
