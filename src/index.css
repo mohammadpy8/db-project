@@ -237,7 +237,7 @@ html,
   transform: scale(1, 1);
   background: rgba(0, 0, 0, 0.3);
   transition: 0.5s;
-  z-index: 100000;
+  z-index: 1499;
 }
 
 .ModalFrist.open .modal-background {
@@ -275,7 +275,7 @@ html,
   opacity: 0;
   visibility: hidden;
   transition: 0.3s;
-  z-index: 100000;
+  z-index: 1500;
 }
 
 .ModalFrist.open .modal {
@@ -327,7 +327,7 @@ html,
 
   .full-size-modal {
     position: fixed;
-    z-index: 999999999;
+    z-index: 1498;
     left: 0;
     top: 0;
     width: 100%;

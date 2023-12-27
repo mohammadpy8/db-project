@@ -78,8 +78,8 @@ const TableCoin: FC<table> = ({
   const colorRandom = (index: number) => {
     if (index % 2 === 0) {
       return "#fff";
-    } else if (index % 2 === 1) {
-      return "#f4f6ff;";
+    } else {
+      return "#f4f6ff";
     }
   };
 
@@ -92,7 +92,13 @@ const TableCoin: FC<table> = ({
       }
     >
       {coins.length > 0 && !isLoading ? (
-        <table className={fullSize ? "z-[9999999] w-full rounded-xl m-auto border-collapse border-spacing-0 overflow-hidden font-Yek-SemiBold" : "w-full rounded-xl m-auto border-collapse border-spacing-0 overflow-hidden font-Yek-SemiBold"}>
+        <table
+          className={
+            fullSize
+              ? "z-[999] w-full rounded-xl m-auto border-collapse border-spacing-0 overflow-hidden font-Yek-SemiBold"
+              : "w-full rounded-xl m-auto border-collapse border-spacing-0 overflow-hidden font-Yek-SemiBold"
+          }
+        >
           <thead className="rounded-2xl h-16 bg-[#f0f3ff] font-Yek-Bold text-gray-700">
             <tr className="TH">
               <th>
@@ -118,9 +124,9 @@ const TableCoin: FC<table> = ({
             </tr>
           </thead>
           <tbody>
-            {coins.slice(0, 10).map((coin, index) => (
+            {coins.map((coin, index) => (
               <tr
-                className="TD hover:scale-105 transition-all duration-500"
+                className="TD hover:scale-105  transition-all duration-500"
                 style={{
                   background: colorRandom(index),
                 }}
