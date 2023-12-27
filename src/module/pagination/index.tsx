@@ -1,25 +1,27 @@
-import  { FC, useEffect } from "react";
-import styles from "./Pagination.module.css";
+import { FC, useEffect } from 'react'
+import styles from './Pagination.module.css'
 
 interface pagination {
-    page: number;
-    setPage:any
+  page: number
+  setPage: any
 }
 
 const Pagination: FC<pagination> = ({ page, setPage }) => {
-    
-    useEffect(() => {
-        window.scrollTo(0,0)
-    }, [page])
+  useEffect(() => {
+    window.scrollTo({
+      top: 150,
+      behavior: 'smooth',
+    })
+  }, [page])
   const previousHandle = () => {
-    if (page <= 1) return;
-    setPage((page : number) => page - 1);
-  };
+    if (page <= 1) return
+    setPage((page: number) => page - 1)
+  }
 
   const nextHandle = () => {
-    if (page >= 10) return;
-      setPage((page: number) => page + 1);
-  };
+    if (page >= 10) return
+    setPage((page: number) => page + 1)
+  }
   return (
     <div className={`${styles.pagination} text-xl font-Yek-Bold`}>
       <button
@@ -46,7 +48,7 @@ const Pagination: FC<pagination> = ({ page, setPage }) => {
         صفحه بعدی
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default Pagination;
+export default Pagination

@@ -37,7 +37,7 @@ const SliderCoin: FC = () => {
       slidesPerView={5}
       speed={5000}
     >
-      {getCoin.length > 0 ? (
+      {getCoin?.length > 0 ? (
         getCoin?.map((coins: crypto) => (
           <SwiperSlide key={coins?.id}>
             <div className="coinSwiper w-[230px] h-12 mt-2 rounded-lg flex justify-between">
