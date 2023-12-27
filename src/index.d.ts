@@ -9,6 +9,8 @@ declare module "*.module.css"
 declare module "react-multi-date-picker"
 declare module "react-date-object/*"
 declare module "recharts"
+declare module "react-loader-spinner"
+
 
 
 

@@ -1,25 +1,25 @@
-import { FC, useState } from "react";
-import crypto from "../../types/cryptoType/CryptoType";
-import numberConvertToPersian from "../../shared/numberConvertToPersian";
-import { FiBarChart2 } from "react-icons/fi";
-import { marketChart } from "../../services/cryptoApi";
-import { ThreeDots } from "react-loader-spinner";
-import { IoMdResize } from "react-icons/io";
-import { IoClose } from "react-icons/io5";
+import { FC, useState } from 'react'
+import crypto from '../../types/cryptoType/CryptoType'
+import numberConvertToPersian from '../../shared/numberConvertToPersian'
+import { FiBarChart2 } from 'react-icons/fi'
+import { marketChart } from '../../services/cryptoApi'
+import { ThreeDots } from 'react-loader-spinner'
+import { IoMdResize } from 'react-icons/io'
+import { IoClose } from 'react-icons/io5'
 
 interface ChartType {
-  prices: [number, number][];
-  market_caps: [number, number][];
-  total_volumes: [number, number][];
+  prices: [number, number][]
+  market_caps: [number, number][]
+  total_volumes: [number, number][]
 }
 
 interface table {
-  isLoading?: boolean;
-  currency: string;
-  coins: crypto[];
-  setChart: any;
-  setOpenCharts: any;
-  show: any;
+  isLoading?: boolean
+  currency: string
+  coins: crypto[]
+  setChart: any
+  setOpenCharts: any
+  show: any
 }
 
 const TableCoin: FC<table> = ({
@@ -30,87 +30,87 @@ const TableCoin: FC<table> = ({
   setOpenCharts,
   show,
 }) => {
-  const [fullSize, setFullSize] = useState(false);
+  const [fullSize, setFullSize] = useState(false)
 
   const changeCurrency = (price: string) => {
-    if (price === "usd") {
-      return "$";
-    } else if (price === "eur") {
-      return "€";
+    if (price === 'usd') {
+      return '$'
+    } else if (price === 'eur') {
+      return '€'
     } else {
-      return "¥";
+      return '¥'
     }
-  };
+  }
 
   const fullSizeHandler = () => {
-    setFullSize(!fullSize);
-  };
+    setFullSize(!fullSize)
+  }
 
   const randomPhoto = (priceCoin: number) => {
     if (priceCoin > 0 && priceCoin < 3) {
-      return "https://kifpool.me/ui_v2/charts/green/green-1.svg";
+      return 'https://kifpool.me/ui_v2/charts/green/green-1.svg'
     } else if (priceCoin >= 3 && priceCoin < 5) {
-      return "https://kifpool.me/ui_v2/charts/green/green-10.svg";
+      return 'https://kifpool.me/ui_v2/charts/green/green-10.svg'
     } else if (priceCoin >= 5) {
-      return "https://kifpool.me/ui_v2/charts/green/green-9.svg";
+      return 'https://kifpool.me/ui_v2/charts/green/green-9.svg'
     } else if (priceCoin <= -1 && priceCoin >= -3) {
-      return "https://kifpool.me/ui_v2/charts/red/red-3.svg";
+      return 'https://kifpool.me/ui_v2/charts/red/red-3.svg'
     } else if (priceCoin <= -4) {
-      return "https://kifpool.me/ui_v2/charts/red/red-4.svg";
+      return 'https://kifpool.me/ui_v2/charts/red/red-4.svg'
     } else if (priceCoin < 0) {
-      return "https://kifpool.me/ui_v2/charts/red/red-2.svg";
+      return 'https://kifpool.me/ui_v2/charts/red/red-2.svg'
     }
-  };
+  }
 
   const reverseNumber = (number: any): any => {
-    const negative = number.slice(0, 1);
-    console.log("number", number);
-    console.log("negative", negative);
+    const negative = number.slice(0, 1)
+    const splited = number.split('-')
 
-    const splited = number.split("-");
-    console.log("splited", splited);
-
-    const joined = splited[1].concat(negative);
-    console.log("TFFFFFFgjonjihg", joined);
-    return joined;
-  };
+    const joined = splited[1].concat(negative)
+    return joined
+  }
 
   const colorRandom = (index: number) => {
     if (index % 2 === 0) {
-      return "#fff";
+      return '#fff'
     } else {
-      return "#f4f6ff";
+      return '#f0f3ff'
     }
-  };
+  }
 
   return (
     <div
       className={
         fullSize
-          ? "full-size-modal"
-          : "mt-8 mb-8 rounded-2xl relative z-0 border-[1px] border-[#f0f3ff]"
+          ? 'full-size-modal'
+          : 'mt-8 mb-8 rounded-2xl relative z-[1] border-[1px] border-[#f0f3ff]'
       }
     >
       {coins.length > 0 && !isLoading ? (
         <table
           className={
             fullSize
-              ? "z-[999] w-full rounded-xl m-auto border-collapse border-spacing-0 overflow-hidden font-Yek-SemiBold"
-              : "w-full rounded-xl m-auto border-collapse border-spacing-0 overflow-hidden font-Yek-SemiBold"
+              ? 'z-[999] w-full rounded-xl m-auto border-collapse border-spacing-0 overflow-hidden font-Yek-SemiBold'
+              : 'w-full rounded-xl m-auto border-collapse border-spacing-0 overflow-hidden font-Yek-SemiBold z-[10000]'
           }
         >
           <thead className="rounded-2xl h-16 bg-[#f0f3ff] font-Yek-Bold text-gray-700">
             <tr className="TH">
               <th>
-                {" "}
                 {show ? (
                   fullSize ? (
-                    <button onClick={fullSizeHandler}>
+                    <button
+                      onClick={fullSizeHandler}
+                      className="border-2 p-2 bg-gray-300 rounded-lg"
+                    >
                       <IoClose size={30} />
                     </button>
                   ) : (
-                    <button onClick={fullSizeHandler}>
-                      <IoMdResize size={30} />
+                    <button
+                      onClick={fullSizeHandler}
+                      className="border-2 p-2 bg-gray-300 rounded-lg"
+                    >
+                      <IoMdResize size={25} />
                     </button>
                   )
                 ) : null}
@@ -131,7 +131,7 @@ const TableCoin: FC<table> = ({
                   background: colorRandom(index),
                 }}
               >
-                <td>
+                <td className='bg-[#f0f3ff] TD-first'>
                   <div className="flex flex-col items-center gap-y-2">
                     <img src={coin.image} alt={coin.id} className="w-8 h-8" />
                     <span className="text-[15px] font-Yek-Bold">
@@ -147,19 +147,19 @@ const TableCoin: FC<table> = ({
                 <td
                   className={
                     coin.price_change_percentage_24h > 0
-                      ? "text-green-500"
-                      : "text-red-600"
+                      ? 'text-green-500'
+                      : 'text-red-600'
                   }
                 >
                   %
                   {coin.price_change_percentage_24h < 0
                     ? numberConvertToPersian(
                         reverseNumber(
-                          coin.price_change_percentage_24h.toFixed(2)
-                        )
+                          coin.price_change_percentage_24h.toFixed(2),
+                        ),
                       )
                     : numberConvertToPersian(
-                        coin.price_change_percentage_24h.toFixed(2)
+                        coin.price_change_percentage_24h.toFixed(2),
                       )}
                 </td>
                 <td>
@@ -176,13 +176,13 @@ const TableCoin: FC<table> = ({
                   <button
                     className="border-2 p-2 rounded-lg"
                     onClick={async () => {
-                      setOpenCharts(true);
+                      setOpenCharts(true)
                       try {
-                        const res = await fetch(marketChart(coin.id));
-                        const json = (await res.json()) as number[][];
-                        setChart({ ...json, coin });
+                        const res = await fetch(marketChart(coin.id))
+                        const json = (await res.json()) as number[][]
+                        setChart({ ...json, coin })
                       } catch (error) {
-                        setChart(null);
+                        setChart(null)
                       }
                     }}
                   >
@@ -206,7 +206,7 @@ const TableCoin: FC<table> = ({
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default TableCoin;
+export default TableCoin

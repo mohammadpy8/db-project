@@ -3,6 +3,7 @@ import { getCoinList } from '../../services/cryptoApi'
 import crypto from '../../types/cryptoType/CryptoType'
 import TableCoin from '../../module/tableCoin'
 import Chart from '../../module/chart'
+import Pagination from '../../module/pagination'
 
 const ShowCoin = ({currency, show} : any) => {
   const [coins, setCoins] = useState<crypto[]>([])
@@ -42,6 +43,7 @@ const ShowCoin = ({currency, show} : any) => {
         show={show}
       />
       {!!chart && <Chart setChart={setChart} chart={chart} setOpenChart={setOpenCharts} openCharts={openCharts} />}
+      {show ? <Pagination page={page} setPage={setPage} /> : ""}
     </div>
   )
 }

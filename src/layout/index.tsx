@@ -5,7 +5,7 @@ import { FaTimes } from "react-icons/fa";
 import { IoChatbox } from "react-icons/io5";
 import { Outlet } from "react-router-dom";
 
-const index: FC = () => {
+const index = () => {
 
   const [openChat, setOpenChat] = useState<boolean>(false);
   return (
@@ -26,7 +26,7 @@ const index: FC = () => {
         className={
           openChat
             ? "opacity-100 transition-all duration-500 w-72 h-96 bg-white shadow-2xl fixed bottom-[120px] right-9 z-[1000] rounded-lg"
-            : "opacity-0 transition-all duration-500 w-72 h-96 bg-white shadow-2xl fixed bottom-[120px] right-9 z-[1000] rounded-lg"
+            : "transition-all duration-500 w-72 h-96 bg-white shadow-2xl fixed bottom-[120px] right-9 z-[1000] rounded-lg chat"
         }
       >
         <div className="bg-primary-300 h-24 rounded-t-lg">

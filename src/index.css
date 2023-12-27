@@ -210,7 +210,6 @@ html,
   place-items: center;
 }
 
-
 @keyframes background-in {
   0% {
     scale: 0 0.005;
@@ -269,7 +268,7 @@ html,
   color: #f9f9f9;
   padding: 0 40px;
   width: 820px;
-  height: 475px;
+  height: 500px;
   border-radius: 12px;
   translate: -50% -50%;
   opacity: 0;
@@ -294,44 +293,92 @@ html,
 /* ////////////?modal///////////// */
 
 /* //////404page */
-.page_404{ padding:40px 0; background:#fff; font-family: 'Arvo', serif;
+.page_404 {
+  padding: 40px 0;
+  background: #fff;
+  font-family: "Arvo", serif;
 }
 
-.page_404  img{ width:100%;}
+.page_404 img {
+  width: 100%;
+}
 
-.four_zero_four_bg{
- 
- background-image: url("./assets/images/404.gif");
-    height: 400px;
-    background-position: center;
- }
- 
- 
- .four_zero_four_bg h1{
- font-size:80px;
- }
- 
-  .four_zero_four_bg h3{
-			 font-size:80px;
-			 }
-			 
-			 .link_404{			 
-	color: #fff!important;
-    padding: 10px 20px;
-    background: #39ac31;
-    margin: 20px 0;
-    display: inline-block;}
-	.contant_box_404{ margin-top:-50px;}
+.four_zero_four_bg {
+  background-image: url("./assets/images/404.gif");
+  height: 400px;
+  background-position: center;
+}
 
-  /* /////404page */
+.four_zero_four_bg h1 {
+  font-size: 80px;
+}
 
-  .full-size-modal {
-    position: fixed;
-    z-index: 1498;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    overflow-y: scroll;
-    border-radius: 0;
+.four_zero_four_bg h3 {
+  font-size: 80px;
+}
+
+.link_404 {
+  color: #fff !important;
+  padding: 10px 20px;
+  background: #39ac31;
+  margin: 20px 0;
+  display: inline-block;
+}
+.contant_box_404 {
+  margin-top: -50px;
+}
+
+/* /////404page */
+
+.full-size-modal {
+  position: fixed;
+  z-index: 1498;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  border-radius: 0;
+}
+
+.chat {
+  display: none;
+}
+
+.TD-first:hover {
+  transform: scale(1) !important;
+  background-color: #f0f3ff !important;
+}
+
+.TD:hover .TD-first {
+  transform: scale(1) !important;
+}
+
+.bganim {
+  width: 100%;
+  max-width: 491px;
+  height: 50%;
+  display: block;
+  position: absolute;
+  background-image: url("./assets/images/arzAn.png");
+  top: 0;
+  left: 120px;
+  background-repeat: repeat-y;
+  background-position: left 35px top 0;
+  animation-iteration-count: infinite;
+  background-size: 100%;
+  animation-name: slidebg;
+  animation-duration: 15s;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+  
+}
+
+@keyframes slidebg {
+  0% {
+    background-position: 0 0;
   }
+  100% {
+    background-position: 0 1300px;
+  }
+}

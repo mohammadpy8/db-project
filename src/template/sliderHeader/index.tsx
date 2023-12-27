@@ -5,7 +5,7 @@ import { GoMoon } from "react-icons/go";
 
 const SliderHeader: FC = () => {
   return (
-    <div className="sliderHeader w-full relative flex items-center h-[70px]">
+    <div className="sliderHeader w-full relative flex items-center h-[70px] z-[2]">
       <div className="relative w-[10%] flex items-center gap-x-2 mx-4">
         <span className="w-4 h-4 bg-green-500 rounded-full dateDelay"></span>
         <div className="bg-[#eaeaea] px-2 py-1 rounded-lg">
