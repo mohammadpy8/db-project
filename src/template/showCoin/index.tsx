@@ -1,21 +1,14 @@
-import { FC, useState, useEffect } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { getCoinList } from '../../services/cryptoApi'
 import crypto from '../../types/cryptoType/CryptoType'
 import TableCoin from '../../module/tableCoin'
 import Chart from '../../module/chart'
-import { chartType } from '../../types/chartType/ChartType'
 
-interface ChartType {
-  prices: [number, number][] | undefined
-  market_caps: [number, number][] | undefined
-  total_volumes: [number, number][] | undefined
-}
-
-const ShowCoin: FC = () => {
+const ShowCoin = ({currency} : any) => {
   const [coins, setCoins] = useState<crypto[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [page, setPage] = useState<number>(1)
-  const [currency, setCurrency] = useState<string>('usd')
+  // const [currency, setCurrency] = useState<string>('usd')
   const [chart, setChart] = useState<number[][]>([])
   const [openCharts, setOpenCharts] = useState<boolean>(false)
 
@@ -33,7 +26,7 @@ const ShowCoin: FC = () => {
     }
 
     getData()
-    window.scrollTo(0, 0)
+    // window.scrollTo(0, 0)
   }, [page, currency])
 
   return (

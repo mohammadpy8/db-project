@@ -1,63 +1,92 @@
-import { FC } from 'react'
-import crypto from '../../types/cryptoType/CryptoType'
-import numberConvertToPersian from '../../shared/numberConvertToPersian'
-import { FiBarChart2 } from 'react-icons/fi'
-import { marketChart } from '../../services/cryptoApi'
-import { chartType } from '../../types/chartType/ChartType'
+import { FC } from "react";
+import crypto from "../../types/cryptoType/CryptoType";
+import numberConvertToPersian from "../../shared/numberConvertToPersian";
+import { FiBarChart2 } from "react-icons/fi";
+import { marketChart } from "../../services/cryptoApi";
+import { ThreeDots } from "react-loader-spinner";
 
 interface ChartType {
-  prices: [number, number][]
-  market_caps: [number, number][]
-  total_volumes: [number, number][]
+  prices: [number, number][];
+  market_caps: [number, number][];
+  total_volumes: [number, number][];
 }
 
 interface table {
-  isLoading?: boolean
-  currency: string
-  coins: crypto[]
-  setChart: any
+  isLoading?: boolean;
+  currency: string;
+  coins: crypto[];
+  setChart: any;
   setOpenCharts: any;
 }
 
-const TableCoin: FC<table> = ({ isLoading, coins, currency, setChart, setOpenCharts }) => {
+const TableCoin: FC<table> = ({
+  isLoading,
+  coins,
+  currency,
+  setChart,
+  setOpenCharts,
+}) => {
   const changeCurrency = (price: string) => {
-    if (price === 'usd') {
-      return '$'
-    } else if (price === 'eur') {
-      return '€'
+    if (price === "usd") {
+      return "$";
+    } else if (price === "eur") {
+      return "€";
     } else {
-      return '¥'
+      return "¥";
     }
-  }
+  };
 
   const randomPhoto = (priceCoin: number) => {
     if (priceCoin > 0 && priceCoin < 3) {
-      return 'https://kifpool.me/ui_v2/charts/green/green-1.svg'
+      return "https://kifpool.me/ui_v2/charts/green/green-1.svg";
     } else if (priceCoin >= 3 && priceCoin < 5) {
-      return 'https://kifpool.me/ui_v2/charts/green/green-10.svg'
+      return "https://kifpool.me/ui_v2/charts/green/green-10.svg";
     } else if (priceCoin >= 5) {
-      return 'https://kifpool.me/ui_v2/charts/green/green-9.svg'
+      return "https://kifpool.me/ui_v2/charts/green/green-9.svg";
+    } else if (priceCoin <= -1 && priceCoin >= -3) {
+      return "https://kifpool.me/ui_v2/charts/red/red-3.svg";
+    } else if (priceCoin <= -4) {
+      return "https://kifpool.me/ui_v2/charts/red/red-4.svg";
     } else if (priceCoin < 0) {
-      return 'https://kifpool.me/ui_v2/charts/red/red-2.svg'
-    } else if (priceCoin <= -1 && priceCoin <= -3) {
-      return 'https://kifpool.me/ui_v2/charts/red/red-3.svg'
-    } else if (priceCoin < -4) {
-      return 'https://kifpool.me/ui_v2/charts/red/red-2.svg'
+      return "https://kifpool.me/ui_v2/charts/red/red-2.svg";
     }
-  }
+  };
+
+  const reverseNumber = (number: any): any => {
+    const negative = number.slice(0,1
+      );
+    console.log("number", number);
+    console.log("negative", negative);
+
+    const splited = number.split("-");
+    console.log("splited", splited);
+
+    const joined = splited[1].concat(negative);
+    console.log("TFFFFFFgjonjihg", joined);
+    return joined
+  };
 
   const colorRandom = (index: number) => {
     if (index % 2 === 0) {
-      return '#fff'
+      return "#fff";
     } else if (index % 2 === 1) {
-      return '#f4f6ff;'
+      return "#f4f6ff;";
     }
-  }
+  };
 
   return (
     <div className="mt-8 mb-8 rounded-2xl relative z-0 border-[1px] border-[#f0f3ff]">
       {isLoading ? (
-        <h1>loading..</h1>
+        <div className="flex justify-center items-center">
+          <ThreeDots
+            visible={true}
+            height="80"
+            width="80"
+            color="#0023d0"
+            radius="9"
+            ariaLabel="three-dots-loading"
+          />
+        </div>
       ) : (
         <table className="w-full rounded-xl m-auto border-collapse border-spacing-0 overflow-hidden font-Yek-SemiBold">
           <thead className="rounded-2xl h-16 bg-[#f0f3ff] font-Yek-Bold text-gray-700">
@@ -72,7 +101,7 @@ const TableCoin: FC<table> = ({ isLoading, coins, currency, setChart, setOpenCha
             </tr>
           </thead>
           <tbody>
-            {coins.slice(0,10).map((coin, index) => (
+            {coins.slice(0, 10).map((coin, index) => (
               <tr
                 className="TD hover:scale-105 transition-all duration-500"
                 style={{
@@ -95,14 +124,21 @@ const TableCoin: FC<table> = ({ isLoading, coins, currency, setChart, setOpenCha
                 <td
                   className={
                     coin.price_change_percentage_24h > 0
-                      ? 'text-green-500'
-                      : 'text-red-600'
+                      ? "text-green-500"
+                      : "text-red-600"
                   }
                 >
-                  {numberConvertToPersian(
-                    coin.price_change_percentage_24h.toFixed(2),
-                  )}
-                  %
+                   %
+                  {coin.price_change_percentage_24h < 0
+                    ? numberConvertToPersian(
+                        reverseNumber(
+                          coin.price_change_percentage_24h.toFixed(2)
+                        )
+                      )
+                    : numberConvertToPersian(
+                        coin.price_change_percentage_24h.toFixed(2)
+                      )}
+                 
                 </td>
                 <td>
                   ${numberConvertToPersian(coin.total_volume.toLocaleString())}
@@ -115,16 +151,19 @@ const TableCoin: FC<table> = ({ isLoading, coins, currency, setChart, setOpenCha
                   />
                 </td>
                 <td>
-                  <button className="border-2 p-2 rounded-lg" onClick={async() => {
-                    setOpenCharts(true)
-                        try {
-                          const res = await fetch(marketChart(coin.id));
-                          const json = await res.json() as number[][];
-                          setChart({...json, coin})
-                        } catch (error) {
-                          setChart(null)
-                        }
-                  }}>
+                  <button
+                    className="border-2 p-2 rounded-lg"
+                    onClick={async () => {
+                      setOpenCharts(true);
+                      try {
+                        const res = await fetch(marketChart(coin.id));
+                        const json = (await res.json()) as number[][];
+                        setChart({ ...json, coin });
+                      } catch (error) {
+                        setChart(null);
+                      }
+                    }}
+                  >
                     <FiBarChart2 size={30} color="#3051f8" />
                   </button>
                 </td>
@@ -134,7 +173,7 @@ const TableCoin: FC<table> = ({ isLoading, coins, currency, setChart, setOpenCha
         </table>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default TableCoin
+export default TableCoin;

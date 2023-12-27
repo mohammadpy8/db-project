@@ -13,20 +13,20 @@ import {
 } from "recharts";
 import convertData from "../../shared/convertData";
 
-interface chartTypes {
+interface ChartTypes {
   prices: number[][];
   market_caps: number[][];
   total_volumes: number[][];
 }
 
-interface chart {
+interface Chart {
   setChart: any;
   chart: number[][];
   setOpenChart: any;
   openCharts: any;
 }
 
-const Chart: FC<chart> = ({ setChart, chart, setOpenChart, openCharts }) => {
+const Chart: FC<Chart> = ({ setChart, chart, setOpenChart, openCharts }) => {
   const [type, setType] = useState<any>("prices");
   console.log(chart);
 
