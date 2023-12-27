@@ -1,32 +1,74 @@
-import { FC } from "react";
-import { chartType } from "../../types/chartType/ChartType";
-import { FaTimes } from "react-icons/fa";
-import { LineChart, Line } from "recharts";
+import { FC, useState } from 'react'
 
-interface chart {
-  setChart: any;
-  chart: chartType;
+import { FaTimes } from 'react-icons/fa'
+import {
+  LineChart,
+  Line,
+  ResponsiveContainer,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  XAxis,
+  Legend,
+} from 'recharts'
+import convertData from '../../shared/convertData'
+
+interface chartTypes {
+  prices: number[][]
+  market_caps: number[][]
+  total_volumes: number[][]
 }
 
-const Chart: FC<chart> = ({ setChart, chart }) => {
-  const data = [{ name: "Page A",  amt: 1 }, { name: "Page A",  amt: 50 }, { name: "Page A", uv: 700, pv: 1000, amt: 2400 }];
-  console.log(chart.prices.slice(0, 20));
+interface chart {
+  setChart: any
+  chart: number[][]
+  setOpenChart: any
+  openCharts: any
+}
+
+const Chart: FC<chart> = ({ setChart, chart, setOpenChart, openCharts }) => {
+  const [type, setType] = useState<any>('prices')
+  console.log(chart);
+  
+  console.log(convertData(chart, type))
 
   return (
-    <div className={chart ? `ModalFrist open` : `ModalFrist close`}>
+    <div className={openCharts ? `ModalFrist open` : `ModalFrist close`}>
       <div className="modal-background"></div>
       <div className="modal">
         <div className="flex justify-end mt-4 ml-[-20px]">
-          <button onClick={() => setChart(false)}>
+          <button onClick={() => setOpenChart(false)}>
             <FaTimes size={25} />
           </button>
         </div>
-        <LineChart width={400} height={400} data={data}>
-          <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-        </LineChart>
+        <div>
+          {/* <img src={chart.coin.image} alt="image" />
+          <p>{chart.coin.name}</p> */}
+        </div>
+        <div className="w-[760px] h-[300px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart width={400} height={400} data={convertData(chart, type)}>
+              <Line
+                type="monoton"
+                dataKey={type}
+                stroke="#3874ff"
+                strokeWidth="2px"
+              />
+              <CartesianGrid stroke="#9d9d9d" />
+              <YAxis
+                dataKey={type}
+                domain={['auto', 'auto']}
+                stroke="#9d9d9d"
+              />
+              <XAxis dataKey="date" hide />
+              <Legend />
+              <Tooltip />
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Chart;
+export default Chart

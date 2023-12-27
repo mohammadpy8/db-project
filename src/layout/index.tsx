@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import Header from "../template/header";
-import Footer from "../template/footer";
-import { FaTimes } from "react-icons/fa";
-import { IoChatbox } from "react-icons/io5";
+import React, { useState } from 'react'
+import Header from '../template/header'
+import Footer from '../template/footer'
+import { FaTimes } from 'react-icons/fa'
+import { IoChatbox } from 'react-icons/io5'
 
 const index: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const [openChat, setOpenChat] = useState<boolean>(false);
+  const [openChat, setOpenChat] = useState<boolean>(false)
   return (
     <div className="relative">
       <div className="fixed bottom-8 right-4 z-[10000]">
@@ -14,24 +14,38 @@ const index: React.FC<React.PropsWithChildren> = ({ children }) => {
           onClick={() => setOpenChat(!openChat)}
         >
           {openChat ? (
-            <IoChatbox color="#fff" size={35} />
-          ) : (
             <FaTimes size={35} color="#fff" />
+          ) : (
+            <IoChatbox color="#fff" size={35} />
           )}
         </button>
       </div>
       <div
         className={
           openChat
-            ? "opacity-100 transition-all duration-300 w-72 h-96 bg-white shadow-2xl fixed bottom-[120px] right-9 z-[10000] rounded-lg"
-            : "opacity-0 transition-all duration-300 w-72 h-96 bg-white shadow-2xl fixed bottom-[120px] right-9 z-[10000] rounded-lg"
+            ? 'opacity-100 transition-all duration-500 w-72 h-96 bg-white shadow-2xl fixed bottom-[120px] right-9 z-[10000] rounded-lg'
+            : 'opacity-0 transition-all duration-500 w-72 h-96 bg-white shadow-2xl fixed bottom-[120px] right-9 z-[10000] rounded-lg'
         }
-      ></div>
+      >
+        <div className="bg-primary-300 h-24 rounded-t-lg">
+          <div>
+            <h1 className="text-xl font-Yek-Bold text-white pt-2 pr-2">
+              پشتیبانی ایرانیان
+            </h1>
+          </div>
+          <div className='text-center'>
+            <span className='text-sm mx-4 text-gray-200 font-Yek-Regular'>
+              سوالات خود را می توانید بپرسید و افراد ما در کوتاه ترین زمان ممکن
+              پاسخ خواهند داد
+            </span>
+          </div>
+        </div>
+      </div>
       <Header />
       {children}
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default index;
+export default index

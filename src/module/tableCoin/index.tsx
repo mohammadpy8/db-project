@@ -5,14 +5,21 @@ import { FiBarChart2 } from 'react-icons/fi'
 import { marketChart } from '../../services/cryptoApi'
 import { chartType } from '../../types/chartType/ChartType'
 
+interface ChartType {
+  prices: [number, number][]
+  market_caps: [number, number][]
+  total_volumes: [number, number][]
+}
+
 interface table {
   isLoading?: boolean
   currency: string
   coins: crypto[]
   setChart: any
+  setOpenCharts: any;
 }
 
-const TableCoin: FC<table> = ({ isLoading, coins, currency, setChart }) => {
+const TableCoin: FC<table> = ({ isLoading, coins, currency, setChart, setOpenCharts }) => {
   const changeCurrency = (price: string) => {
     if (price === 'usd') {
       return '$'
@@ -109,11 +116,11 @@ const TableCoin: FC<table> = ({ isLoading, coins, currency, setChart }) => {
                 </td>
                 <td>
                   <button className="border-2 p-2 rounded-lg" onClick={async() => {
-                        setChart(true)
+                    setOpenCharts(true)
                         try {
                           const res = await fetch(marketChart(coin.id));
-                          const json = await res.json() as chartType;
-                          setChart(json)
+                          const json = await res.json() as number[][];
+                          setChart({...json, coin})
                         } catch (error) {
                           setChart(null)
                         }
