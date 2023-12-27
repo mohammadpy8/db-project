@@ -1,9 +1,11 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import crypto from "../../types/cryptoType/CryptoType";
 import numberConvertToPersian from "../../shared/numberConvertToPersian";
 import { FiBarChart2 } from "react-icons/fi";
 import { marketChart } from "../../services/cryptoApi";
 import { ThreeDots } from "react-loader-spinner";
+import { IoMdResize } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 
 interface ChartType {
   prices: [number, number][];
@@ -17,6 +19,7 @@ interface table {
   coins: crypto[];
   setChart: any;
   setOpenCharts: any;
+  show: any;
 }
 
 const TableCoin: FC<table> = ({
@@ -25,7 +28,10 @@ const TableCoin: FC<table> = ({
   currency,
   setChart,
   setOpenCharts,
+  show,
 }) => {
+  const [fullSize, setFullSize] = useState(false);
+
   const changeCurrency = (price: string) => {
     if (price === "usd") {
       return "$";
@@ -34,6 +40,10 @@ const TableCoin: FC<table> = ({
     } else {
       return "¥";
     }
+  };
+
+  const fullSizeHandler = () => {
+    setFullSize(!fullSize);
   };
 
   const randomPhoto = (priceCoin: number) => {
@@ -53,8 +63,7 @@ const TableCoin: FC<table> = ({
   };
 
   const reverseNumber = (number: any): any => {
-    const negative = number.slice(0,1
-      );
+    const negative = number.slice(0, 1);
     console.log("number", number);
     console.log("negative", negative);
 
@@ -63,7 +72,7 @@ const TableCoin: FC<table> = ({
 
     const joined = splited[1].concat(negative);
     console.log("TFFFFFFgjonjihg", joined);
-    return joined
+    return joined;
   };
 
   const colorRandom = (index: number) => {
@@ -75,23 +84,31 @@ const TableCoin: FC<table> = ({
   };
 
   return (
-    <div className="mt-8 mb-8 rounded-2xl relative z-0 border-[1px] border-[#f0f3ff]">
-      {isLoading ? (
-        <div className="flex justify-center items-center">
-          <ThreeDots
-            visible={true}
-            height="80"
-            width="80"
-            color="#0023d0"
-            radius="9"
-            ariaLabel="three-dots-loading"
-          />
-        </div>
-      ) : (
-        <table className="w-full rounded-xl m-auto border-collapse border-spacing-0 overflow-hidden font-Yek-SemiBold">
+    <div
+      className={
+        fullSize
+          ? "full-size-modal"
+          : "mt-8 mb-8 rounded-2xl relative z-0 border-[1px] border-[#f0f3ff]"
+      }
+    >
+      {coins.length > 0 && !isLoading ? (
+        <table className={fullSize ? "z-[9999999] w-full rounded-xl m-auto border-collapse border-spacing-0 overflow-hidden font-Yek-SemiBold" : "w-full rounded-xl m-auto border-collapse border-spacing-0 overflow-hidden font-Yek-SemiBold"}>
           <thead className="rounded-2xl h-16 bg-[#f0f3ff] font-Yek-Bold text-gray-700">
             <tr className="TH">
-              <th></th>
+              <th>
+                {" "}
+                {show ? (
+                  fullSize ? (
+                    <button onClick={fullSizeHandler}>
+                      <IoClose size={30} />
+                    </button>
+                  ) : (
+                    <button onClick={fullSizeHandler}>
+                      <IoMdResize size={30} />
+                    </button>
+                  )
+                ) : null}
+              </th>
               <th>ارز</th>
               <th>قیمت(دلار)</th>
               <th>تغییرات</th>
@@ -128,7 +145,7 @@ const TableCoin: FC<table> = ({
                       : "text-red-600"
                   }
                 >
-                   %
+                  %
                   {coin.price_change_percentage_24h < 0
                     ? numberConvertToPersian(
                         reverseNumber(
@@ -138,7 +155,6 @@ const TableCoin: FC<table> = ({
                     : numberConvertToPersian(
                         coin.price_change_percentage_24h.toFixed(2)
                       )}
-                 
                 </td>
                 <td>
                   ${numberConvertToPersian(coin.total_volume.toLocaleString())}
@@ -171,6 +187,17 @@ const TableCoin: FC<table> = ({
             ))}
           </tbody>
         </table>
+      ) : (
+        <div className="flex justify-center items-center">
+          <ThreeDots
+            visible={true}
+            height="80"
+            width="80"
+            color="#0023d0"
+            radius="9"
+            ariaLabel="three-dots-loading"
+          />
+        </div>
       )}
     </div>
   );

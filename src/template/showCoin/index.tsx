@@ -4,7 +4,7 @@ import crypto from '../../types/cryptoType/CryptoType'
 import TableCoin from '../../module/tableCoin'
 import Chart from '../../module/chart'
 
-const ShowCoin = ({currency} : any) => {
+const ShowCoin = ({currency, show} : any) => {
   const [coins, setCoins] = useState<crypto[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [page, setPage] = useState<number>(1)
@@ -21,7 +21,9 @@ const ShowCoin = ({currency} : any) => {
         setCoins(json)
         setIsLoading(false)
       } catch (error) {
-        console.log(error)
+        // console.log(error)
+        setIsLoading(false)
+        setCoins([])
       }
     }
 
@@ -37,6 +39,7 @@ const ShowCoin = ({currency} : any) => {
         currency={currency}
         setChart={setChart}
         setOpenCharts={setOpenCharts}
+        show={show}
       />
       {!!chart && <Chart setChart={setChart} chart={chart} setOpenChart={setOpenCharts} openCharts={openCharts} />}
     </div>

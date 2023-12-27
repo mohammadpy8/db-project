@@ -47,21 +47,21 @@ const Chart: FC<Chart> = ({ setChart, chart, setOpenChart, openCharts }) => {
         </div>
         <div className="w-[760px] h-[300px] mt-6 px-auto">
           <ResponsiveContainer width="100%" height="100%">
-            <LineChart width={400} height={400} data={convertData(chart, type)}>
+            <LineChart width={400} height={400} data={convertData(chart, type).slice(0,30)}>
               <Line
-                type="monoton"
+                type="monotone"
                 dataKey={type}
-                stroke="#3874ff"
-                strokeWidth="2px"
+                stroke="#193df3"
+                strokeWidth="3px"
               />
-              <CartesianGrid stroke="#9d9d9d" />
+              <CartesianGrid stroke="#fff" strokeDasharray="1 3" />
               <YAxis
                 dataKey={type}
                 domain={["auto", "auto"]}
-                stroke="#9d9d9d"
+                stroke="#eee"
               />
               <XAxis dataKey="date" hide />
-              <Legend />
+               {/* <Legend /> */}
               <Tooltip />
             </LineChart>
           </ResponsiveContainer>
@@ -76,7 +76,7 @@ const Chart: FC<Chart> = ({ setChart, chart, setOpenChart, openCharts }) => {
               className={
                 type === "prices"
                   ? "bg-primary-200 w-24 h-12 rounded-xl transition-all duration-300 border-none"
-                  : "border-2 w-24 h-12 rounded-xl border-primary-200 text-primary-200 transition-colors duration-500"
+                  : "border-2 w-24 h-12 rounded-xl border-white text-white transition-colors duration-500"
               }
             >
               قیمت
@@ -88,7 +88,7 @@ const Chart: FC<Chart> = ({ setChart, chart, setOpenChart, openCharts }) => {
               className={
                 type === "market_caps"
                   ? "bg-primary-200 w-24 h-12 rounded-xl transition-all duration-300 border-none"
-                  : "border-2 w-24 h-12 rounded-xl border-primary-200 text-primary-200 transition-colors duration-500"
+                  : "border-2 w-24 h-12 rounded-xl border-white text-white transition-colors duration-500"
               }
             >
               مارکت کپ
@@ -100,7 +100,7 @@ const Chart: FC<Chart> = ({ setChart, chart, setOpenChart, openCharts }) => {
               className={
                 type === "total_volumes"
                   ? "bg-primary-200 w-24 h-12 rounded-xl transition-all duration-300 border-none"
-                  : "border-2 w-24 h-12 rounded-xl border-primary-200 text-primary-200 transition-colors duration-500"
+                  : "border-2 w-24 h-12 rounded-xl border-white text-white transition-colors duration-500"
               }
             >
               ارزش کلی

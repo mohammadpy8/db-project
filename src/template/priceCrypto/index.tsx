@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { FiBarChart2 } from "react-icons/fi";
 import ShowCoin from "../showCoin";
 import { TbClipboardList } from "react-icons/tb";
+import { Link } from "react-router-dom";
 
 const PriceCrypto: FC = () => {
   const [currency, setCurrency] = useState<string>("usd");
@@ -62,7 +63,9 @@ const PriceCrypto: FC = () => {
       <div className="flex justify-center">
         <button className="flex items-center gap-x-2 font-Yek-SemiBold text-primary-200 border-2 p-2 rounded-lg hover:opacity-70 transition-all duration-300">
           <TbClipboardList color="#193df3" size={30} />
-          <span>لیست تمام ارزها</span>
+          <Link to="/all-arz">
+            <span>لیست تمام ارزها</span>
+          </Link>
         </button>
       </div>
     </div>

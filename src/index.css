@@ -324,3 +324,14 @@ html,
 	.contant_box_404{ margin-top:-50px;}
 
   /* /////404page */
+
+  .full-size-modal {
+    position: fixed;
+    z-index: 999999999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+    border-radius: 0;
+  }

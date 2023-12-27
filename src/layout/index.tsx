@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { useState } from "react";
 import Header from "../template/header";
 import Footer from "../template/footer";
 import { FaTimes } from "react-icons/fa";

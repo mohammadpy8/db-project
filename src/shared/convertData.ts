@@ -6,8 +6,8 @@ const convertData = (data: number[][], type: any) => {
 
   const convertedData = data[type].map((item: any) => {
     return {
-      date: item[0],
-      [type]: item[1],
+      date: item[0].toFixed(0),
+      [type]: item[1].toFixed(0),
     };
   });
 
