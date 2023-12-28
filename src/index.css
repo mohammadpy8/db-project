@@ -339,6 +339,7 @@ html,
   height: 100vh;
   overflow-y: scroll;
   border-radius: 0;
+  background-color: #fff;
 }
 
 .chat {

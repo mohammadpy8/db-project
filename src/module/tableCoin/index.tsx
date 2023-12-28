@@ -6,6 +6,7 @@ import { marketChart } from '../../services/cryptoApi'
 import { ThreeDots } from 'react-loader-spinner'
 import { IoMdResize } from 'react-icons/io'
 import { IoClose } from 'react-icons/io5'
+import Pagination from '../pagination'
 
 interface ChartType {
   prices: [number, number][]
@@ -20,6 +21,8 @@ interface table {
   setChart: any
   setOpenCharts: any
   show: any
+  page: number
+  setPage: any
 }
 
 const TableCoin: FC<table> = ({
@@ -29,8 +32,10 @@ const TableCoin: FC<table> = ({
   setChart,
   setOpenCharts,
   show,
+  page,
+  setPage,
 }) => {
-  const [fullSize, setFullSize] = useState(false)
+  const [fullSize, setFullSize] = useState<boolean>(false)
 
   const changeCurrency = (price: string) => {
     if (price === 'usd') {
@@ -131,7 +136,7 @@ const TableCoin: FC<table> = ({
                   background: colorRandom(index),
                 }}
               >
-                <td className='bg-[#f0f3ff] TD-first'>
+                <td className="bg-[#f0f3ff] TD-first">
                   <div className="flex flex-col items-center gap-y-2">
                     <img src={coin.image} alt={coin.id} className="w-8 h-8" />
                     <span className="text-[15px] font-Yek-Bold">
@@ -205,6 +210,9 @@ const TableCoin: FC<table> = ({
           />
         </div>
       )}
+      <div className="w-full">
+        {fullSize ? <Pagination page={page} setPage={setPage} /> : ''}
+      </div>
     </div>
   )
 }

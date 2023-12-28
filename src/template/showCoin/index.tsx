@@ -13,6 +13,7 @@ const ShowCoin = ({currency, show} : any) => {
   const [chart, setChart] = useState<number[][]>([])
   const [openCharts, setOpenCharts] = useState<boolean>(false)
 
+
   useEffect(() => {
     setIsLoading(true)
     const getData = async () => {
@@ -41,9 +42,12 @@ const ShowCoin = ({currency, show} : any) => {
         setChart={setChart}
         setOpenCharts={setOpenCharts}
         show={show}
+        page={page}
+        setPage={setPage}
       />
       {!!chart && <Chart setChart={setChart} chart={chart} setOpenChart={setOpenCharts} openCharts={openCharts} />}
-      {show ? <Pagination page={page} setPage={setPage} /> : ""}
+      {show && !isLoading && <Pagination page={page} setPage={setPage} /> }
+      
     </div>
   )
 }
