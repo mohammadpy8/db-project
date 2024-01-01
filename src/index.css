@@ -411,3 +411,33 @@ html,
     rgba(48, 81, 248, 1) 100%
   );
 }
+
+.cardArz {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(113, 0, 255, 0.8251633417038691) 0%,
+    rgba(48, 81, 248, 1) 100%
+  );
+
+  transition-duration: 1s;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cardArz:hover {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    0deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(113, 0, 255, 0.8251633417038691) 0%,
+    rgba(48, 81, 248, 1) 100%
+  );
+}
+
+.loginPage {
+  -webkit-box-shadow: 2px 2px 25px -14px rgba(84,90,255,1);
+  -moz-box-shadow: 2px 2px 25px -14px rgba(84,90,255,1);
+  box-shadow: 2px 2px 25px -14px rgba(84,90,255,1);
+}

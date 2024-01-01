@@ -80,7 +80,7 @@ const DashboradLayout: FC = () => {
       </div>
       <div className="w-full overflow-hidden min-h-screen py-5 pr-0 pl-4">
         <div className="w-full max-w-[1460px] my-0 mx-auto">
-          <div className="w-full bg-[#e6e6e6] py-4 px-8 mt-2 rounded-lg flex justify-between items-center">
+          <div className="w-full bg-[#f1f1f1] py-4 px-8 mt-2 rounded-lg flex justify-between items-center">
             <div>
               <div className="flex gap-x-2 items-center">
                 <div>

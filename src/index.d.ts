@@ -4,6 +4,7 @@ declare module '*.jpg';
 declare module '*.svg';
 declare module '*.png';
 declare module '*.webp';
+declare module '*.avif';
 declare module 'swiper';
 declare module "*.module.css"
 declare module "react-multi-date-picker"
