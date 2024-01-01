@@ -7,7 +7,7 @@ import { getCoinList } from "../../services/cryptoApi";
 import numberConvertToPersian from "../../shared/numberConvertToPersian";
 import { ThreeDots } from "react-loader-spinner";
 
-const SliderCoin: FC = () => {
+const SliderCoin  = ({ border }: any) => {
   const [getCoin, setGetCoin] = useState<crypto[]>([]);
   const [page, setPage] = useState<number>(1);
   const [currency, setCurrency] = useState<string>("usd");
@@ -40,7 +40,13 @@ const SliderCoin: FC = () => {
       {getCoin?.length > 0 ? (
         getCoin?.map((coins: crypto) => (
           <SwiperSlide key={coins?.id}>
-            <div className="coinSwiper w-[230px] h-12 mt-2 rounded-lg flex justify-between">
+            <div
+              className={
+                border
+                  ? "bg-gray-200 w-[230px] h-12 mt-2 rounded-lg flex justify-between"
+                  : "coinSwiper w-[230px] h-12 mt-2 rounded-lg flex justify-between"
+              }
+            >
               <div className="flex gap-x-2">
                 <div className="p-1">
                   <img
