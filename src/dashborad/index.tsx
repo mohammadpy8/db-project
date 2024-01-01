@@ -1,27 +1,29 @@
-import { FC, useState } from 'react'
-import { RxDashboard } from 'react-icons/rx'
+import { FC, useState } from "react";
+import { RxDashboard } from "react-icons/rx";
 import {
   FaListUl,
   FaRegAddressCard,
   FaRegMoneyBill1,
   FaRegComment,
   FaBtc,
-} from 'react-icons/fa6'
-import { TbTicket } from 'react-icons/tb'
-import { FiUserCheck } from 'react-icons/fi'
-import { TiThListOutline } from 'react-icons/ti'
-import { IoMdCloseCircleOutline } from 'react-icons/io'
-import IconUsers from '../assets/images/user.png'
-import numberConvertToPersian from '../shared/numberConvertToPersian'
-import { IoNotificationsOutline } from 'react-icons/io5'
-import { BiCommentDots } from 'react-icons/bi'
+} from "react-icons/fa6";
+import { TbTicket } from "react-icons/tb";
+import { FiUserCheck } from "react-icons/fi";
+import { TiThListOutline } from "react-icons/ti";
+import { IoMdCloseCircleOutline } from "react-icons/io";
+import IconUsers from "../assets/images/user.png";
+import numberConvertToPersian from "../shared/numberConvertToPersian";
+import { IoNotificationsOutline } from "react-icons/io5";
+import { BiCommentDots } from "react-icons/bi";
+import DatePickers from "../module/datePicker";
+import { Outlet } from "react-router-dom";
 
 const DashboradLayout: FC = () => {
-  //   const [numberPhone, setNumberPhone] = useState<>(09918986324)
+  const [numberPhone, setNumberPhone] = useState<string>("09918986324");
 
   return (
     <div className="flex w-full max-w-[1600px] mx-auto my-0 relative">
-      <div className="p-5 w-[300px] sticky top-0 right-0 sidebar z-[11] overflow-y-scroll">
+      <div className="p-5 w-[300px] sticky top-0 right-0 sidebar z-[11]">
         <div className="py-2 px-0 sticky top-[20px]">
           <h1 className="text-2xl font-Yek-ExtraBlack text-gray-800 z-[25] bg-[#f5f8fc]">
             داشبورد ایرانیان
@@ -90,7 +92,7 @@ const DashboradLayout: FC = () => {
                 </div>
                 <div className="text-md font-Yek-SemiBold text-gray-600">
                   <h1>محمد</h1>
-                  <h1>{numberConvertToPersian(500)}</h1>
+                  <h1>{numberConvertToPersian(numberPhone)}</h1>
                 </div>
               </div>
             </div>
@@ -113,9 +115,28 @@ const DashboradLayout: FC = () => {
             </div>
           </div>
         </div>
+        <div className="mt-10 flex justify-between items-center">
+          <div className="flex gap-x-2 items-center">
+            <div>
+              <span className="block w-4 h-4 bg-green-500 rounded-full dateDelay"></span>
+            </div>
+            <div className="bg-gray-200 p-2 rounded-lg">
+              <DatePickers />
+            </div>
+          </div>
+          <div className="flex gap-x-4">
+            <button className="bg-primary-300 text-white px-1 py-3 rounded-lg font-Yek-Regular text-sm">
+              واریز تومانی
+            </button>
+            <button className="border-2 text-black px-1 py-3 rounded-lg font-Yek-Regular text-sm">
+              برداشت تومانی
+            </button>
+          </div>
+        </div>
+        <Outlet />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DashboradLayout
+export default DashboradLayout;

@@ -401,3 +401,13 @@ html,
 .menu {
   max-height: 100vh;
 }
+
+.dash {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    120deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(174, 187, 253, 1) 0%,
+    rgba(48, 81, 248, 1) 100%
+  );
+}
