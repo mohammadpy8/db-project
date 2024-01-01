@@ -372,7 +372,6 @@ html,
   animation-duration: 15s;
   animation-timing-function: linear;
   animation-direction: alternate;
-  
 }
 
 @keyframes slidebg {
@@ -382,4 +381,23 @@ html,
   100% {
     background-position: 0 1300px;
   }
+}
+
+.re-li {
+  background-color: linear-gradient(
+    270deg,
+    rgba(49, 54, 64, 0) 0%,
+    #313640 49.01%,
+    rgba(49, 54, 64, 0) 100%
+  );
+}
+
+/* ///////?/sidebar// */
+.sidebar {
+  height: calc(100vh - 30px);
+  scrollbar-width: none;
+}
+
+.menu {
+  max-height: 100vh;
 }

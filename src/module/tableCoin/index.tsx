@@ -23,6 +23,7 @@ interface table {
   show: any
   page: number
   setPage: any
+  numberPage: number
 }
 
 const TableCoin: FC<table> = ({
@@ -34,22 +35,24 @@ const TableCoin: FC<table> = ({
   show,
   page,
   setPage,
+  numberPage
 }) => {
   const [fullSize, setFullSize] = useState<boolean>(false)
 
   const changeCurrency = (price: string) => {
-    if (price === 'usd') {
-      return '$'
-    } else if (price === 'eur') {
-      return '€'
-    } else {
-      return '¥'
+    switch (price) {
+      case 'usd':
+        return '$'
+      case 'eur':
+        return '€'
+      case 'jpy':
+        return '¥'
+      default:
+        return null
     }
   }
 
-  const fullSizeHandler = () => {
-    setFullSize(!fullSize)
-  }
+  const fullSizeHandler = () => setFullSize(!fullSize);
 
   const randomPhoto = (priceCoin: number) => {
     if (priceCoin > 0 && priceCoin < 3) {
@@ -129,7 +132,7 @@ const TableCoin: FC<table> = ({
             </tr>
           </thead>
           <tbody>
-            {coins.map((coin, index) => (
+            {coins.slice(0, numberPage).map((coin, index) => (
               <tr
                 className="TD hover:scale-105  transition-all duration-500"
                 style={{
@@ -211,7 +214,7 @@ const TableCoin: FC<table> = ({
         </div>
       )}
       <div className="w-full">
-        {fullSize ? <Pagination page={page} setPage={setPage} /> : ''}
+        {fullSize && <Pagination page={page} setPage={setPage} />}
       </div>
     </div>
   )

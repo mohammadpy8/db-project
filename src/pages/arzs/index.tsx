@@ -1,6 +1,7 @@
+import { FC } from 'react'
 import ShowCoin from '../../template/showCoin'
 
-const Arzs = () => {
+const Arzs : FC= () => {
   return (
     <div>
       <div className="bg-[#eef0f7] h-[500px]">
@@ -28,7 +29,7 @@ const Arzs = () => {
         </div>
       </div>
       <div className='container mt-[-140px]'>
-        <ShowCoin currency="usd" show={true} />
+        <ShowCoin currency="usd" show={true} numberPage={20} />
       </div>
     </div>
   )

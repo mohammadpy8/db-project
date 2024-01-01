@@ -1,11 +1,11 @@
-import { FC, useState } from "react";
-import { FiBarChart2 } from "react-icons/fi";
-import ShowCoin from "../showCoin";
-import { TbClipboardList } from "react-icons/tb";
-import { Link } from "react-router-dom";
+import { FC, useState } from 'react'
+import { FiBarChart2 } from 'react-icons/fi'
+import ShowCoin from '../showCoin'
+import { TbClipboardList } from 'react-icons/tb'
+import { Link } from 'react-router-dom'
 
 const PriceCrypto: FC = () => {
-  const [currency, setCurrency] = useState<string>("usd");
+  const [currency, setCurrency] = useState<string>('usd')
   return (
     <div className="mt-72 mb-24">
       <div className="flex justify-between">
@@ -26,31 +26,31 @@ const PriceCrypto: FC = () => {
           <div className="flex items-center font-Yek-SemiBold gap-x-8 text-primary-100">
             <button
               className={
-                currency === "usd"
-                  ? "bg-white w-24 h-12 rounded-lg shadow-lg transition-all duration-500"
-                  : " transition-all duration-500"
+                currency === 'usd'
+                  ? 'bg-white w-24 h-12 rounded-lg shadow-lg transition-all duration-500'
+                  : ' transition-all duration-500'
               }
-              onClick={() => setCurrency("usd")}
+              onClick={() => setCurrency('usd')}
             >
               دلار
             </button>
             <button
               className={
-                currency === "eur"
-                  ? "bg-white w-24 h-12 rounded-lg shadow-lg transition-all duration-500"
-                  : " transition-all duration-500"
+                currency === 'eur'
+                  ? 'bg-white w-24 h-12 rounded-lg shadow-lg transition-all duration-500'
+                  : ' transition-all duration-500'
               }
-              onClick={() => setCurrency("eur")}
+              onClick={() => setCurrency('eur')}
             >
               یورو
             </button>
             <button
               className={
-                currency === "jpy"
-                  ? "bg-white w-24 h-12 rounded-lg shadow-lg transition-all duration-500"
-                  : " transition-all duration-500"
+                currency === 'jpy'
+                  ? 'bg-white w-24 h-12 rounded-lg shadow-lg transition-all duration-500'
+                  : ' transition-all duration-500'
               }
-              onClick={() => setCurrency("jpy")}
+              onClick={() => setCurrency('jpy')}
             >
               ین ژاپن
             </button>
@@ -58,7 +58,7 @@ const PriceCrypto: FC = () => {
         </div>
       </div>
       <div>
-        <ShowCoin currency={currency} />
+        <ShowCoin currency={currency} numberPage={10} />
       </div>
       <div className="flex justify-center">
         <button className="flex items-center gap-x-2 font-Yek-SemiBold text-primary-200 border-2 p-2 rounded-lg hover:opacity-70 transition-all duration-300">
@@ -69,7 +69,7 @@ const PriceCrypto: FC = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
 export default PriceCrypto;

@@ -5,7 +5,7 @@ import TableCoin from '../../module/tableCoin'
 import Chart from '../../module/chart'
 import Pagination from '../../module/pagination'
 
-const ShowCoin = ({currency, show} : any) => {
+const ShowCoin = ({currency, show, numberPage} : any) => {
   const [coins, setCoins] = useState<crypto[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [page, setPage] = useState<number>(1)
@@ -44,6 +44,7 @@ const ShowCoin = ({currency, show} : any) => {
         show={show}
         page={page}
         setPage={setPage}
+        numberPage={numberPage}
       />
       {!!chart && <Chart setChart={setChart} chart={chart} setOpenChart={setOpenCharts} openCharts={openCharts} />}
       {show && !isLoading && <Pagination page={page} setPage={setPage} /> }
