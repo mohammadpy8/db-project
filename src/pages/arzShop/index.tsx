@@ -17,7 +17,7 @@ const ArzShop: FC = () => {
         <div className="space-y-4 px-4 py-2">
           <div className='flex gap-x-2 items-center'>
             <img src={ArzIcon} alt="arz" className='w-16' />
-            <h1 className="text-4xl text-primary-300 font-Yek-ExtraBlack">
+            <h1 className="text-5xl text-primary-300 font-Yek-ExtraBlack">
               خرید ارز
             </h1>
           </div>
