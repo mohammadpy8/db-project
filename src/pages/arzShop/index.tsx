@@ -52,7 +52,7 @@ const ArzShop: FC = () => {
         </div>
         <div className="w-[55%] relative">
           <input
-            className="w-full outline-none border-[3px] border-gray-400 border-solid transition-all focus:border-primary-300  placeholder:text-gray-400 placeholder:select-none text-lg py-3 rounded-xl placeholder:text-right pr-12 pl-3 bg-white font-Yek-SemiBold"
+            className="w-full outline-none border-2 border-gray-300  border-solid transition-all focus:border-primary-300  placeholder:text-gray-400 placeholder:select-none text-lg py-3 rounded-xl placeholder:text-right pr-12 pl-3 bg-white font-Yek-SemiBold"
             placeholder="جست و جو در میان ارز ها..."
             type="text"
           />

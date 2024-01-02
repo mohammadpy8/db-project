@@ -8,6 +8,7 @@ import Login from './pages/login'
 import DashboradLayout from './dashborad'
 import AdminPanel from './dashborad/admin'
 import ArzShop from './pages/arzShop'
+import MasterShop from './pages/masterShop'
 
 const App: FC = (): JSX.Element => {
   return (
@@ -17,6 +18,7 @@ const App: FC = (): JSX.Element => {
           <Route path="/" element={<HomePage />} />
           <Route path="/all-arz" element={<Arzs />} />
           <Route path="/arz-shop" element={<ArzShop />} />
+          <Route path="/master-shop" element={<MasterShop />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Route>

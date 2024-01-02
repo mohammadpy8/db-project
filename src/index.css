@@ -441,3 +441,15 @@ html,
   -moz-box-shadow: 2px 2px 25px -14px rgba(84,90,255,1);
   box-shadow: 2px 2px 25px -14px rgba(84,90,255,1);
 }
+
+.textColor {
+  background: linear-gradient(-5deg,#FFF 0%,#0064FF 47.99%,#77E1EE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent
+}
+
+.MasterPhoto {
+  background-image: url("./assets/images/masterCarttt.svg");
+  background-repeat: no-repeat;
+  background-position: top center;
+}
