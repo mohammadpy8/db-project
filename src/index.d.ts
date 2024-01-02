@@ -6,6 +6,7 @@ declare module '*.png';
 declare module '*.webp';
 declare module '*.avif';
 declare module 'swiper';
+declare module 'swiper/module';
 declare module "*.module.css"
 declare module "react-multi-date-picker"
 declare module "react-date-object/*"

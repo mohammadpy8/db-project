@@ -463,3 +463,10 @@ html,
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent
 }
+
+/* .swiper-slide-active {
+  height: 900px !important;
+} */
+/* .swiper-initialized {
+  height: 500px !important;
+} */

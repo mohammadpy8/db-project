@@ -6,6 +6,8 @@ import Details from "../../template/details";
 import PriceCrypto from "../../template/priceCrypto";
 import SupportCrypto from "../../template/supportCrypto";
 import Arz from "../../template/Arz";
+import CommentsUsers from "../../template/commetsUser";
+import Question from "../../template/question";
 
 const HomePage: FC = () => {
 
@@ -18,6 +20,8 @@ const HomePage: FC = () => {
       <PriceCrypto />
       <SupportCrypto />
       <Arz />
+      <CommentsUsers />
+      <Question />
     </div>
   );
 };
