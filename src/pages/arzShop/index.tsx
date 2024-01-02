@@ -387,7 +387,7 @@ const ArzShop: FC = () => {
         </div>
       </div>
       <div className="flex justify-center mt-20 pb-10">
-        <button className="bg-primary-400 flex text-white items-center gap-x-2 p-2 rounded-lg shadow-2xl">
+        <button className="bg-primary-400 flex text-white items-center gap-x-2 px-3 py-4 rounded-lg shadow-2xl hover:ring-[7px] transition-all duration-300">
           <span className="text-lg font-Yek-ExtraBold">محصولات بیشتر</span>
           <FaPlus color="#fff" size={15} />
         </button>
