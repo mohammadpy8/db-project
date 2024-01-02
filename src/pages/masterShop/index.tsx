@@ -6,7 +6,7 @@ import numberConvertToPersian from "../../shared/numberConvertToPersian";
 import { Link } from "react-router-dom";
 
 const MasterShop: FC = () => {
-  const [arzCount, setArzCount] = useState(20);
+  const [arzCount, setArzCount] = useState<number>(20);
 
   return (
     <div className="container MasterPhoto h-[1500px]">

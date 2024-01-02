@@ -413,20 +413,18 @@ html,
 }
 
 .cardArz {
-  background: rgb(2, 0, 36);
+  /* background: rgb(2, 0, 36);
   background: linear-gradient(
     90deg,
     rgba(2, 0, 36, 1) 0%,
     rgba(113, 0, 255, 0.8251633417038691) 0%,
     rgba(48, 81, 248, 1) 100%
-  );
-
-  transition-duration: 1s;
-  transition-property: all;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  ); */
+  background: linear-gradient(to left bottom, rgb(24, 32, 77), rgb(0, 144, 255))
+  /* transition: color 2s linear; */
 }
 
-.cardArz:hover {
+/* .cardArz:hover {
   background: rgb(2, 0, 36);
   background: linear-gradient(
     0deg,
@@ -434,7 +432,7 @@ html,
     rgba(113, 0, 255, 0.8251633417038691) 0%,
     rgba(48, 81, 248, 1) 100%
   );
-}
+} */
 
 .loginPage {
   -webkit-box-shadow: 2px 2px 25px -14px rgba(84,90,255,1);
@@ -452,4 +450,16 @@ html,
   background-image: url("./assets/images/masterCarttt.svg");
   background-repeat: no-repeat;
   background-position: top center;
+}
+
+.arzPhoto {
+  background-image: url("./assets/images/arzLogo.svg");
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+.textColorArz {
+  background: linear-gradient(0deg,#FFF 0%,#0064FF 47.99%,#77E1EE 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent
 }

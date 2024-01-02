@@ -10,6 +10,8 @@ import AdminPanel from "./dashborad/admin";
 import ArzShop from "./pages/arzShop";
 import MasterShop from "./pages/masterShop";
 import Cart from "./pages/cart";
+import DetailsArz from "./pages/detailsArz";
+import DetailsMasterCart from "./pages/detailsMasterCart";
 
 const App: FC = (): JSX.Element => {
   return (
@@ -19,7 +21,9 @@ const App: FC = (): JSX.Element => {
           <Route path="/" element={<HomePage />} />
           <Route path="/all-arz" element={<Arzs />} />
           <Route path="/arz-shop" element={<ArzShop />} />
+          <Route path="/arz-shop/:id" element={<DetailsArz />} />
           <Route path="/master-shop" element={<MasterShop />} />
+          <Route path="/master-shop/:id" element={<DetailsMasterCart />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
