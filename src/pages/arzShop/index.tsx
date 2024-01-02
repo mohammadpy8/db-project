@@ -1,22 +1,23 @@
-import { FC, useState } from 'react'
-import { TbShoppingCartDollar } from 'react-icons/tb'
-import numberConvertToPersian from '../../shared/numberConvertToPersian'
-import images from '../../assets/images/btcc.avif'
-import { FaLongArrowAltLeft, FaPlus } from 'react-icons/fa'
-import ArzIcon from '../../assets/images/shopi.webp'
+import { FC, useState } from "react";
+import { TbShoppingCartDollar } from "react-icons/tb";
+import numberConvertToPersian from "../../shared/numberConvertToPersian";
+import images from "../../assets/images/btcc.avif";
+import { FaLongArrowAltLeft, FaPlus } from "react-icons/fa";
+import ArzIcon from "../../assets/images/shopi.webp";
+import { Link } from "react-router-dom";
 
 const ArzShop: FC = () => {
-  const [arzCount, setArzCount] = useState<number>(12)
-  const [arzTotal, setTotal] = useState<number>(1500)
-  const [arzOffer, setArzOffer] = useState<number>(10)
-  const [arzPrice, setArzPrice] = useState<number>(165820888550)
+  const [arzCount, setArzCount] = useState<number>(12);
+  const [arzTotal, setTotal] = useState<number>(1500);
+  const [arzOffer, setArzOffer] = useState<number>(10);
+  const [arzPrice, setArzPrice] = useState<number>(165820888550);
 
   return (
     <div className="container mt-6">
       <div className="flex justify-between">
         <div className="space-y-4 px-4 py-2">
-          <div className='flex gap-x-2 items-center'>
-            <img src={ArzIcon} alt="arz" className='w-16' />
+          <div className="flex gap-x-2 items-center">
+            <img src={ArzIcon} alt="arz" className="w-16" />
             <h1 className="text-5xl text-primary-300 font-Yek-ExtraBlack">
               خرید ارز
             </h1>
@@ -28,15 +29,19 @@ const ArzShop: FC = () => {
           </div>
         </div>
         <div>
-          <div className="bg-primary-400 pl-2 pr-4 py-2 flex items-center gap-x-2 rounded-lg relative shadow-lg">
-            <h1 className="text-lg text-white font-Yek-ExtraBlack">سبد خرید</h1>
-            <button>
-              <TbShoppingCartDollar color="#fff" size={45} />
-            </button>
-            <span className="absolute top-2 left-11 bg-red-600 rounded-full w-5 h-5 flex items-center justify-center text-center text-md text-white font-Yek-ExtraBold">
-              {numberConvertToPersian(arzCount)}
-            </span>
-          </div>
+          <Link to="/cart">
+            <div className="bg-primary-400 pl-2 pr-4 py-2 flex items-center gap-x-2 rounded-lg relative shadow-lg hover:ring-[7px] transition-all duration-300">
+              <h1 className="text-lg text-white font-Yek-ExtraBlack">
+                سبد خرید
+              </h1>
+              <button>
+                <TbShoppingCartDollar color="#fff" size={45} />
+              </button>
+              <span className="absolute top-2 left-11 bg-red-600 rounded-full w-5 h-5 flex items-center justify-center text-center text-md text-white font-Yek-ExtraBold">
+                {numberConvertToPersian(arzCount)}
+              </span>
+            </div>
+          </Link>
         </div>
       </div>
       <div className="flex justify-between items-center mt-8">
@@ -399,7 +404,7 @@ const ArzShop: FC = () => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ArzShop
+export default ArzShop;

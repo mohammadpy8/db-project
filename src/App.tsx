@@ -1,14 +1,15 @@
-import { FC } from 'react'
-import { Route, Routes } from 'react-router-dom'
-import HomePage from './pages/home'
-import Layout from './layout'
-import NotFound from './pages/notFound'
-import Arzs from './pages/arzs'
-import Login from './pages/login'
-import DashboradLayout from './dashborad'
-import AdminPanel from './dashborad/admin'
-import ArzShop from './pages/arzShop'
-import MasterShop from './pages/masterShop'
+import { FC } from "react";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "./pages/home";
+import Layout from "./layout";
+import NotFound from "./pages/notFound";
+import Arzs from "./pages/arzs";
+import Login from "./pages/login";
+import DashboradLayout from "./dashborad";
+import AdminPanel from "./dashborad/admin";
+import ArzShop from "./pages/arzShop";
+import MasterShop from "./pages/masterShop";
+import Cart from "./pages/cart";
 
 const App: FC = (): JSX.Element => {
   return (
@@ -19,6 +20,7 @@ const App: FC = (): JSX.Element => {
           <Route path="/all-arz" element={<Arzs />} />
           <Route path="/arz-shop" element={<ArzShop />} />
           <Route path="/master-shop" element={<MasterShop />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<NotFound />} />
         </Route>
@@ -27,7 +29,7 @@ const App: FC = (): JSX.Element => {
         </Route>
       </Routes>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
