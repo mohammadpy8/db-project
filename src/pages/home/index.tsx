@@ -9,6 +9,7 @@ import Arz from "../../template/Arz";
 import CommentsUsers from "../../template/commetsUser";
 import Question from "../../template/question";
 import LastSection from "../../template/lastSection";
+import EndSectoinHome from "../../template/endSectionHome";
 
 const HomePage: FC = () => {
 
@@ -24,6 +25,7 @@ const HomePage: FC = () => {
       <CommentsUsers />
       <Question />
       <LastSection />
+      <EndSectoinHome />
     </div>
   );
 };

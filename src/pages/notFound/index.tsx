@@ -16,7 +16,7 @@ function NotFound() {
 
                 <p className="text-3xl font-Yek-Bold mt-4">صفحه مورد نظر یافت نشد!</p>
 
-                <Link to="/" className="link_404 rounded-xl font-Yek-Bold">
+                <Link to="/" className="link_404 rounded-xl font-Yek-Bold hover:ring-[7px] ring-[#a2f99c] transition-all duration-300">
                   برگشت به خانه
                 </Link>
               </div>

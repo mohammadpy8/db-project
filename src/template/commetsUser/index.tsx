@@ -17,11 +17,11 @@ const CommentsUsers: FC = () => {
       </div>
       <div className="flex justify-between">
         <div>
-          <div className="text-3xl font-Yek-ExtraBold text-primary-200 mt-10">
+          <div className="text-3xl font-Yek-ExtraBlack text-primary-200 mt-10">
             <h1>مهندسی شده برای رشد و اطمینان بیش‌تر</h1>
           </div>
           <div className="w-[600px] mt-8 text-justify">
-            <span className="leading-8 text-lg font-Yek-SemiBold">
+            <span className="leading-8 text-md font-Yek-Regular text-gray-600">
               کیف پول من یک سیستم کاملا هوشمند دیجیتالی میباشد که شما میتوانید
               تمامی خدمات خرید و فروش ارز دیجیتال ، نگهداری ارز دیجیتال ، خرید
               خدمات و پرداخت قبوض با ارز دیجیتال را در این سیستم تجربه کنید .
