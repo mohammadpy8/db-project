@@ -201,7 +201,7 @@ const Question: FC = () => {
             <div>
               <button
                 className={
-                  accordion === 1
+                  accordion === 4
                     ? "-rotate-90 transition-all duration-300"
                     : "rotate-0 transition-all duration-300"
                 }

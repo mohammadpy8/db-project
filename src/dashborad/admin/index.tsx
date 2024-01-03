@@ -7,7 +7,7 @@ import SliderCoin from "../../module/sliderCoin";
 
 const AdminPanel: FC = () => {
   return (
-    <div className="w-full bg-[#f1f1f1] rounded-lg mt-6">
+    <div className="w-full bg-[#f1f1f1] rounded-lg mt-6 h-[1500px] sticky">
       <div className="flex flex-col gap-y-2 p-8">
         <h1 className="text-2xl font-Yek-ExtraBlack text-gray-800">
           داشبورد من

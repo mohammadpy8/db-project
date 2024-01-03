@@ -22,7 +22,7 @@ const DashboradLayout: FC = () => {
   const [numberPhone, setNumberPhone] = useState<string>("09918986324");
 
   return (
-    <div className="flex w-full max-w-[1600px] mx-auto my-0 relative">
+    <div className="flex w-full max-w-[1600px] mx-auto my-0 h-scree">
       <div className="p-5 w-[300px] sticky top-0 right-0 sidebar z-[11]">
         <div className="py-2 px-0 sticky top-[20px]">
           <h1 className="text-2xl font-Yek-ExtraBlack text-gray-800 z-[25] bg-[#f5f8fc]">
@@ -70,6 +70,26 @@ const DashboradLayout: FC = () => {
             <li className="flex gap-x-2 text-lg font-Yek-Bold">
               <FiUserCheck color="#333" size={25} />
               <h1>حساب کاربری</h1>
+            </li>
+            <li className="flex gap-x-2 text-lg font-Yek-Bold text-red-600">
+              <IoMdCloseCircleOutline color="red" size={25} />
+              <h1>خروج از حساب کاربری</h1>
+            </li>
+            <li className="flex gap-x-2 text-lg font-Yek-Bold text-red-600">
+              <IoMdCloseCircleOutline color="red" size={25} />
+              <h1>خروج از حساب کاربری</h1>
+            </li>
+            <li className="flex gap-x-2 text-lg font-Yek-Bold text-red-600">
+              <IoMdCloseCircleOutline color="red" size={25} />
+              <h1>خروج از حساب کاربری</h1>
+            </li>
+            <li className="flex gap-x-2 text-lg font-Yek-Bold text-red-600">
+              <IoMdCloseCircleOutline color="red" size={25} />
+              <h1>خروج از حساب کاربری</h1>
+            </li>
+            <li className="flex gap-x-2 text-lg font-Yek-Bold text-red-600">
+              <IoMdCloseCircleOutline color="red" size={25} />
+              <h1>خروج از حساب کاربری</h1>
             </li>
             <li className="flex gap-x-2 text-lg font-Yek-Bold text-red-600">
               <IoMdCloseCircleOutline color="red" size={25} />
