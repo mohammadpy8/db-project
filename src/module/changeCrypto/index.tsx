@@ -186,8 +186,8 @@ const ChangeCrypto: FC = () => {
               </div>
             </div>
           </div>
-          <div className="w-full bg-primary-200 flex justify-center py-2 rounded-lg mt-2  h-12">
-            <button className="text-white font-Yek-Regular">
+          <div className="w-full bg-primary-200 flex justify-center py-2 rounded-lg mt-2  h-12 relative overflow-hidden">
+            <button className="text-white font-Yek-Regular btn-shine">
               {step === 0 ? 'خرید بیت کوین' : 'فروش بین کوین'}
             </button>
           </div>

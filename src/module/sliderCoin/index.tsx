@@ -7,7 +7,7 @@ import { getCoinList } from "../../services/cryptoApi";
 import numberConvertToPersian from "../../shared/numberConvertToPersian";
 import { ThreeDots } from "react-loader-spinner";
 
-const SliderCoin  = ({ border }: any) => {
+const SliderCoin = ({ border }: any) => {
   const [getCoin, setGetCoin] = useState<crypto[]>([]);
   const [page, setPage] = useState<number>(1);
   const [currency, setCurrency] = useState<string>("usd");

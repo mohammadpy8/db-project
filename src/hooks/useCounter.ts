@@ -11,7 +11,7 @@ function useCounter(numberSchool : number) {
       if (scroll >= SCROLLSIZE) {
         setCounter((number) => number + 1);
       }
-    }, 0);
+    },0);
 
     if (counter === numberSchool) {
       clearInterval(interval);

@@ -6,9 +6,9 @@ import numberConvertToPersian from '../../shared/numberConvertToPersian'
 import CommetsSlider from '../../module/commentSlider'
 
 const CommentsUsers: FC = () => {
-  const [users] = useCounter(15400)
-  const [transfer] = useCounter(365200)
-  const [order] = useCounter(2650080)
+  const [users] = useCounter(1500)
+  const [transfer] = useCounter(2500)
+  const [order] = useCounter(2500)
 
   return (
     <div className="mt-20">
@@ -59,7 +59,7 @@ const CommentsUsers: FC = () => {
           </div>
         </div>
         <div className='h-[400px] mt-20'>
-          {/* <CommetsSlider /> */}
+          <CommetsSlider />
         </div>
       </div>
     </div>
