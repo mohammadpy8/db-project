@@ -507,4 +507,17 @@ html,
   100% { transform: translateX(-100%); }
 } */
 
+.errorValidation {
+  height: 10px;
+  text-align: left;
+  margin-top: 5px;
+  width: fit-content;
+  font-size: 0.8rem;
+  color: red;
+  line-height: 10px;
+  padding: 2px 3px;
+  border-radius: 3px;
+  background-color: rgba(255, 0, 0, 0.175);
+}
+
 

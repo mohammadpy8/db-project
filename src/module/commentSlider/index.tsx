@@ -37,7 +37,7 @@ const CommetsSlider: FC = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <div className="w-[550px] border-2 border-gray-300 rounded-lg h-[150px]  z-0">
+          <div className="w-[550px] border-[0.1px] border-gray-300 rounded-lg h-[150px]  z-0">
             <div className="flex justify-between items-center p-4">
               <div className="flex items-center gap-x-2 text-lg font-Yek-ExtraBlack text-gray-600">
                 <button className="bg-gray-200 p-3 rounded-full">
@@ -62,7 +62,7 @@ const CommetsSlider: FC = () => {
           </div>
         </SwiperSlide>
         <SwiperSlide>
-          <div className="w-[550px] border-2 border-gray-300 rounded-lg h-[150px]  z-0">
+          <div className="w-[550px] border-[0.1px] border-gray-300 rounded-lg h-[150px]  z-0">
             <div className="flex justify-between items-center p-4">
               <div className="flex items-center gap-x-2 text-lg font-Yek-ExtraBlack text-gray-600">
                 <button className="bg-gray-200 p-3 rounded-full">
@@ -87,7 +87,7 @@ const CommetsSlider: FC = () => {
           </div>
         </SwiperSlide>{" "}
         <SwiperSlide>
-          <div className="w-[550px] border-2 border-gray-300 rounded-lg h-[150px]  z-0">
+          <div className="w-[550px] border-[0.1px] border-gray-300 rounded-lg h-[150px]  z-0">
             <div className="flex justify-between items-center p-4">
               <div className="flex items-center gap-x-2 text-lg font-Yek-ExtraBlack text-gray-600">
                 <button className="bg-gray-200 p-3 rounded-full">

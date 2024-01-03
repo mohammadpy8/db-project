@@ -1,11 +1,65 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
+import { loginType, registerType } from '../../types/loginTypes/LoginTypes'
+import registerValidation from '../../validation/registerValidation'
 
 const Login: FC = () => {
+  const [errorRegister, setErrorRegister] = useState<registerType>({
+    fullName: '',
+    phone: '',
+    password: '',
+  })
+  const [errorLogin, setErrroLogin] = useState<loginType>({
+    phone: '',
+    password: '',
+  })
   const [loginForm, setFormLogin] = useState<string>('register')
+  const [login, setLogin] = useState<loginType>({
+    phone: '',
+    password: '',
+  })
+  const [register, setRegister] = useState<registerType>({
+    fullName: '',
+    phone: '',
+    password: '',
+  })
+
+  const [registerTouched, setRegisterTouched] = useState<registerType>({
+    fullName: '',
+    phone: '',
+    password: '',
+  })
+
+  const registerChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const name = event.target.name
+    const value = event.target.value
+    console.log(register)
+    setRegister({ ...register, [name]: value })
+  }
+
+  const loginChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const name = event.target.name
+    const value = event.target.value
+    setLogin({ ...login, [name]: value })
+  }
+
+  const registerFocusHandler = (
+    event: React.FocusEvent<HTMLInputElement, Element>,
+  ) => {
+    setRegisterTouched({ ...registerTouched, [event.target.name]: true })
+  }
+
+  useEffect(() => {
+    setErrorRegister(registerValidation(register))
+  }, [register, registerTouched])
+
+  console.log(errorRegister)
+
   return (
     <div className="container flex justify-center py-12">
       {loginForm === 'register' ? (
-        <div className="bg-white w-[50%] h-[620px] loginPage rounded-xl">
+        <div className="bg-white w-[50%] h-auto loginPage rounded-xl">
           <div className="px-16">
             <div className="flex justify-around mt-12  text-2xl font-Yek-Bold w-full text-center">
               <div className="border-b-4 pb-4 w-full">
@@ -25,10 +79,17 @@ const Login: FC = () => {
                 <div className="space-y-5">
                   <div className="relative">
                     <input
-                      className="w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
+                      className={
+                        errorRegister.fullName && registerTouched.fullName
+                          ? 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                      }
                       placeholder="نام و نام خانوادگی"
                       type="text"
-                      value=""
+                      name="fullName"
+                      value={register.fullName}
+                      onChange={registerChangeHandler}
+                      onFocus={registerFocusHandler}
                     />
                     <span className="flex justify-center items-center absolute top-1/2 -translate-y-1/2 border-solid transition-all border-gray-400 pl-3 right-3 border-l-[3px] ">
                       <svg
@@ -47,12 +108,26 @@ const Login: FC = () => {
                       </svg>
                     </span>
                   </div>
+                  <div>
+                    {errorRegister.fullName && registerTouched.fullName && (
+                      <span className="errorValidation font-Yek-Bold">
+                        {errorRegister.fullName}
+                      </span>
+                    )}
+                  </div>
                   <div className="relative">
                     <input
-                      className="w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
+                      className={
+                        errorRegister.phone && registerTouched.phone
+                          ? 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                      }
                       placeholder="شماره تلفن"
-                      type="text"
-                      value=""
+                      type="number"
+                      name="phone"
+                      value={register.phone}
+                      onChange={registerChangeHandler}
+                      onFocus={registerFocusHandler}
                     />
                     <span className="flex justify-center items-center absolute top-1/2 -translate-y-1/2 border-solid transition-all border-gray-400 pl-3 right-3 border-l-[3px] ">
                       <svg
@@ -69,12 +144,26 @@ const Login: FC = () => {
                       </svg>
                     </span>
                   </div>
+                  <div>
+                    {errorRegister.phone && registerTouched.phone && (
+                      <span className="errorValidation font-Yek-Bold">
+                        {errorRegister.phone}
+                      </span>
+                    )}
+                  </div>
                   <div className="relative">
                     <input
-                      className="w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
+                      className={
+                        errorRegister.password && registerTouched.password
+                          ? 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                      }
                       placeholder="رمز عبور"
                       type="text"
-                      value=""
+                      name="password"
+                      value={register.password}
+                      onChange={registerChangeHandler}
+                      onFocus={registerFocusHandler}
                     />
                     <span className="flex justify-center items-center absolute top-1/2 -translate-y-1/2 border-solid transition-all border-gray-400 pl-3 right-3 border-l-[3px] ">
                       <svg
@@ -91,13 +180,31 @@ const Login: FC = () => {
                       </svg>
                     </span>
                   </div>
+                  <div>
+                    {errorRegister.password && registerTouched.password && (
+                      <span className="errorValidation font-Yek-Bold">
+                        {errorRegister.password}
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div className="w-full mt-8">
-                  <button className="bg-primary-300 w-full py-4 text-xl font-Yek-ExtraBlack text-white rounded-xl hover:ring-[6px] transition-all duration-300">
-                    ارسال کد تایید
-                  </button>
+                  {(errorRegister.fullName && registerTouched.fullName) ||
+                  (errorRegister.password && registerTouched.password) ||
+                  (errorRegister.phone && registerTouched.phone) ? (
+                    <button
+                      className="bg-primary-300 w-full py-4 text-xl font-Yek-ExtraBlack text-white rounded-xl hover:ring-[6px] transition-all duration-300"
+                      disabled
+                    >
+                      ارسال کد تایید
+                    </button>
+                  ) : (
+                    <button className="bg-primary-300 w-full py-4 text-xl font-Yek-ExtraBlack text-white rounded-xl hover:ring-[6px] transition-all duration-300">
+                      ارسال کد تایید
+                    </button>
+                  )}
                 </div>
-                <div className="flex justify-center items-center gap-x-2 mt-4 text-lg font-Yek-Bold">
+                <div className="flex justify-center items-center gap-x-2 my-4 text-lg font-Yek-Bold">
                   <span>اگر قبلا ثبت نام کرده اید!</span>
                   <span
                     className="text-primary-300 cursor-pointer"
@@ -146,7 +253,9 @@ const Login: FC = () => {
                       className="w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
                       placeholder="شماره تلفن"
                       type="text"
-                      value=""
+                      name="phone"
+                      value={login.phone}
+                      onChange={loginChangeHandler}
                     />
                     <span className="flex justify-center items-center absolute top-1/2 -translate-y-1/2 border-solid transition-all border-gray-400 pl-3 right-3 border-l-[3px] ">
                       <svg
@@ -168,7 +277,9 @@ const Login: FC = () => {
                       className="w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
                       placeholder="رمز عبور"
                       type="text"
-                      value=""
+                      name="password"
+                      value={login.password}
+                      onChange={loginChangeHandler}
                     />
                     <span className="flex justify-center items-center absolute top-1/2 -translate-y-1/2 border-solid transition-all border-gray-400 pl-3 right-3 border-l-[3px] ">
                       <svg

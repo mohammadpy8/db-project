@@ -35,6 +35,7 @@ const SliderCoin = ({ border }: any) => {
       loop={true}
       autoplay={{ delay: 0 }}
       slidesPerView={5}
+      allowTouchMove={false}
       speed={5000}
     >
       {getCoin?.length > 0 ? (
