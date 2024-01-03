@@ -4,7 +4,7 @@ import { IoIosArrowBack } from 'react-icons/io'
 const Question: FC = () => {
   const [accordion, setAccordion] = useState<number>(0)
   return (
-    <div>
+    <div className='mb-28'>
       <div className="mt-12 flex justify-center font-Yek-ExtraBlack text-4xl text-primary-300">
         <h1>سوالات متداول</h1>
       </div>

@@ -420,7 +420,11 @@ html,
     rgba(113, 0, 255, 0.8251633417038691) 0%,
     rgba(48, 81, 248, 1) 100%
   ); */
-  background: linear-gradient(to left bottom, rgb(24, 32, 77), rgb(0, 144, 255))
+  background: linear-gradient(
+    to left bottom,
+    rgb(24, 32, 77),
+    rgb(0, 144, 255)
+  );
   /* transition: color 2s linear; */
 }
 
@@ -435,15 +439,15 @@ html,
 } */
 
 .loginPage {
-  -webkit-box-shadow: 2px 2px 25px -14px rgba(84,90,255,1);
-  -moz-box-shadow: 2px 2px 25px -14px rgba(84,90,255,1);
-  box-shadow: 2px 2px 25px -14px rgba(84,90,255,1);
+  -webkit-box-shadow: 2px 2px 25px -14px rgba(84, 90, 255, 1);
+  -moz-box-shadow: 2px 2px 25px -14px rgba(84, 90, 255, 1);
+  box-shadow: 2px 2px 25px -14px rgba(84, 90, 255, 1);
 }
 
 .textColor {
-  background: linear-gradient(-5deg,#FFF 0%,#0064FF 47.99%,#77E1EE 100%);
+  background: linear-gradient(-5deg, #fff 0%, #0064ff 47.99%, #77e1ee 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent
+  -webkit-text-fill-color: transparent;
 }
 
 .MasterPhoto {
@@ -459,9 +463,9 @@ html,
 }
 
 .textColorArz {
-  background: linear-gradient(0deg,#FFF 0%,#0064FF 47.99%,#77E1EE 100%);
+  background: linear-gradient(0deg, #fff 0%, #0064ff 47.99%, #77e1ee 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent
+  -webkit-text-fill-color: transparent;
 }
 
 /* .swiper-slide-active {
@@ -470,3 +474,19 @@ html,
 /* .swiper-initialized {
   height: 500px !important;
 } */
+
+.money {
+  background-image: url("./assets/images/bogh.svg"),
+    url("./assets/images/money.svg"),
+    linear-gradient(
+      90deg,
+      rgba(2, 0, 36, 1) 0%,
+      rgba(174, 187, 253, 1) 0%,
+      rgba(48, 81, 248, 1) 100%
+    );
+    background-position: left bottom,right bottom;
+    background-repeat: no-repeat,no-repeat;
+    background-size: 400px,400px,100%;
+    margin: 50px 0;
+    padding: 50px 0;
+}

@@ -8,6 +8,7 @@ import SupportCrypto from "../../template/supportCrypto";
 import Arz from "../../template/Arz";
 import CommentsUsers from "../../template/commetsUser";
 import Question from "../../template/question";
+import LastSection from "../../template/lastSection";
 
 const HomePage: FC = () => {
 
@@ -22,6 +23,7 @@ const HomePage: FC = () => {
       <Arz />
       <CommentsUsers />
       <Question />
+      <LastSection />
     </div>
   );
 };
