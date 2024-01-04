@@ -1,28 +1,30 @@
-import { FC, useState } from "react";
-import { TbShoppingCartDollar } from "react-icons/tb";
-import numberConvertToPersian from "../../shared/numberConvertToPersian";
-import images from "../../assets/images/btcc.avif";
-import { FaLongArrowAltLeft, FaPlus } from "react-icons/fa";
-import { FaUserPen } from "react-icons/fa6";
-import ArzIcon from "../../assets/images/shopi.webp";
-import { Link } from "react-router-dom";
-import ArzIcons from "../../assets/images/Arzzz.webp";
-import { MdOutlineAddCard } from "react-icons/md";
-import { GiMoneyStack } from "react-icons/gi";
-import { LuBadgeDollarSign } from "react-icons/lu";
+import { FC, useState } from 'react'
+import { TbShoppingCartDollar } from 'react-icons/tb'
+import numberConvertToPersian from '../../shared/numberConvertToPersian'
+import images from '../../assets/images/btcc.avif'
+import { FaLongArrowAltLeft, FaPlus } from 'react-icons/fa'
+import { FaUserPen } from 'react-icons/fa6'
+import ArzIcon from '../../assets/images/shopi.webp'
+import { Link } from 'react-router-dom'
+import ArzIcons from '../../assets/images/Arzzz.webp'
+import { MdOutlineAddCard } from 'react-icons/md'
+import { GiMoneyStack } from 'react-icons/gi'
+import { LuBadgeDollarSign } from 'react-icons/lu'
+import { IoIosArrowDown, IoMdCart } from 'react-icons/io'
 
 const ArzShop: FC = () => {
-  const [arzCount, setArzCount] = useState<number>(12);
-  const [arzTotal, setTotal] = useState<number>(1500);
-  const [arzOffer, setArzOffer] = useState<number>(10);
-  const [arzPrice, setArzPrice] = useState<number>(165820888550);
+  const [arzCount, setArzCount] = useState<number>(12)
+  const [arzTotal, setTotal] = useState<number>(1500)
+  const [arzOffer, setArzOffer] = useState<number>(10)
+  const [arzPrice, setArzPrice] = useState<number>(165820888550)
+  const [step, setStep] = useState<number>(0);
 
   const ScrollToMaster = () => {
     window.scrollTo({
       top: 500,
-      behavior: "smooth",
-    });
-  };
+      behavior: 'smooth',
+    })
+  }
 
   return (
     <div className="container mt-6 arzPhoto">
@@ -79,30 +81,72 @@ const ArzShop: FC = () => {
                 سبد خرید
               </h1>
               <button>
-                <TbShoppingCartDollar color="#fff" size={45} />
+                <IoMdCart color="#fff" size={40} />
               </button>
-              <span className="absolute top-2 left-11 bg-red-600 rounded-full w-5 h-5 flex items-center justify-center text-center text-md text-white font-Yek-ExtraBold">
+              <span className="absolute top-2 left-9 bg-red-600 rounded-full w-5 h-5 flex items-center justify-center text-center text-md text-white font-Yek-ExtraBold">
                 {numberConvertToPersian(arzCount)}
               </span>
             </div>
           </Link>
         </div>
       </div>
-      <div className="flex justify-between items-center mt-8">
-        <div>
-          <div className="flex items-center gap-x-2">
-            <h1 className="text-xl font-Yek-ExtraBlack">مرتب سازی براساس:</h1>
-            <div className="bg-gray-200 flex gap-x-12 text-xl px-8 py-4 rounded-lg shadow-md font-Yek-ExtraBlack">
-              <div>ارزان ترین</div>
-              <div>گران ترین</div>
-              <div> باتخفیف</div>
+      <div className="flex justify-between items-center mt-12 mr-4">
+        <div className="relative">
+          <div className="absolute z-10 -top-7">
+            <div
+              className={
+                step === 1
+                  ? 'bg-white h-36 rounded-xl shadow-sm transition-all duration-300 w-[250px]'
+                  : 'bg-white h-14 rounded-xl shadow-sm transition-all duration-300 w-[250px]'
+              }
+              onClick={() => setStep(step !== 1 ? 1 : 0)}
+            >
+              <div className="flex items-center gap-x-28 px-2 py-4">
+                <h1 className="text-lg font-Yek-SemiBold text-gray-600">
+                  مرتب سازی
+                </h1>
+                <div
+                  className={
+                    step === 1
+                      ? '-rotate-180 transition-all duration-300'
+                      : 'rotate-0 transition-all duration-300'
+                  }
+                >
+                  <IoIosArrowDown size={25} color="#333" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute z-10 -top-7 right-[280px]">
+            <div
+              className={
+                step === 2
+                  ? 'bg-white h-36 rounded-xl shadow-sm transition-all duration-300 w-[250px]'
+                  : 'bg-white h-14 rounded-xl shadow-sm transition-all duration-300 w-[250px]'
+              }
+              onClick={() => setStep(step !== 2 ? 2 : 0)}
+            >
+              <div className="flex items-center gap-x-28 px-2 py-4">
+                <h1 className="text-lg font-Yek-SemiBold text-gray-600">
+                  کشور کارت
+                </h1>
+                <div
+                  className={
+                    step === 2
+                      ? '-rotate-180 transition-all duration-300'
+                      : 'rotate-0 transition-all duration-300'
+                  }
+                >
+                  <IoIosArrowDown size={25} color="#333" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
         <div className="w-[55%] relative">
           <input
-            className="w-full outline-none border-2 border-gray-300  border-solid transition-all focus:border-primary-300  placeholder:text-gray-400 placeholder:select-none text-lg py-3 rounded-xl placeholder:text-right pr-12 pl-3 bg-white font-Yek-SemiBold"
-            placeholder="جست و جو در میان ارز ها..."
+            className="w-full outline-none shadow-sm border-solid placeholder:text-gray-400 placeholder:select-none text-lg py-[13px] rounded-xl placeholder:text-right pr-12 pl-3 bg-white font-Yek-SemiBold"
+            placeholder="جست و جو در میان مستر کارت..."
             type="text"
           />
           <span className="flex justify-center items-center absolute top-1/2 -translate-y-1/2 border-solid transition-all border-cnBlack-10 dark:border-gray-300 pl-2 right-3 border-l-2 ">
@@ -137,7 +181,7 @@ const ArzShop: FC = () => {
             <img
               src={images}
               alt="images"
-              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-5 z-0"
+              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-6 z-0"
             />
           </div>
           <div className="flex gap-x-4 p-3 mt-32">
@@ -149,30 +193,30 @@ const ArzShop: FC = () => {
             </div>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
-          <LuBadgeDollarSign color="#fff" size={30} />
+            <LuBadgeDollarSign color="red" size={30} />
             <h1>ارز:</h1>
             <span>ارز بیت کوین</span>
           </div>
           <div className="flex gap-x-2 mr-4 my-4">
-            <GiMoneyStack color="#fff" size={30} />
+            <GiMoneyStack color="#27ff00" size={30} />
             <h1 className="text-xl font-Yek-ExtraBlack text-white">
               قیمت دلاری:
             </h1>
-            <span className="text-xl font-Yek-ExtraBlack text-red-800 border-b-4 border-red-800">
+            <span className="text-xl font-Yek-ExtraBlack text-red-800">
               ${numberConvertToPersian(arzPrice.toLocaleString())}
             </span>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
-            <FaUserPen color="#fff" size={30} />
+            <FaUserPen color="#0000ff" size={30} />
             <h1>عرضه کننده:</h1>
             <span>محمد سیف الهی</span>
           </div>
-          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-20">
+          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-[93px]">
             <button className="flex bg-primary-300 rounded-lg px-2 py-4 items-center gap-x-2 hover:ring-[7px] transition-all duration-300">
-              <span className="text-lg text-white font-Yek-ExtraBlack">
+              <span className="text-md text-white font-Yek-ExtraBlack">
                 توضیحات و خرید ارز
               </span>
-              <FaLongArrowAltLeft color="#fff" size={25} />
+              <FaLongArrowAltLeft color="#fff" size={20} />
             </button>
           </div>
         </div>
@@ -185,7 +229,7 @@ const ArzShop: FC = () => {
             <img
               src={images}
               alt="images"
-              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-5 z-0"
+              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-6 z-0"
             />
           </div>
           <div className="flex gap-x-4 p-3 mt-32">
@@ -197,30 +241,30 @@ const ArzShop: FC = () => {
             </div>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
-          <LuBadgeDollarSign color="#fff" size={30} />
+            <LuBadgeDollarSign color="red" size={30} />
             <h1>ارز:</h1>
             <span>ارز بیت کوین</span>
           </div>
           <div className="flex gap-x-2 mr-4 my-4">
-            <GiMoneyStack color="#fff" size={30} />
+            <GiMoneyStack color="#27ff00" size={30} />
             <h1 className="text-xl font-Yek-ExtraBlack text-white">
               قیمت دلاری:
             </h1>
-            <span className="text-xl font-Yek-ExtraBlack text-red-800 border-b-4 border-red-800">
+            <span className="text-xl font-Yek-ExtraBlack text-red-800">
               ${numberConvertToPersian(arzPrice.toLocaleString())}
             </span>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
-            <FaUserPen color="#fff" size={30} />
+            <FaUserPen color="#0000ff" size={30} />
             <h1>عرضه کننده:</h1>
             <span>محمد سیف الهی</span>
           </div>
-          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-20">
+          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-[93px]">
             <button className="flex bg-primary-300 rounded-lg px-2 py-4 items-center gap-x-2 hover:ring-[7px] transition-all duration-300">
-              <span className="text-lg text-white font-Yek-ExtraBlack">
+              <span className="text-md text-white font-Yek-ExtraBlack">
                 توضیحات و خرید ارز
               </span>
-              <FaLongArrowAltLeft color="#fff" size={25} />
+              <FaLongArrowAltLeft color="#fff" size={20} />
             </button>
           </div>
         </div>
@@ -233,7 +277,7 @@ const ArzShop: FC = () => {
             <img
               src={images}
               alt="images"
-              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-5 z-0"
+              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-6 z-0"
             />
           </div>
           <div className="flex gap-x-4 p-3 mt-32">
@@ -245,30 +289,30 @@ const ArzShop: FC = () => {
             </div>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
-          <LuBadgeDollarSign color="#fff" size={30} />
+            <LuBadgeDollarSign color="red" size={30} />
             <h1>ارز:</h1>
             <span>ارز بیت کوین</span>
           </div>
           <div className="flex gap-x-2 mr-4 my-4">
-            <GiMoneyStack color="#fff" size={30} />
+            <GiMoneyStack color="#27ff00" size={30} />
             <h1 className="text-xl font-Yek-ExtraBlack text-white">
               قیمت دلاری:
             </h1>
-            <span className="text-xl font-Yek-ExtraBlack text-red-800 border-b-4 border-red-800">
+            <span className="text-xl font-Yek-ExtraBlack text-red-800">
               ${numberConvertToPersian(arzPrice.toLocaleString())}
             </span>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
-            <FaUserPen color="#fff" size={30} />
+            <FaUserPen color="#0000ff" size={30} />
             <h1>عرضه کننده:</h1>
             <span>محمد سیف الهی</span>
           </div>
-          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-20">
+          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-[93px]">
             <button className="flex bg-primary-300 rounded-lg px-2 py-4 items-center gap-x-2 hover:ring-[7px] transition-all duration-300">
-              <span className="text-lg text-white font-Yek-ExtraBlack">
+              <span className="text-md text-white font-Yek-ExtraBlack">
                 توضیحات و خرید ارز
               </span>
-              <FaLongArrowAltLeft color="#fff" size={25} />
+              <FaLongArrowAltLeft color="#fff" size={20} />
             </button>
           </div>
         </div>
@@ -281,7 +325,7 @@ const ArzShop: FC = () => {
             <img
               src={images}
               alt="images"
-              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-5 z-0"
+              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-6 z-0"
             />
           </div>
           <div className="flex gap-x-4 p-3 mt-32">
@@ -293,30 +337,30 @@ const ArzShop: FC = () => {
             </div>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
-          <LuBadgeDollarSign color="#fff" size={30} />
+            <LuBadgeDollarSign color="red" size={30} />
             <h1>ارز:</h1>
             <span>ارز بیت کوین</span>
           </div>
           <div className="flex gap-x-2 mr-4 my-4">
-            <GiMoneyStack color="#fff" size={30} />
+            <GiMoneyStack color="#27ff00" size={30} />
             <h1 className="text-xl font-Yek-ExtraBlack text-white">
               قیمت دلاری:
             </h1>
-            <span className="text-xl font-Yek-ExtraBlack text-red-800 border-b-4 border-red-800">
+            <span className="text-xl font-Yek-ExtraBlack text-red-800">
               ${numberConvertToPersian(arzPrice.toLocaleString())}
             </span>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
-            <FaUserPen color="#fff" size={30} />
+            <FaUserPen color="#0000ff" size={30} />
             <h1>عرضه کننده:</h1>
             <span>محمد سیف الهی</span>
           </div>
-          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-20">
+          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-[93px]">
             <button className="flex bg-primary-300 rounded-lg px-2 py-4 items-center gap-x-2 hover:ring-[7px] transition-all duration-300">
-              <span className="text-lg text-white font-Yek-ExtraBlack">
+              <span className="text-md text-white font-Yek-ExtraBlack">
                 توضیحات و خرید ارز
               </span>
-              <FaLongArrowAltLeft color="#fff" size={25} />
+              <FaLongArrowAltLeft color="#fff" size={20} />
             </button>
           </div>
         </div>
@@ -329,7 +373,7 @@ const ArzShop: FC = () => {
             <img
               src={images}
               alt="images"
-              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-5 z-0"
+              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-6 z-0"
             />
           </div>
           <div className="flex gap-x-4 p-3 mt-32">
@@ -341,30 +385,30 @@ const ArzShop: FC = () => {
             </div>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
-          <LuBadgeDollarSign color="#fff" size={30} />
+            <LuBadgeDollarSign color="red" size={30} />
             <h1>ارز:</h1>
             <span>ارز بیت کوین</span>
           </div>
           <div className="flex gap-x-2 mr-4 my-4">
-            <GiMoneyStack color="#fff" size={30} />
+            <GiMoneyStack color="#27ff00" size={30} />
             <h1 className="text-xl font-Yek-ExtraBlack text-white">
               قیمت دلاری:
             </h1>
-            <span className="text-xl font-Yek-ExtraBlack text-red-800 border-b-4 border-red-800">
+            <span className="text-xl font-Yek-ExtraBlack text-red-800">
               ${numberConvertToPersian(arzPrice.toLocaleString())}
             </span>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
-            <FaUserPen color="#fff" size={30} />
+            <FaUserPen color="#0000ff" size={30} />
             <h1>عرضه کننده:</h1>
             <span>محمد سیف الهی</span>
           </div>
-          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-20">
+          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-[93px]">
             <button className="flex bg-primary-300 rounded-lg px-2 py-4 items-center gap-x-2 hover:ring-[7px] transition-all duration-300">
-              <span className="text-lg text-white font-Yek-ExtraBlack">
+              <span className="text-md text-white font-Yek-ExtraBlack">
                 توضیحات و خرید ارز
               </span>
-              <FaLongArrowAltLeft color="#fff" size={25} />
+              <FaLongArrowAltLeft color="#fff" size={20} />
             </button>
           </div>
         </div>
@@ -377,7 +421,7 @@ const ArzShop: FC = () => {
             <img
               src={images}
               alt="images"
-              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-5 z-0"
+              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-6 z-0"
             />
           </div>
           <div className="flex gap-x-4 p-3 mt-32">
@@ -389,30 +433,30 @@ const ArzShop: FC = () => {
             </div>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
-          <LuBadgeDollarSign color="#fff" size={30} />
+            <LuBadgeDollarSign color="red" size={30} />
             <h1>ارز:</h1>
             <span>ارز بیت کوین</span>
           </div>
           <div className="flex gap-x-2 mr-4 my-4">
-            <GiMoneyStack color="#fff" size={30} />
+            <GiMoneyStack color="#27ff00" size={30} />
             <h1 className="text-xl font-Yek-ExtraBlack text-white">
               قیمت دلاری:
             </h1>
-            <span className="text-xl font-Yek-ExtraBlack text-red-800 border-b-4 border-red-800">
+            <span className="text-xl font-Yek-ExtraBlack text-red-800">
               ${numberConvertToPersian(arzPrice.toLocaleString())}
             </span>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
-            <FaUserPen color="#fff" size={30} />
+            <FaUserPen color="#0000ff" size={30} />
             <h1>عرضه کننده:</h1>
             <span>محمد سیف الهی</span>
           </div>
-          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-20">
+          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-[93px]">
             <button className="flex bg-primary-300 rounded-lg px-2 py-4 items-center gap-x-2 hover:ring-[7px] transition-all duration-300">
-              <span className="text-lg text-white font-Yek-ExtraBlack">
+              <span className="text-md text-white font-Yek-ExtraBlack">
                 توضیحات و خرید ارز
               </span>
-              <FaLongArrowAltLeft color="#fff" size={25} />
+              <FaLongArrowAltLeft color="#fff" size={20} />
             </button>
           </div>
         </div>
@@ -424,7 +468,7 @@ const ArzShop: FC = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ArzShop;
+export default ArzShop
