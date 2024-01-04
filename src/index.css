@@ -414,13 +414,6 @@ html,
 }
 
 .cardArz {
-  /* background: rgb(2, 0, 36);
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(113, 0, 255, 0.8251633417038691) 0%,
-    rgba(48, 81, 248, 1) 100%
-  ); */
   background: linear-gradient(
     to left bottom,
     rgb(24, 32, 77),
@@ -492,21 +485,6 @@ html,
     padding: 50px 0;
 }
 
-/* .marquee-container {
-  width: 100%;
-  overflow: hidden;
-}
-.marquee-content {
-  display: inline-block;
-  white-space: nowrap;
-  animation: marquee 10s linear infinite;
-}
-
-@keyframes marquee {
-  0% { transform: translateX(0%); }
-  100% { transform: translateX(-100%); }
-} */
-
 .errorValidation {
   height: 10px;
   text-align: left;
@@ -518,6 +496,11 @@ html,
   padding: 2px 3px;
   border-radius: 3px;
   background-color: rgba(255, 0, 0, 0.175);
+}
+
+.master_Cart {
+  background: rgb(2,0,36);
+  background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(143,0,255,0.6374882716758579) 0%, rgba(48,81,248,1) 100%);
 }
 
 

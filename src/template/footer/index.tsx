@@ -13,7 +13,7 @@ import numberConvertToPersian from '../../shared/numberConvertToPersian'
 
 const Footer: FC = () => {
   return (
-    <div className="mt-24 border-t-2">
+    <div className="mt-20 border-t-2">
       <div className="mt-16 footer flex justify-between px-28">
         <div className="w-[40%]">
           <div>

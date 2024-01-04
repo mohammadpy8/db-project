@@ -3,10 +3,13 @@ import { TbShoppingCartDollar } from "react-icons/tb";
 import numberConvertToPersian from "../../shared/numberConvertToPersian";
 import images from "../../assets/images/btcc.avif";
 import { FaLongArrowAltLeft, FaPlus } from "react-icons/fa";
+import { FaUserPen } from "react-icons/fa6";
 import ArzIcon from "../../assets/images/shopi.webp";
 import { Link } from "react-router-dom";
 import ArzIcons from "../../assets/images/Arzzz.webp";
 import { MdOutlineAddCard } from "react-icons/md";
+import { GiMoneyStack } from "react-icons/gi";
+import { LuBadgeDollarSign } from "react-icons/lu";
 
 const ArzShop: FC = () => {
   const [arzCount, setArzCount] = useState<number>(12);
@@ -125,7 +128,7 @@ const ArzShop: FC = () => {
         <span>{numberConvertToPersian(arzTotal)}</span>
       </div>
       <div className="mt-32 flex flex-wrap gap-x-24 gap-y-[160px] mx-10">
-        <div className=" w-[350px] rounded-2xl h-[340px]  relative cardArz">
+        <div className=" w-[350px] rounded-2xl h-[350px]  relative cardArz">
           <div className="absolute top-[-110px] left-4 bg-red-600 flex text-white px-2 text-lg font-Yek-ExtraBold text-center rounded-xl z-10">
             <h1>{numberConvertToPersian(arzOffer)}</h1>
             <span>%</span>
@@ -146,18 +149,21 @@ const ArzShop: FC = () => {
             </div>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
+          <LuBadgeDollarSign color="#fff" size={30} />
             <h1>ارز:</h1>
             <span>ارز بیت کوین</span>
           </div>
-          <div className="flex gap-x-2 mr-4 my-2">
-            <h1 className="text-lg font-Yek-ExtraBlack text-white">
+          <div className="flex gap-x-2 mr-4 my-4">
+            <GiMoneyStack color="#fff" size={30} />
+            <h1 className="text-xl font-Yek-ExtraBlack text-white">
               قیمت دلاری:
             </h1>
-            <span className="text-lg font-Yek-ExtraBold text-white">
+            <span className="text-xl font-Yek-ExtraBlack text-red-800 border-b-4 border-red-800">
               ${numberConvertToPersian(arzPrice.toLocaleString())}
             </span>
           </div>
-          <div className="flex gap-x-2 mr-4 text-md font-Yek-SemiBold text-gray-100 mt-4">
+          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
+            <FaUserPen color="#fff" size={30} />
             <h1>عرضه کننده:</h1>
             <span>محمد سیف الهی</span>
           </div>
@@ -170,7 +176,7 @@ const ArzShop: FC = () => {
             </button>
           </div>
         </div>
-        <div className=" w-[350px] rounded-2xl h-[340px]  relative cardArz">
+        <div className=" w-[350px] rounded-2xl h-[350px]  relative cardArz">
           <div className="absolute top-[-110px] left-4 bg-red-600 flex text-white px-2 text-lg font-Yek-ExtraBold text-center rounded-xl z-10">
             <h1>{numberConvertToPersian(arzOffer)}</h1>
             <span>%</span>
@@ -191,16 +197,21 @@ const ArzShop: FC = () => {
             </div>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
+          <LuBadgeDollarSign color="#fff" size={30} />
             <h1>ارز:</h1>
             <span>ارز بیت کوین</span>
           </div>
-          <div className="flex gap-x-2 mr-4 my-2">
-            <h1 className="text-lg font-Yek-ExtraBlack">قیمت دلاری:</h1>
-            <span className="text-lg font-Yek-ExtraBold text-white">
+          <div className="flex gap-x-2 mr-4 my-4">
+            <GiMoneyStack color="#fff" size={30} />
+            <h1 className="text-xl font-Yek-ExtraBlack text-white">
+              قیمت دلاری:
+            </h1>
+            <span className="text-xl font-Yek-ExtraBlack text-red-800 border-b-4 border-red-800">
               ${numberConvertToPersian(arzPrice.toLocaleString())}
             </span>
           </div>
-          <div className="flex gap-x-2 mr-4 text-md font-Yek-SemiBold text-gray-200 mt-4">
+          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
+            <FaUserPen color="#fff" size={30} />
             <h1>عرضه کننده:</h1>
             <span>محمد سیف الهی</span>
           </div>
@@ -213,7 +224,7 @@ const ArzShop: FC = () => {
             </button>
           </div>
         </div>
-        <div className=" w-[350px] rounded-2xl h-[340px]  relative cardArz">
+        <div className=" w-[350px] rounded-2xl h-[350px]  relative cardArz">
           <div className="absolute top-[-110px] left-4 bg-red-600 flex text-white px-2 text-lg font-Yek-ExtraBold text-center rounded-xl z-10">
             <h1>{numberConvertToPersian(arzOffer)}</h1>
             <span>%</span>
@@ -234,16 +245,21 @@ const ArzShop: FC = () => {
             </div>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
+          <LuBadgeDollarSign color="#fff" size={30} />
             <h1>ارز:</h1>
             <span>ارز بیت کوین</span>
           </div>
-          <div className="flex gap-x-2 mr-4 my-2">
-            <h1 className="text-lg font-Yek-ExtraBlack">قیمت دلاری:</h1>
-            <span className="text-lg font-Yek-ExtraBold text-white">
+          <div className="flex gap-x-2 mr-4 my-4">
+            <GiMoneyStack color="#fff" size={30} />
+            <h1 className="text-xl font-Yek-ExtraBlack text-white">
+              قیمت دلاری:
+            </h1>
+            <span className="text-xl font-Yek-ExtraBlack text-red-800 border-b-4 border-red-800">
               ${numberConvertToPersian(arzPrice.toLocaleString())}
             </span>
           </div>
-          <div className="flex gap-x-2 mr-4 text-md font-Yek-SemiBold text-gray-200 mt-4">
+          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
+            <FaUserPen color="#fff" size={30} />
             <h1>عرضه کننده:</h1>
             <span>محمد سیف الهی</span>
           </div>
@@ -256,7 +272,7 @@ const ArzShop: FC = () => {
             </button>
           </div>
         </div>
-        <div className=" w-[350px] rounded-2xl h-[340px]  relative cardArz">
+        <div className=" w-[350px] rounded-2xl h-[350px]  relative cardArz">
           <div className="absolute top-[-110px] left-4 bg-red-600 flex text-white px-2 text-lg font-Yek-ExtraBold text-center rounded-xl z-10">
             <h1>{numberConvertToPersian(arzOffer)}</h1>
             <span>%</span>
@@ -277,16 +293,21 @@ const ArzShop: FC = () => {
             </div>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
+          <LuBadgeDollarSign color="#fff" size={30} />
             <h1>ارز:</h1>
             <span>ارز بیت کوین</span>
           </div>
-          <div className="flex gap-x-2 mr-4 my-2">
-            <h1 className="text-lg font-Yek-ExtraBlack">قیمت دلاری:</h1>
-            <span className="text-lg font-Yek-ExtraBold text-white">
+          <div className="flex gap-x-2 mr-4 my-4">
+            <GiMoneyStack color="#fff" size={30} />
+            <h1 className="text-xl font-Yek-ExtraBlack text-white">
+              قیمت دلاری:
+            </h1>
+            <span className="text-xl font-Yek-ExtraBlack text-red-800 border-b-4 border-red-800">
               ${numberConvertToPersian(arzPrice.toLocaleString())}
             </span>
           </div>
-          <div className="flex gap-x-2 mr-4 text-md font-Yek-SemiBold text-gray-200 mt-4">
+          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
+            <FaUserPen color="#fff" size={30} />
             <h1>عرضه کننده:</h1>
             <span>محمد سیف الهی</span>
           </div>
@@ -299,7 +320,7 @@ const ArzShop: FC = () => {
             </button>
           </div>
         </div>
-        <div className=" w-[350px] rounded-2xl h-[340px]  relative cardArz">
+        <div className=" w-[350px] rounded-2xl h-[350px]  relative cardArz">
           <div className="absolute top-[-110px] left-4 bg-red-600 flex text-white px-2 text-lg font-Yek-ExtraBold text-center rounded-xl z-10">
             <h1>{numberConvertToPersian(arzOffer)}</h1>
             <span>%</span>
@@ -320,16 +341,21 @@ const ArzShop: FC = () => {
             </div>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
+          <LuBadgeDollarSign color="#fff" size={30} />
             <h1>ارز:</h1>
             <span>ارز بیت کوین</span>
           </div>
-          <div className="flex gap-x-2 mr-4 my-2">
-            <h1 className="text-lg font-Yek-ExtraBlack">قیمت دلاری:</h1>
-            <span className="text-lg font-Yek-ExtraBold text-white">
+          <div className="flex gap-x-2 mr-4 my-4">
+            <GiMoneyStack color="#fff" size={30} />
+            <h1 className="text-xl font-Yek-ExtraBlack text-white">
+              قیمت دلاری:
+            </h1>
+            <span className="text-xl font-Yek-ExtraBlack text-red-800 border-b-4 border-red-800">
               ${numberConvertToPersian(arzPrice.toLocaleString())}
             </span>
           </div>
-          <div className="flex gap-x-2 mr-4 text-md font-Yek-SemiBold text-gray-200 mt-4">
+          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
+            <FaUserPen color="#fff" size={30} />
             <h1>عرضه کننده:</h1>
             <span>محمد سیف الهی</span>
           </div>
@@ -342,7 +368,7 @@ const ArzShop: FC = () => {
             </button>
           </div>
         </div>
-        <div className=" w-[350px] rounded-2xl h-[340px]  relative cardArz">
+        <div className=" w-[350px] rounded-2xl h-[350px]  relative cardArz">
           <div className="absolute top-[-110px] left-4 bg-red-600 flex text-white px-2 text-lg font-Yek-ExtraBold text-center rounded-xl z-10">
             <h1>{numberConvertToPersian(arzOffer)}</h1>
             <span>%</span>
@@ -363,16 +389,21 @@ const ArzShop: FC = () => {
             </div>
           </div>
           <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
+          <LuBadgeDollarSign color="#fff" size={30} />
             <h1>ارز:</h1>
             <span>ارز بیت کوین</span>
           </div>
-          <div className="flex gap-x-2 mr-4 my-2">
-            <h1 className="text-lg font-Yek-ExtraBlack">قیمت دلاری:</h1>
-            <span className="text-lg font-Yek-ExtraBold text-white">
+          <div className="flex gap-x-2 mr-4 my-4">
+            <GiMoneyStack color="#fff" size={30} />
+            <h1 className="text-xl font-Yek-ExtraBlack text-white">
+              قیمت دلاری:
+            </h1>
+            <span className="text-xl font-Yek-ExtraBlack text-red-800 border-b-4 border-red-800">
               ${numberConvertToPersian(arzPrice.toLocaleString())}
             </span>
           </div>
-          <div className="flex gap-x-2 mr-4 text-md font-Yek-SemiBold text-gray-200 mt-4">
+          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
+            <FaUserPen color="#fff" size={30} />
             <h1>عرضه کننده:</h1>
             <span>محمد سیف الهی</span>
           </div>
@@ -386,7 +417,7 @@ const ArzShop: FC = () => {
           </div>
         </div>
       </div>
-      <div className="flex justify-center mt-20 pb-10">
+      <div className="flex justify-center mt-20 pb-2">
         <button className="bg-primary-400 flex text-white items-center gap-x-2 px-3 py-4 rounded-lg shadow-2xl hover:ring-[7px] transition-all duration-300">
           <span className="text-lg font-Yek-ExtraBold">محصولات بیشتر</span>
           <FaPlus color="#fff" size={15} />

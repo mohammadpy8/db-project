@@ -96,7 +96,7 @@ const Login: FC = () => {
                       className={
                         errorRegister.fullName && registerTouched.fullName
                           ? 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
-                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
                       }
                       placeholder="نام و نام خانوادگی"
                       type="text"
@@ -134,7 +134,7 @@ const Login: FC = () => {
                       className={
                         errorRegister.phone && registerTouched.phone
                           ? 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
-                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
                       }
                       placeholder="شماره تلفن"
                       type="number"
@@ -170,7 +170,7 @@ const Login: FC = () => {
                       className={
                         errorRegister.password && registerTouched.password
                           ? 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
-                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
                       }
                       placeholder="رمز عبور"
                       type="text"
@@ -267,7 +267,7 @@ const Login: FC = () => {
                       className={
                         errorLogin.phone && loginTouched.phone
                           ? 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
-                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
                       }
                       placeholder="شماره تلفن"
                       type="text"
@@ -303,7 +303,7 @@ const Login: FC = () => {
                       className={
                         errorLogin.password && loginTouched.password
                           ? 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
-                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
                       }
                       placeholder="رمز عبور"
                       type="text"
