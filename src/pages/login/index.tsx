@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react'
 import { loginType, registerType } from '../../types/loginTypes/LoginTypes'
 import registerValidation from '../../validation/registerValidation'
+import loginValidation from '../../validation/loginValidation'
 
 const Login: FC = () => {
   const [errorRegister, setErrorRegister] = useState<registerType>({
@@ -25,6 +26,11 @@ const Login: FC = () => {
 
   const [registerTouched, setRegisterTouched] = useState<registerType>({
     fullName: '',
+    phone: '',
+    password: '',
+  })
+
+  const [loginTouched, setLoginTouched] = useState<loginType>({
     phone: '',
     password: '',
   })
@@ -54,7 +60,15 @@ const Login: FC = () => {
     setErrorRegister(registerValidation(register))
   }, [register, registerTouched])
 
-  console.log(errorRegister)
+  const loginFocusHandler = (
+    event: React.FocusEvent<HTMLInputElement, Element>,
+  ) => {
+    setLoginTouched({ ...loginTouched, [event.target.name]: true })
+  }
+
+  useEffect(() => {
+    setErrroLogin(loginValidation(login))
+  }, [login, loginTouched])
 
   return (
     <div className="container flex justify-center py-12">
@@ -218,7 +232,7 @@ const Login: FC = () => {
           </div>
         </div>
       ) : (
-        <div className="bg-white w-[50%] h-[530px] loginPage rounded-xl">
+        <div className="bg-white w-[50%] h-auto loginPage rounded-xl">
           <div className="px-16">
             <div className="flex justify-around mt-12  text-2xl font-Yek-Bold w-full text-center">
               <div
@@ -250,12 +264,17 @@ const Login: FC = () => {
                 <div className="space-y-5">
                   <div className="relative">
                     <input
-                      className="w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
+                      className={
+                        errorLogin.phone && loginTouched.phone
+                          ? 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                      }
                       placeholder="شماره تلفن"
                       type="text"
                       name="phone"
                       value={login.phone}
                       onChange={loginChangeHandler}
+                      onFocus={loginFocusHandler}
                     />
                     <span className="flex justify-center items-center absolute top-1/2 -translate-y-1/2 border-solid transition-all border-gray-400 pl-3 right-3 border-l-[3px] ">
                       <svg
@@ -272,14 +291,26 @@ const Login: FC = () => {
                       </svg>
                     </span>
                   </div>
+                  <div>
+                    {errorLogin.phone && loginTouched.phone && (
+                      <span className="errorValidation font-Yek-Bold">
+                        {errorLogin.phone}
+                      </span>
+                    )}
+                  </div>
                   <div className="relative">
                     <input
-                      className="w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
+                      className={
+                        errorLogin.password && loginTouched.password
+                          ? 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-gray-300 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                      }
                       placeholder="رمز عبور"
                       type="text"
                       name="password"
                       value={login.password}
                       onChange={loginChangeHandler}
+                      onFocus={loginFocusHandler}
                     />
                     <span className="flex justify-center items-center absolute top-1/2 -translate-y-1/2 border-solid transition-all border-gray-400 pl-3 right-3 border-l-[3px] ">
                       <svg
@@ -297,12 +328,29 @@ const Login: FC = () => {
                     </span>
                   </div>
                 </div>
-                <div className="w-full mt-8">
-                  <button className="bg-primary-300 w-full py-4 text-xl font-Yek-ExtraBlack text-white rounded-xl hover:ring-[6px] transition-all duration-300">
-                    وارد شدن
-                  </button>
+                <div>
+                  {errorLogin.password && loginTouched.password && (
+                    <span className="errorValidation font-Yek-Bold">
+                      {errorLogin.password}
+                    </span>
+                  )}
                 </div>
-                <div className="flex justify-center items-center gap-x-2 mt-4 text-lg font-Yek-Bold">
+                <div className="w-full mt-8">
+                  {(errorLogin.phone && loginTouched.phone) ||
+                  (errorLogin.password && loginTouched.password) ? (
+                    <button
+                      className="bg-primary-300 w-full py-4 text-xl font-Yek-ExtraBlack text-white rounded-xl hover:ring-[6px] transition-all duration-300"
+                      disabled
+                    >
+                      وارد شدن
+                    </button>
+                  ) : (
+                    <button className="bg-primary-300 w-full py-4 text-xl font-Yek-ExtraBlack text-white rounded-xl hover:ring-[6px] transition-all duration-300">
+                      وارد شدن
+                    </button>
+                  )}
+                </div>
+                <div className="flex justify-center items-center gap-x-2 mt-4 text-lg font-Yek-Bold mb-4">
                   <span>اگر ثبت نام نکرده اید!</span>
                   <span
                     className="text-primary-300 cursor-pointer"

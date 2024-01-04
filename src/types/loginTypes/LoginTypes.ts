@@ -1,6 +1,6 @@
 interface loginType {
-  phone: string ;
-  password: string;
+  phone?: string ;
+  password?: string;
 }
 
 interface registerType {

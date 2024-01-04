@@ -21,6 +21,8 @@ const registerValidation = (data: registerType) => {
 
   if (!data?.fullName?.trim()) {
     errors.fullName = "نام و نام خانوادگی خود را وارد کنید";
+  } else if(data.fullName.length < 10) {
+    errors.fullName = "نام و نام خانوادگی حداقل باید 10 کاراکتر داشته باشد"
   } else {
     delete errors.fullName;
   }
