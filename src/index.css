@@ -483,7 +483,7 @@ html,
 
 .sliderComments .swiper-slide-active {
   height: 900px !important;
-} 
+}
 .sliderComments .swiper-initialized {
   height: 500px !important;
 }
@@ -497,11 +497,11 @@ html,
       rgba(174, 187, 253, 1) 0%,
       rgba(48, 81, 248, 1) 100%
     );
-    background-position: left bottom,right bottom;
-    background-repeat: no-repeat,no-repeat;
-    background-size: 400px,400px,100%;
-    margin: 50px 0;
-    padding: 50px 0;
+  background-position: left bottom, right bottom;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 400px, 400px, 100%;
+  margin: 50px 0;
+  padding: 50px 0;
 }
 
 .errorValidation {
@@ -518,8 +518,13 @@ html,
 }
 
 .master_Cart {
-  background: rgb(2,0,36);
-  background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(143,0,255,0.6374882716758579) 0%, rgba(48,81,248,1) 100%);
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    0deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(143, 0, 255, 0.6374882716758579) 0%,
+    rgba(48, 81, 248, 1) 100%
+  );
 }
 
 .detailsArzPage {
@@ -529,7 +534,7 @@ html,
 }
 
 .lowerBG {
-  background-image: linear-gradient(0,#fff 40%,rgba(255,255,255,0) 100%);
+  background-image: linear-gradient(0, #fff 40%, rgba(255, 255, 255, 0) 100%);
 }
 
 .mainContent {
@@ -542,4 +547,13 @@ html,
   background-color: #e7edf5;
 }
 
-
+.edit {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    0deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(121, 121, 121, 0.6374882716758579) 0%,
+    rgba(189, 189, 189, 1) 0%,
+    rgba(246, 246, 246, 1) 100%
+  );
+}

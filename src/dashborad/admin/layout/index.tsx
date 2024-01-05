@@ -197,7 +197,7 @@ const AdminLayoutPanel: FC = () => {
         </div>
       </div>
       <div className="flex flex-col mr-[290px]">
-        <div className="bg-white h-20 sticky top-0">
+        <div className="bg-white h-20 sticky top-0 z-10">
           <div className="flex justify-between p-6">
             <div className="flex gap-x-2 text-xl font-Yek-Bold text-gray-700">
               <h1>سلام;</h1>
