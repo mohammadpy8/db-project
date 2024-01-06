@@ -2,38 +2,42 @@ import { FC, useEffect, useState } from 'react'
 import { loginType, registerType } from '../../types/loginTypes/LoginTypes'
 import registerValidation from '../../validation/registerValidation'
 import loginValidation from '../../validation/loginValidation'
+import toast, { Toaster } from 'react-hot-toast'
+import { useNavigate } from 'react-router'
 
 const Login: FC = () => {
   const [errorRegister, setErrorRegister] = useState<registerType>({
-    fullName: '',
-    phone: '',
+    full_name: '',
+    username: '',
     password: '',
   })
   const [errorLogin, setErrroLogin] = useState<loginType>({
-    phone: '',
+    username: '',
     password: '',
   })
   const [loginForm, setFormLogin] = useState<string>('register')
   const [login, setLogin] = useState<loginType>({
-    phone: '',
+    username: '',
     password: '',
   })
   const [register, setRegister] = useState<registerType>({
-    fullName: '',
-    phone: '',
+    full_name: '',
+    username: '',
     password: '',
   })
 
   const [registerTouched, setRegisterTouched] = useState<registerType>({
-    fullName: '',
-    phone: '',
+    full_name: '',
+    username: '',
     password: '',
   })
 
   const [loginTouched, setLoginTouched] = useState<loginType>({
-    phone: '',
+    username: '',
     password: '',
   })
+
+  const navigate = useNavigate()
 
   const registerChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -70,6 +74,61 @@ const Login: FC = () => {
     setErrroLogin(loginValidation(login))
   }, [login, loginTouched])
 
+  const sendInfo = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    fetch('http://127.0.0.1:8000/api/signup/', {
+      method: 'POST',
+      body: JSON.stringify({
+        ...register,
+        is_staff: false,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        const status = res.status
+        if (status === 201 || 200) {
+          setRegister({
+            full_name: '',
+            password: '',
+            username: '',
+          })
+          setFormLogin('login')
+          toast.success('ثبت نام با موفقیت انجام شد برای ورود لاگین کنید')
+        }
+      })
+      .catch((error) => console.error('Error:', error))
+  }
+
+  const loginSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    fetch('http://127.0.0.1:8000/auth/jwt/create/', {
+      method: 'POST',
+      body: JSON.stringify(login),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => {
+        console.log(
+          res.json().then((r) => {
+            const token = r.access
+            localStorage.setItem('token', JSON.stringify(token))
+          }),
+        )
+        const status = res.status
+        if (status === 201 || 200) {
+          toast.success('با موفقیت وارد شدید')
+          setTimeout(() => {
+            navigate('/')
+          }, 1500)
+        }
+      })
+      .then((result) => console.log(result))
+      .catch((error) => console.error('Error:', error))
+  }
+
   return (
     <div className="container flex justify-center py-12">
       {loginForm === 'register' ? (
@@ -89,19 +148,19 @@ const Login: FC = () => {
               <h1>ثبت نام در ارز ایرانیان</h1>
             </div>
             <div className="mt-8">
-              <form>
+              <form onSubmit={sendInfo}>
                 <div className="space-y-5">
                   <div className="relative">
                     <input
                       className={
-                        errorRegister.fullName && registerTouched.fullName
+                        errorRegister.full_name && registerTouched.full_name
                           ? 'w-full outline-none font-Yek-Bold border-2  border-solid  transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
                           : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
                       }
                       placeholder="نام و نام خانوادگی"
                       type="text"
-                      name="fullName"
-                      value={register.fullName}
+                      name="full_name"
+                      value={register.full_name}
                       onChange={registerChangeHandler}
                       onFocus={registerFocusHandler}
                     />
@@ -123,23 +182,23 @@ const Login: FC = () => {
                     </span>
                   </div>
                   <div>
-                    {errorRegister.fullName && registerTouched.fullName && (
+                    {errorRegister.full_name && registerTouched.full_name && (
                       <span className="errorValidation font-Yek-Bold">
-                        {errorRegister.fullName}
+                        {errorRegister.full_name}
                       </span>
                     )}
                   </div>
                   <div className="relative">
                     <input
                       className={
-                        errorRegister.phone && registerTouched.phone
+                        errorRegister.username && registerTouched.username
                           ? 'w-full outline-none font-Yek-Bold border-2  border-solid  transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
                           : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
                       }
                       placeholder="شماره تلفن"
                       type="number"
-                      name="phone"
-                      value={register.phone}
+                      name="username"
+                      value={register.username}
                       onChange={registerChangeHandler}
                       onFocus={registerFocusHandler}
                     />
@@ -159,9 +218,9 @@ const Login: FC = () => {
                     </span>
                   </div>
                   <div>
-                    {errorRegister.phone && registerTouched.phone && (
+                    {errorRegister.username && registerTouched.username && (
                       <span className="errorValidation font-Yek-Bold">
-                        {errorRegister.phone}
+                        {errorRegister.username}
                       </span>
                     )}
                   </div>
@@ -203,9 +262,9 @@ const Login: FC = () => {
                   </div>
                 </div>
                 <div className="w-full mt-8">
-                  {(errorRegister.fullName && registerTouched.fullName) ||
+                  {(errorRegister.full_name && registerTouched.full_name) ||
                   (errorRegister.password && registerTouched.password) ||
-                  (errorRegister.phone && registerTouched.phone) ? (
+                  (errorRegister.username && registerTouched.username) ? (
                     <button
                       className="bg-primary-300 w-full py-4 text-xl font-Yek-ExtraBlack text-white rounded-xl hover:ring-[6px] transition-all duration-300 opacity-50"
                       disabled
@@ -260,19 +319,19 @@ const Login: FC = () => {
               <h1>ورود به ارز ایرانیان</h1>
             </div>
             <div className="mt-8">
-              <form>
+              <form onSubmit={loginSubmit}>
                 <div className="space-y-5">
                   <div className="relative">
                     <input
                       className={
-                        errorLogin.phone && loginTouched.phone
+                        errorLogin.username && loginTouched.username
                           ? 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
                           : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
                       }
                       placeholder="شماره تلفن"
                       type="text"
-                      name="phone"
-                      value={login.phone}
+                      name="username"
+                      value={login.username}
                       onChange={loginChangeHandler}
                       onFocus={loginFocusHandler}
                     />
@@ -292,9 +351,9 @@ const Login: FC = () => {
                     </span>
                   </div>
                   <div>
-                    {errorLogin.phone && loginTouched.phone && (
+                    {errorLogin.username && loginTouched.username && (
                       <span className="errorValidation font-Yek-Bold">
-                        {errorLogin.phone}
+                        {errorLogin.username}
                       </span>
                     )}
                   </div>
@@ -336,7 +395,7 @@ const Login: FC = () => {
                   )}
                 </div>
                 <div className="w-full mt-8">
-                  {(errorLogin.phone && loginTouched.phone) ||
+                  {(errorLogin.username && loginTouched.username) ||
                   (errorLogin.password && loginTouched.password) ? (
                     <button
                       className="bg-primary-300 w-full py-4 text-xl font-Yek-ExtraBlack text-white rounded-xl hover:ring-[6px] transition-all duration-300"
@@ -364,6 +423,7 @@ const Login: FC = () => {
           </div>
         </div>
       )}
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   )
 }

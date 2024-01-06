@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import { MdVerifiedUser } from 'react-icons/md'
 import DatePickers from '../../../module/datePicker'
 import numberConvertToPersian from '../../../shared/numberConvertToPersian'
@@ -6,6 +6,21 @@ import { Outlet } from 'react-router'
 import { Link } from 'react-router-dom'
 
 const UsersLayoutPanel: FC = () => {
+  const getToken = JSON.parse(localStorage.getItem('token') as string)
+  console.log(getToken)
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/digital/customer/me', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        // Authorization: `Bearer ${getToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err))
+  })
   return (
     <div className="bg-white h-full flex justify-between">
       <div className="w-[290px] h-screen bg-white fixed top-0">

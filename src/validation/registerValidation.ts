@@ -1,14 +1,14 @@
 import { registerType } from "../types/loginTypes/LoginTypes";
 
 const registerValidation = (data: registerType) => {
-  const errors: registerType = { phone: "", password: "", fullName: "" };
+  const errors: registerType = { username: "", password: "", full_name: "" };
 
-  if (!data.phone) {
-    errors.phone = "شماره تلفن را وارد کنید";
-  } else if (!/^0?9[0-9]{9}$/.test(data.phone)) {
-    errors.phone = "شماره تلفن را درست وارد کنید";
+  if (!data.username) {
+    errors.username = "شماره تلفن را وارد کنید";
+  } else if (!/^0?9[0-9]{9}$/.test(data.username)) {
+    errors.username = "شماره تلفن را درست وارد کنید";
   } else {
-    delete errors.phone;
+    delete errors.username;
   }
 
   if (!data.password) {
@@ -19,12 +19,12 @@ const registerValidation = (data: registerType) => {
     delete errors.password;
   }
 
-  if (!data?.fullName?.trim()) {
-    errors.fullName = "نام و نام خانوادگی خود را وارد کنید";
-  } else if(data.fullName.length < 10) {
-    errors.fullName = "نام و نام خانوادگی حداقل باید 10 کاراکتر داشته باشد"
+  if (!data.full_name?.trim()) {
+    errors.full_name = "نام و نام خانوادگی خود را وارد کنید";
+  } else if(data.full_name.length < 10) {
+    errors.full_name = "نام و نام خانوادگی حداقل باید 10 کاراکتر داشته باشد"
   } else {
-    delete errors.fullName;
+    delete errors.full_name;
   }
 
   return errors;

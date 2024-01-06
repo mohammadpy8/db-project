@@ -1,11 +1,11 @@
 interface loginType {
-  phone?: string ;
+  username?: string ;
   password?: string;
 }
 
 interface registerType {
-  fullName: string | undefined;
-  phone?: string;
+  full_name: string | undefined;
+  username?: string;
   password?: string;
 }
 

@@ -3,14 +3,14 @@ import { loginType } from "../types/loginTypes/LoginTypes";
 const loginValidation = (data: loginType) => {
   const errors: loginType = {
     password: "",
-    phone: "",
+    username: "",
   };
-  if (!data.phone) {
-    errors.phone = "شماره تلفن را وارد کنید";
-  } else if (!/^0?9[0-9]{9}$/.test(data.phone)) {
-    errors.phone = "شماره تلفن را درست وارد کنید";
+  if (!data.username) {
+    errors.username = "شماره تلفن را وارد کنید";
+  } else if (!/^0?9[0-9]{9}$/.test(data.username)) {
+    errors.username = "شماره تلفن را درست وارد کنید";
   } else {
-    delete errors.phone;
+    delete errors.username;
   }
 
   if (!data.password) {
