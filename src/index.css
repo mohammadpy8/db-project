@@ -541,11 +541,6 @@ html,
   border-top-right-radius: 35px;
 }
 
-.active {
-  padding: 8px;
-  border-radius: 12px;
-  background-color: #e7edf5;
-}
 
 .edit {
   background: rgb(2, 0, 36);
@@ -648,4 +643,10 @@ html,
   visibility: hidden;
   translate: -50% -50%;
   transition: all 0.5s linear;
+}
+
+.side-bar a.active {
+  padding: 8px;
+  border-radius: 12px;
+  background-color: #e7edf5;
 }

@@ -3,7 +3,7 @@ import { MdVerifiedUser } from 'react-icons/md'
 import DatePickers from '../../../module/datePicker'
 import numberConvertToPersian from '../../../shared/numberConvertToPersian'
 import { Outlet } from 'react-router'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 const AdminLayoutPanel: FC = () => {
   return (
@@ -15,8 +15,8 @@ const AdminLayoutPanel: FC = () => {
         </div>
         <div className="p-8">
           <ul className="text-md font-Yek-Regular space-y-8 text-gray-600">
-            <li className="active">
-              <Link to="/admin-dashboard" className="flex items-center gap-x-2">
+            <li className='side-bar'>
+              <NavLink to="/admin-dashboard" className="flex items-center gap-x-2" end>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 22 22"
@@ -29,12 +29,13 @@ const AdminLayoutPanel: FC = () => {
                   ></path>
                 </svg>
                 <h1>داشبورد</h1>
-              </Link>
+              </NavLink>
             </li>
-            <li className="">
-              <Link
+            <li className="side-bar">
+              <NavLink
                 to="/admin-dashboard/list-arz"
                 className="flex items-center gap-x-2"
+                end
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +51,7 @@ const AdminLayoutPanel: FC = () => {
                   ></path>
                 </svg>
                 <h1>لیست محصولات ارزی</h1>
-              </Link>
+              </NavLink>
             </li>
             <li className="flex items-center gap-x-2">
               <svg

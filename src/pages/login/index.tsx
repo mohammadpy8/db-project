@@ -207,7 +207,7 @@ const Login: FC = () => {
                   (errorRegister.password && registerTouched.password) ||
                   (errorRegister.phone && registerTouched.phone) ? (
                     <button
-                      className="bg-primary-300 w-full py-4 text-xl font-Yek-ExtraBlack text-white rounded-xl hover:ring-[6px] transition-all duration-300"
+                      className="bg-primary-300 w-full py-4 text-xl font-Yek-ExtraBlack text-white rounded-xl hover:ring-[6px] transition-all duration-300 opacity-50"
                       disabled
                     >
                       ارسال کد تایید
