@@ -16,7 +16,7 @@ const AdminLayoutPanel: FC = () => {
         <div className="p-8">
           <ul className="text-md font-Yek-Regular space-y-8 text-gray-600">
             <li className='side-bar'>
-              <NavLink to="/admin-dashboard" className="flex items-center gap-x-2" end>
+              <NavLink to="/admin-dashboard" className="flex items-center gap-x-2 p-2" end>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 22 22"
@@ -34,8 +34,7 @@ const AdminLayoutPanel: FC = () => {
             <li className="side-bar">
               <NavLink
                 to="/admin-dashboard/list-arz"
-                className="flex items-center gap-x-2"
-                end
+                className="flex items-center gap-x-2 p-2"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
