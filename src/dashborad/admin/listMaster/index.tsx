@@ -1,8 +1,10 @@
-import { FC } from 'react'
-import numberConvertToPersian from '../../../shared/numberConvertToPersian'
-import images from '../../../assets/images/preview.png'
+import { FC, useState } from "react";
+import numberConvertToPersian from "../../../shared/numberConvertToPersian";
+import images from "../../../assets/images/preview.png";
+import CustomeModal from "../../../module/customModal";
 
 const ListMaster: FC = () => {
+  const [changeModal, setChangeModal] = useState<any>(false);
   return (
     <div className="p-9">
       <div className="flex justify-between">
@@ -10,7 +12,10 @@ const ListMaster: FC = () => {
           <h1>لیست مستر کارت ها</h1>
         </div>
         <div className="text-lg font-Yek-Bold ml-4">
-          <button className="text-white bg-primary-300 p-2 rounded-xl hover:ring-[6px] transition-all duration-300">
+          <button
+            className="text-white bg-primary-300 p-2 rounded-xl hover:ring-[6px] transition-all duration-300"
+            onClick={() => setChangeModal(true)}
+          >
             اضافه کردن مسترکارت
           </button>
         </div>
@@ -231,8 +236,12 @@ const ListMaster: FC = () => {
           </div>
         </div>
       </div>
+      <CustomeModal
+        setChangeModal={setChangeModal}
+        changeModal={changeModal}
+      ></CustomeModal>
     </div>
-  )
-}
+  );
+};
 
-export default ListMaster
+export default ListMaster;
