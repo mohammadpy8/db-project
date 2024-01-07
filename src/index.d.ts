@@ -13,6 +13,7 @@ declare module "react-date-object/*"
 declare module "recharts"
 declare module "react-loader-spinner"
 declare module "*/rootReducer"
+declare module "react-hot-toast"
 
 
 
