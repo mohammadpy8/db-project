@@ -5,7 +5,6 @@ import loginValidation from '../../validation/loginValidation'
 import toast, { Toaster } from 'react-hot-toast'
 import { useNavigate } from 'react-router'
 import useLocalStorage from '../../hooks/useLocalStorage'
-import { useAuth } from '../../context/AuthContextProvider'
 
 const Login: FC = () => {
   const [errorRegister, setErrorRegister] = useState<registerType>({

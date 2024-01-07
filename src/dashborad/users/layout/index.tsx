@@ -1,26 +1,40 @@
-import { FC, useEffect } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { MdVerifiedUser } from 'react-icons/md'
 import DatePickers from '../../../module/datePicker'
 import numberConvertToPersian from '../../../shared/numberConvertToPersian'
 import { Outlet } from 'react-router'
 import { Link } from 'react-router-dom'
+import useLocalStorage from '../../../hooks/useLocalStorage'
 
-const UsersLayoutPanel: FC = () => {
-  const getToken = JSON.parse(localStorage.getItem('token') as string)
+interface UserInfos {
+  username?: string
+  password?: string
+  is_staff?: string
+  full_name?: string
+}
+
+const UsersLayoutPanel = () => {
+  const [userInfo, setUserInfo] = useState<UserInfos>({
+    username: '',
+    password: '',
+    is_staff: '',
+    full_name: '',
+  })
+  const getToken = useLocalStorage('', 'GET')
   console.log(getToken)
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/digital/customer/me', {
+    fetch('http://127.0.0.1:8000/digital/customer/me/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        // Authorization: `Bearer ${getToken}`,
+        Authorization: `JWT ${getToken}`,
       },
     })
       .then((res) => res.json())
-      .then((result) => console.log(result))
-      .catch((err) => console.log(err))
-  })
+      .then((result) => setUserInfo(result))
+  }, [])
+
   return (
     <div className="bg-white h-full flex justify-between">
       <div className="w-[290px] h-screen bg-white fixed top-0">
@@ -110,14 +124,16 @@ const UsersLayoutPanel: FC = () => {
         <div className="bg-white p-4 mt-[265px] flex justify-between items-center">
           <div className="flex gap-x-2">
             <div className="bg-gray-300 text-center flex items-center px-3 h-9 rounded-full">
-              <h1 className="text-md font-Yek-ExtraBold">م</h1>
+              <h1 className="text-md font-Yek-ExtraBold">
+                {userInfo.full_name?.slice(0, 1)}
+              </h1>
             </div>
             <div className="space-y-1">
               <h1 className="text-md font-Yek-ExtraBlack text-gray-600">
-                محمد سیف الهی
+                {userInfo.full_name}
               </h1>
               <p className="text-sm font-Yek-SemiBold text-gray-500 text-center">
-                ادمین
+                {userInfo.is_staff === 'False' ? 'کاربر' : 'ادمین'}
               </p>
             </div>
           </div>
@@ -163,7 +179,7 @@ const UsersLayoutPanel: FC = () => {
           <div className="flex justify-between p-6">
             <div className="flex gap-x-2 text-xl font-Yek-Bold text-gray-700">
               <h1>سلام;</h1>
-              <h1 className="border-l-2 pl-2">محمد سیف الهی</h1>
+              <h1 className="border-l-2 pl-2">{userInfo.full_name}</h1>
               <DatePickers />
             </div>
             <div className="flex items-center gap-x-4">

@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './pages/home'
 import Layout from './layout'
@@ -25,13 +25,29 @@ import EditInfoUsers from './dashborad/users/editInfo'
 import ProtedtedRoutes from './module/protectedRouts'
 import AuthContextProvider from './context/AuthContextProvider'
 
-const App = () => {
+interface UserInfos {
+  username?: string,
+  password?: string,
+  is_staff?:string
+  full_name?:string
+}
+
+const App: FC = (): JSX.Element => {
+
+
+  const [userInfo, setUserInfo] = useState<UserInfos>({
+    username: "",
+    password: "",
+    is_staff:"",
+    full_name:""
+  });
+
   return (
     <>
       <AuthContextProvider>
         <Routes>
-          <Route element={<Layout />}>
-            <Route path="/" element={<HomePage />} />
+          <Route element={<Layout userInfo={userInfo} />}>
+            <Route path="/" element={<HomePage setUserInfo={setUserInfo}/>} />
             <Route path="/all-arz" element={<Arzs />} />
             <Route path="/arz-shop" element={<ArzShop />} />
             <Route path="/arz-shop/:id" element={<DetailsArz />} />
@@ -65,7 +81,7 @@ const App = () => {
               element={<ListMaster />}
             />
           </Route>
-          <Route path="/users-dashboard" element={<UsersLayoutPanel />}>
+          <Route path="/users-dashboard" element={<UsersLayoutPanel  />}>
             <Route
               path="/users-dashboard/dashboard"
               element={<MainUsersPanel />}
@@ -81,7 +97,7 @@ const App = () => {
             />
           </Route>
         </Routes>
-        </AuthContextProvider>
+      </AuthContextProvider>
     </>
   )
 }

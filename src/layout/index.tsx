@@ -1,13 +1,14 @@
-import React, { useState } from "react";
-import Header from "../template/header";
-import Footer from "../template/footer";
-import { FaTimes } from "react-icons/fa";
-import { IoChatbox } from "react-icons/io5";
-import { Outlet } from "react-router-dom";
+import React, { useState } from 'react'
+import Header from '../template/header'
+import Footer from '../template/footer'
+import { FaTimes } from 'react-icons/fa'
+import { IoChatbox } from 'react-icons/io5'
+import { Outlet } from 'react-router-dom'
 
-const index = () => {
+const index = ({ userInfo }: any) => {
+  console.log('userInfo', userInfo)
 
-  const [openChat, setOpenChat] = useState<boolean>(false);
+  const [openChat, setOpenChat] = useState<boolean>(false)
   return (
     <div className="relative">
       <div className="fixed bottom-8 right-4 z-[1000]">
@@ -25,8 +26,8 @@ const index = () => {
       <div
         className={
           openChat
-            ? "opacity-100 transition-all duration-500 w-72 h-96 bg-white shadow-2xl fixed bottom-[120px] right-9 z-[1000] rounded-lg"
-            : "transition-all duration-500 w-72 h-96 bg-white shadow-2xl fixed bottom-[120px] right-9 z-[1000] rounded-lg chat"
+            ? 'opacity-100 transition-all duration-500 w-72 h-96 bg-white shadow-2xl fixed bottom-[120px] right-9 z-[1000] rounded-lg'
+            : 'transition-all duration-500 w-72 h-96 bg-white shadow-2xl fixed bottom-[120px] right-9 z-[1000] rounded-lg chat'
         }
       >
         <div className="bg-primary-300 h-24 rounded-t-lg">
@@ -43,11 +44,11 @@ const index = () => {
           </div>
         </div>
       </div>
-      <Header />
+      <Header userInfo={userInfo} />
       <Outlet />
       <Footer />
     </div>
-  );
-};
+  )
+}
 
-export default index;
+export default index

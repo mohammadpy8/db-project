@@ -1,29 +1,25 @@
-import { FC, useEffect, useState } from "react";
-import Button from "../../interface/Button";
-import { RiUserLine } from "react-icons/ri";
-import ScrollIndicator from "../../module/scrollIndicator";
-import SliderHeader from "../sliderHeader";
-import { Link } from "react-router-dom";
+import { FC, useEffect, useState } from 'react'
+import ScrollIndicator from '../../module/scrollIndicator'
+import SliderHeader from '../sliderHeader'
+import { Link } from 'react-router-dom'
 
-const Header: FC = () => {
-  const clickHandler = () => {};
-
-  const [scrollCount, setScrollCount] = useState<boolean>(false);
+const Header = ({ userInfo }: any) => {
+  const [scrollCount, setScrollCount] = useState<boolean>(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      const isScroll = window.scrollY > 104;
-      setScrollCount(isScroll);
-    };
+      const isScroll = window.scrollY > 104
+      setScrollCount(isScroll)
+    }
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll)
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [window.scrollY]);
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [window.scrollY])
 
-  console.log(window.scrollY);
+  console.log(window.scrollY)
 
   return (
     <>
@@ -31,8 +27,8 @@ const Header: FC = () => {
       <div
         className={
           scrollCount
-            ? "w-full bg-gray-100 z-50 sticky top-0 transition-all duration-500"
-            : "w-full bg-gray-100 z-50 sticky transition-all duration-500"
+            ? 'w-full bg-gray-100 z-50 sticky top-0 transition-all duration-500'
+            : 'w-full bg-gray-100 z-50 sticky transition-all duration-500'
         }
       >
         <div className="container w-full border-b-[1px] border-gray-200 h-20 flex justify-between items-center">
@@ -51,24 +47,31 @@ const Header: FC = () => {
             </ul>
           </div>
           <div className="flex gap-x-4">
-            <Button styles="" clickHandler={clickHandler}>
-              <h1 className="font-Yek-Bold text-primary-100 border-[1px] p-3 rounded-lg">
-                ورود
-              </h1>
-            </Button>
-            <Button
-              styles="flex items-center gap-x-2 bg-primary-100 p-3 rounded-lg"
-              clickHandler={clickHandler}
-            >
-              <RiUserLine color="#fff" size={25} />
-              <h1 className="text-white font-Yek-Bold">ثبت نام</h1>
-            </Button>
+            {userInfo.full_name.length > 0 ? (
+              <Link
+                to={
+                  userInfo.is_staff === 'False'
+                    ? '/users-dashboard/dashboard'
+                    : '/admin-dashboard/dashboard'
+                }
+              >
+                <button className="text-white text-lg bg-primary-300 font-Yek-SemiBold p-3 rounded-xl hover:ring-[6px] duration-300 transition-all">
+                  رفتن به پنل کاربری
+                </button>
+              </Link>
+            ) : (
+              <Link to="/login">
+                <button className="text-white text-lg bg-primary-300 font-Yek-SemiBold p-3 rounded-xl hover:ring-[6px] duration-300 transition-all">
+                  ورود / ثبت نام
+                </button>
+              </Link>
+            )}
           </div>
         </div>
         <ScrollIndicator />
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
