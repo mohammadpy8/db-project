@@ -1,170 +1,163 @@
-import { FC, useEffect, useState } from "react";
-import { loginType, registerType } from "../../types/loginTypes/LoginTypes";
-import registerValidation from "../../validation/registerValidation";
-import loginValidation from "../../validation/loginValidation";
-import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import { AuthContext } from "../../context/AuthHandlerContext";
+import { FC, useEffect, useState } from 'react'
+import { loginType, registerType } from '../../types/loginTypes/LoginTypes'
+import registerValidation from '../../validation/registerValidation'
+import loginValidation from '../../validation/loginValidation'
+import toast, { Toaster } from 'react-hot-toast'
+import { useNavigate } from 'react-router'
+import useLocalStorage from '../../hooks/useLocalStorage'
+import { useAuth } from '../../context/AuthContextProvider'
 
 const Login: FC = () => {
   const [errorRegister, setErrorRegister] = useState<registerType>({
-    full_name: "",
-    username: "",
-    password: "",
-  });
+    full_name: '',
+    username: '',
+    password: '',
+  })
   const [errorLogin, setErrroLogin] = useState<loginType>({
-    username: "",
-    password: "",
-  });
-  const [loginForm, setFormLogin] = useState<string>("register");
+    username: '',
+    password: '',
+  })
+  const [loginForm, setFormLogin] = useState<string>('register')
   const [login, setLogin] = useState<loginType>({
-    username: "",
-    password: "",
-  });
+    username: '',
+    password: '',
+  })
   const [register, setRegister] = useState<registerType>({
-    full_name: "",
-    username: "",
-    password: "",
-  });
+    full_name: '',
+    username: '',
+    password: '',
+  })
 
   const [registerTouched, setRegisterTouched] = useState<registerType>({
-    full_name: "",
-    username: "",
-    password: "",
-  });
+    full_name: '',
+    username: '',
+    password: '',
+  })
 
   const [loginTouched, setLoginTouched] = useState<loginType>({
-    username: "",
-    password: "",
-  });
+    username: '',
+    password: '',
+  })
 
-  const navigate = useNavigate();
-
-  const {value} = AuthContext("")
+  const navigate = useNavigate()
 
   const registerChangeHandler = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    console.log(register);
-    setRegister({ ...register, [name]: value });
-  };
+    const name = event.target.name
+    const value = event.target.value
+    console.log(register)
+    setRegister({ ...register, [name]: value })
+  }
 
   const loginChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setLogin({ ...login, [name]: value });
-  };
+    const name = event.target.name
+    const value = event.target.value
+    setLogin({ ...login, [name]: value })
+  }
 
   const registerFocusHandler = (
-    event: React.FocusEvent<HTMLInputElement, Element>
+    event: React.FocusEvent<HTMLInputElement, Element>,
   ) => {
-    setRegisterTouched({ ...registerTouched, [event.target.name]: true });
-  };
-
+    setRegisterTouched({ ...registerTouched, [event.target.name]: true })
+  }
+  
   useEffect(() => {
-    setErrorRegister(registerValidation(register));
-  }, [register, registerTouched]);
+    setErrorRegister(registerValidation(register))
+  }, [register, registerTouched])
 
   const loginFocusHandler = (
-    event: React.FocusEvent<HTMLInputElement, Element>
+    event: React.FocusEvent<HTMLInputElement, Element>,
   ) => {
-    setLoginTouched({ ...loginTouched, [event.target.name]: true });
-  };
+    setLoginTouched({ ...loginTouched, [event.target.name]: true })
+  }
 
   useEffect(() => {
-    setErrroLogin(loginValidation(login));
-  }, [login, loginTouched]);
-
+    setErrroLogin(loginValidation(login))
+  }, [login, loginTouched])
 
   const sendInfo = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    fetch("http://127.0.0.1:8000/api/signup/", {
-      method: "POST",
+    event.preventDefault()
+    fetch('http://127.0.0.1:8000/api/signup/', {
+      method: 'POST',
       body: JSON.stringify({
         ...register,
         is_staff: false,
       }),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then((res) => {
-        const status = res.status;
-        if (status === 201 || 200) {
-          setRegister({
-            full_name: "",
-            password: "",
-            username: "",
-          });
-          setFormLogin("login");
-          toast.success("ثبت نام با موفقیت انجام شد برای ورود لاگین کنید");
-        } else if (status === 400) {
-          res.json().then((r) => {
-            const message = r.message;
-            if (message === "") {
-              toast.error("نام کاربری قبلا ثبت نام کرده است ");
-            }
-          });
-        } else {
-          toast.error("سامانه به خطا خورده است");
+        const status = res.status
+        const success = () => {
+          toast.success('ثبت نام با موفقیت انجام شد')
+          setRegister({ full_name: '', password: '', username: '' })
+          setFormLogin('login')
+        }
+        console.log(status)
+        switch (status) {
+          case 201 || 200:
+            return success();
+          case 400:
+            return toast.error('کاربر قبلا ثبت نام کرده است')
+          default:
+            return toast.error('خطا در سامانه ثبت نام')
         }
       })
-      .catch((error) => console.error("Error:", error));
-  };
+      .catch((error) => console.error('Error:', error))
+  }
 
   const loginSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    fetch("http://127.0.0.1:8000/auth/jwt/create/", {
-      method: "POST",
+    event.preventDefault()
+    fetch('http://127.0.0.1:8000/auth/jwt/create/', {
+      method: 'POST',
       body: JSON.stringify(login),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     })
       .then((res) => {
         console.log(
           res.json().then((r) => {
-            const token = r.access;
-            useLocalStorage(token, "SET");
-          })
-        );
-        const status = res.status;
+            const token = r.access
+            useLocalStorage(token, 'SET')
+          }),
+        )
+        const status = res.status
         if (status === 201 || 200) {
-          toast.success("با موفقیت وارد شدید");
+          toast.success('با موفقیت وارد شدید')
           setTimeout(() => {
-            navigate("/");
-          }, 1500);
+            navigate('/')
+          }, 1500)
         } else if (status === 401) {
           res.json().then((r) => {
-            const message = r.message;
-            if (message === "") {
-              toast.error("نام کاربری یافت نشد");
+            const message = r.message
+            if (message === '') {
+              toast.error('نام کاربری یافت نشد')
             }
-          });
+          })
         } else if (status === 402) {
-          toast.error("کلمه عبور نادرست است");
+          toast.error('کلمه عبور نادرست است')
         } else {
-          toast.error("سامانه به خطا خورده است");
+          toast.error('سامانه به خطا خورده است')
         }
       })
       .then((result) => console.log(result))
-      .catch((error) => console.error("Error:", error));
-  };
+      .catch((error) => console.error('Error:', error))
+  }
 
   return (
     <div className="container flex justify-center py-12">
-      {loginForm === "register" ? (
+      {loginForm === 'register' ? (
         <div className="bg-white w-[50%] h-auto loginPage rounded-xl">
           <div className="px-16">
             <div className="flex justify-around mt-12  text-2xl font-Yek-Bold w-full text-center">
               <div className="border-b-4 pb-4 w-full">
-                <button onClick={() => setFormLogin("login")}>ورود</button>
+                <button onClick={() => setFormLogin('login')}>ورود</button>
               </div>
               <div className="w-full border-b-4 border-primary-400 text-primary-400 pb-4">
-                <button onClick={() => setFormLogin("register")}>
+                <button onClick={() => setFormLogin('register')}>
                   ثبت نام
                 </button>
               </div>
@@ -179,8 +172,8 @@ const Login: FC = () => {
                     <input
                       className={
                         errorRegister.full_name && registerTouched.full_name
-                          ? "w-full outline-none font-Yek-Bold border-2  border-solid  transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
-                          : "w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
+                          ? 'w-full outline-none font-Yek-Bold border-2  border-solid  transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
                       }
                       placeholder="نام و نام خانوادگی"
                       type="text"
@@ -217,8 +210,8 @@ const Login: FC = () => {
                     <input
                       className={
                         errorRegister.username && registerTouched.username
-                          ? "w-full outline-none font-Yek-Bold border-2  border-solid  transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
-                          : "w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
+                          ? 'w-full outline-none font-Yek-Bold border-2  border-solid  transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
                       }
                       placeholder="شماره تلفن"
                       type="number"
@@ -253,8 +246,8 @@ const Login: FC = () => {
                     <input
                       className={
                         errorRegister.password && registerTouched.password
-                          ? "w-full outline-none font-Yek-Bold border-2  border-solid transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
-                          : "w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
+                          ? 'w-full outline-none font-Yek-Bold border-2  border-solid transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
                       }
                       placeholder="رمز عبور"
                       type="text"
@@ -306,7 +299,7 @@ const Login: FC = () => {
                   <span>اگر قبلا ثبت نام کرده اید!</span>
                   <span
                     className="text-primary-300 cursor-pointer"
-                    onClick={() => setFormLogin("login")}
+                    onClick={() => setFormLogin('login')}
                   >
                     وارد شوید
                   </span>
@@ -321,21 +314,21 @@ const Login: FC = () => {
             <div className="flex justify-around mt-12  text-2xl font-Yek-Bold w-full text-center">
               <div
                 className={
-                  loginForm === "login"
-                    ? "w-full border-b-4 border-primary-400 text-primary-400 pb-4"
-                    : "border-b-4 pb-4 w-full"
+                  loginForm === 'login'
+                    ? 'w-full border-b-4 border-primary-400 text-primary-400 pb-4'
+                    : 'border-b-4 pb-4 w-full'
                 }
               >
-                <button onClick={() => setFormLogin("login")}>ورود</button>
+                <button onClick={() => setFormLogin('login')}>ورود</button>
               </div>
               <div
                 className={
-                  loginForm === "register"
-                    ? "w-full border-b-4 border-primary-400 text-primary-400 pb-4"
-                    : "border-b-4 pb-4 w-full"
+                  loginForm === 'register'
+                    ? 'w-full border-b-4 border-primary-400 text-primary-400 pb-4'
+                    : 'border-b-4 pb-4 w-full'
                 }
               >
-                <button onClick={() => setFormLogin("register")}>
+                <button onClick={() => setFormLogin('register')}>
                   ثبت نام
                 </button>
               </div>
@@ -350,8 +343,8 @@ const Login: FC = () => {
                     <input
                       className={
                         errorLogin.username && loginTouched.username
-                          ? "w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
-                          : "w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
+                          ? 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
                       }
                       placeholder="شماره تلفن"
                       type="text"
@@ -386,8 +379,8 @@ const Login: FC = () => {
                     <input
                       className={
                         errorLogin.password && loginTouched.password
-                          ? "w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
-                          : "w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 "
+                          ? 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all border-red-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
+                          : 'w-full outline-none font-Yek-Bold border-2  border-solid border-transparent transition-all focus:border-green-500 placeholder:text-gray-400 placeholder:select-none text-xl rounded-xl py-5  placeholder:text-right pr-14  pl-4 bg-gray-100 '
                       }
                       placeholder="رمز عبور"
                       type="text"
@@ -438,7 +431,7 @@ const Login: FC = () => {
                   <span>اگر ثبت نام نکرده اید!</span>
                   <span
                     className="text-primary-300 cursor-pointer"
-                    onClick={() => setFormLogin("register")}
+                    onClick={() => setFormLogin('register')}
                   >
                     ثبت نام کنید
                   </span>
@@ -450,7 +443,7 @@ const Login: FC = () => {
       )}
       <Toaster position="top-center" reverseOrder={false} />
     </div>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

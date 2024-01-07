@@ -1,41 +1,67 @@
-import { createContext, useContext } from 'react';
+import { createContext, useContext, useReducer } from 'react'
 
-const ThemeContext = createContext("null");
+type AuthContextProps = {
+  children: React.ReactNode
+}
 
-export default function MyApp() {
+type User = {
+  full_name: string
+  password: string
+  username: string
+  is_staff: boolean
+}
+
+type AuthContextType = {
+  user: User | null
+  isAuthenticated: boolean
+  dispatch: React.Dispatch<Action>;
+}
+
+type Action = {
+  type: string; 
+  payload: User
+}
+
+export const AuthContext = createContext<AuthContextType | null>(null)
+
+const initialState = {
+  user: null,
+  isAuthenticated: false,
+}
+
+const authReducer = (state : any, action : Action) => {
+  switch (action.type) {
+    case 'login':
+      return {
+        user: action.payload,
+        isAuthenticated: true,
+      }
+    case 'logout':
+      return {
+        user: null,
+        isAuthenticated: false,
+      }
+    default:
+      throw new Error('Unkwon actions !!')
+  }
+}
+
+
+const AuthContextProvider = ({ children } : AuthContextProps) => {
+  const [{ user, isAuthenticated }, dispatch] = useReducer(
+    authReducer,
+    initialState,
+  )
+
   return (
-    <ThemeContext.Provider value="dark">
-      <Form />
-    </ThemeContext.Provider>
+    <AuthContext.Provider value={{ user, isAuthenticated, dispatch }}>
+      {children}
+    </AuthContext.Provider>
   )
 }
 
-function Form() {
-  return (
-    <Panel title="Welcome">
-      <Button>Sign up</Button>
-      <Button>Log in</Button>
-    </Panel>
-  );
-}
+export default AuthContextProvider
 
-function Panel({ title, children }) {
-  const theme = useContext(ThemeContext);
-  const className = 'panel-' + theme;
-  return (
-    <section className={className}>
-      <h1>{title}</h1>
-      {children}
-    </section>
-  )
-}
-
-function Button({ children }) {
-  const theme = useContext(ThemeContext);
-  const className = 'button-' + theme;
-  return (
-    <button className={className}>
-      {children}
-    </button>
-  );
+export const useAuth = () => {
+  return useContext(AuthContext)
 }
