@@ -4,6 +4,7 @@ import registerValidation from "../../validation/registerValidation";
 import loginValidation from "../../validation/loginValidation";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 const Login: FC = () => {
   const [errorRegister, setErrorRegister] = useState<registerType>({
@@ -73,6 +74,7 @@ const Login: FC = () => {
   useEffect(() => {
     setErrroLogin(loginValidation(login));
   }, [login, loginTouched]);
+
 
   const sendInfo = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
