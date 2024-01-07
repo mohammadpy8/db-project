@@ -5,6 +5,7 @@ import loginValidation from "../../validation/loginValidation";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import { AuthContext } from "../../context/AuthHandlerContext";
 
 const Login: FC = () => {
   const [errorRegister, setErrorRegister] = useState<registerType>({
@@ -39,6 +40,8 @@ const Login: FC = () => {
   });
 
   const navigate = useNavigate();
+
+  const {value} = AuthContext("")
 
   const registerChangeHandler = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -125,7 +128,7 @@ const Login: FC = () => {
         console.log(
           res.json().then((r) => {
             const token = r.access;
-            localStorage.setItem("token", JSON.stringify(token));
+            useLocalStorage(token, "SET");
           })
         );
         const status = res.status;
