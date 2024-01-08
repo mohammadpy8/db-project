@@ -45,7 +45,7 @@ const UsersLayoutPanel = () => {
         <div className="p-8">
           <ul className="text-md font-Yek-Regular space-y-8 text-gray-600">
             <li className="active">
-              <Link to="/users-dashboard" className="flex items-center gap-x-2">
+              <Link to="/users-dashboard/dashboard" className="flex items-center gap-x-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 22 22"
@@ -139,7 +139,7 @@ const UsersLayoutPanel = () => {
           </div>
           <div>
             <button className="border-2 p-2 rounded-2xl">
-              <Link to="/admin-dashboard/edit-info">
+              <Link to="/users-dashboard/edit-info">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 14 14"

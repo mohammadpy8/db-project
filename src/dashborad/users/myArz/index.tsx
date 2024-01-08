@@ -1,9 +1,47 @@
 import { FC, useState } from 'react'
 import CustomeModal from '../../../module/customModal'
+import useLocalStorage from '../../../hooks/useLocalStorage'
+import toast from 'react-hot-toast'
+import { Toaster } from 'react-hot-toast'
+
+interface detailsType {
+  title: string
+  price: string
+  description: string
+}
 
 const MyArz: FC = () => {
   const [changeModal, setChangeModal] = useState<boolean>(false)
+  const [details, setDetails] = useState<detailsType>({
+    title: '',
+    price: '',
+    description: '',
+  })
+  const getToken = useLocalStorage('', 'GET')
+  const changeHanderDetails = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const name = event.target.name
+    const value = event.target.value
+    setDetails({ ...details, [name]: value })
+  }
 
+  const sendArz = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    fetch('http://127.0.0.1:8000/digital/currencies/', {
+      method: 'POST',
+      body: JSON.stringify(details),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `JWT ${getToken}`,
+      },
+    }).then((res) => {
+      const status = res.status
+      if (status === 200 || 201) {
+        toast.success('محصول با موفقیت ثبت شد.')
+        setChangeModal(!changeModal)
+        setDetails({ title: '', price: '', description: '' })
+      }
+    })
+  }
   return (
     <div className="p-12">
       <div className="flex justify-between">
@@ -24,7 +62,7 @@ const MyArz: FC = () => {
       <CustomeModal
         changeModal={changeModal}
         setChangeModal={setChangeModal}
-        styles="w-[600px] h-[620px]"
+        styles="w-[600px] h-[600px]"
       >
         <div>
           <div className="flex justify-center mt-12">
@@ -33,7 +71,7 @@ const MyArz: FC = () => {
             </h1>
           </div>
           <div className="mt-8">
-            <form>
+            <form onSubmit={sendArz}>
               <div className="space-y-3">
                 <div className="flex flex-col space-y-2">
                   <label className="text-lg font-Yek-ExtraBold text-gray-700">
@@ -42,6 +80,9 @@ const MyArz: FC = () => {
                   <input
                     type="text"
                     placeholder="عنوان محصول را وارد کنید"
+                    value={details.title}
+                    onChange={changeHanderDetails}
+                    name="title"
                     className="outline-none bg-gray-100 py-3 px-2 text-lg font-Yek-Bold rounded-xl "
                   />
                 </div>
@@ -52,28 +93,21 @@ const MyArz: FC = () => {
                   <input
                     type="text"
                     placeholder="قیمت محصول را وارد کنید"
+                    value={details.price}
+                    onChange={changeHanderDetails}
+                    name="price"
                     className="outline-none bg-gray-100 py-3 px-2 text-lg font-Yek-Bold rounded-xl "
-                  />
-                </div>
-                <div className="flex justify-between">
-                  <label className="text-lg font-Yek-ExtraBold text-gray-700">
-                    عکس محصول <span className="text-red-600">*</span>
-                  </label>
-                  <input
-                    type="file"
-                    id="myFile"
-                    name="filename"
-                    accept="image/png, image/jpg, image/gif, image/jpeg image/avif"
                   />
                 </div>
                 <div className="flex flex-col space-y-2">
                   <label className="text-lg font-Yek-ExtraBold text-gray-700">
                     توضیحات محصول <span className="text-red-600">*</span>
                   </label>
-                  <textarea
-                    name=""
-                    id=""
-                    className="outline-none bg-gray-100 py-3 px-2 text-lg font-Yek-Bold rounded-xl resize-none h-32"
+                  <input
+                    name="description"
+                    value={details.description}
+                    onChange={changeHanderDetails}
+                    className="outline-none bg-gray-100 pt-2 py-20  px-2 text-lg font-Yek-Bold rounded-xl resize-none"
                     placeholder="توضیحات محصول را وارد کنید"
                   />
                 </div>
@@ -87,6 +121,7 @@ const MyArz: FC = () => {
           </div>
         </div>
       </CustomeModal>
+      <Toaster position="top-center" reverseOrder={false} />
     </div>
   )
 }
