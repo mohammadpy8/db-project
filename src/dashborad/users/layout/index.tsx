@@ -62,7 +62,7 @@ const UsersLayoutPanel = () => {
             </li>
             <li className="">
               <Link
-                to="/users-dashboard/list-arz"
+                to="/users-dashboard/my-arz"
                 className="flex items-center gap-x-2"
               >
                 <svg

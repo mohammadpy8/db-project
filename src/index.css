@@ -620,10 +620,9 @@ html,
   background: #fff;
   
   /* border:2px solid #0a0066; */
-  color: #f9f9f9;
+  /* color: #f9f9f9; */
   padding: 0 40px;
-  width: 820px;
-  height: 500px;
+
   border-radius: 12px;
   translate: -50% -50%;
   opacity: 0;
