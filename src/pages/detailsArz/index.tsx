@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import images from '../../assets/images/btcc.avif'
 import numberConvertToPersian from '../../shared/numberConvertToPersian'
 import { IoIosArrowBack, IoMdCart } from 'react-icons/io'
@@ -11,14 +11,41 @@ import {
 import { GiMoneyStack } from 'react-icons/gi'
 import { LuUser2 } from 'react-icons/lu'
 import { FaStar } from 'react-icons/fa'
-import { useNavigate } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
+import useLocalStorage from '../../hooks/useLocalStorage'
 
 const DetailsArz: FC = () => {
   const [arzOffer, setArzOffer] = useState<number>(20)
   const [arzPrice, setArzPrice] = useState<number>(1560000000)
   const [openSection, setOpenSection] = useState<boolean>(false)
   const [accordion, setAccordion] = useState<number>(0)
+  const [listArzs, setListArzs] = useState<any>([])
+  const [listDetails, setListDetails] = useState()
   const navigate = useNavigate()
+  // console.log(listArzs)
+
+  const { id } = useParams()
+  console.log(id)
+
+  const getToken = useLocalStorage('', 'GET')
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/digital/currencies/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `JWT ${getToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        console.log('id', id)
+        setListArzs(result.filter((item: any) => item.id === Number(id)))
+        console.log(listArzs)
+
+      })
+  }, [id])
+
   return (
     <div className="container mt-12">
       <div className="relative">
@@ -36,14 +63,14 @@ const DetailsArz: FC = () => {
           </div>
           <div>
             <div className="text-[45px] font-Yek-ExtraBlack text-gray-800">
-              <h1>ارز دیجیتال بیت کوین</h1>
+              <h1>ارز دیجیتال {listArzs[0]?.title}</h1>
             </div>
             <div className="flex gap-x-4 mt-4">
               <div className="bg-green-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
                 <span>ارز دیجیتال</span>
               </div>
               <div className="bg-red-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
-                <span>بیت کوین</span>
+                <span>{lis}</span>
               </div>
             </div>
             <div className="w-[800px] mt-4 text-[15px] font-Yek-Regular leading-7">

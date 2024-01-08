@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { TbShoppingCartDollar } from 'react-icons/tb'
 import numberConvertToPersian from '../../shared/numberConvertToPersian'
 import images from '../../assets/images/btcc.avif'
@@ -11,13 +11,19 @@ import { MdOutlineAddCard } from 'react-icons/md'
 import { GiMoneyStack } from 'react-icons/gi'
 import { LuBadgeDollarSign } from 'react-icons/lu'
 import { IoIosArrowDown, IoMdCart } from 'react-icons/io'
+import useLocalStorage from '../../hooks/useLocalStorage'
+import { ThreeDots } from 'react-loader-spinner'
 
 const ArzShop: FC = () => {
   const [arzCount, setArzCount] = useState<number>(12)
   const [arzTotal, setTotal] = useState<number>(1500)
   const [arzOffer, setArzOffer] = useState<number>(10)
   const [arzPrice, setArzPrice] = useState<number>(165820888550)
-  const [step, setStep] = useState<number>(0);
+  const [step, setStep] = useState<number>(0)
+  const [listArzs, setListArzs] = useState<any>([])
+  console.log(listArzs)
+
+  const getToken = useLocalStorage('', 'GET')
 
   const ScrollToMaster = () => {
     window.scrollTo({
@@ -25,6 +31,22 @@ const ArzShop: FC = () => {
       behavior: 'smooth',
     })
   }
+
+  console.log('access', listArzs)
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/digital/currencies/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `JWT ${getToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        setListArzs(result.filter((item: any) => item.status === 'a'))
+      })
+  }, [])
 
   return (
     <div className="container mt-6 arzPhoto">
@@ -169,297 +191,85 @@ const ArzShop: FC = () => {
       </div>
       <div className="flex gap-x-2 text-lg mt-8 text-gray-700 font-Yek-Bold border-b-4 border-gray-400 w-[150px]">
         <h1>تعداد کل:</h1>
-        <span>{numberConvertToPersian(arzTotal)}</span>
+        <span>{numberConvertToPersian(listArzs.length)}</span>
       </div>
       <div className="mt-32 flex flex-wrap gap-x-24 gap-y-[160px] mx-10">
-        <div className=" w-[350px] rounded-2xl h-[350px]  relative cardArz">
-          <div className="absolute top-[-110px] left-4 bg-red-600 flex text-white px-2 text-lg font-Yek-ExtraBold text-center rounded-xl z-10">
-            <h1>{numberConvertToPersian(arzOffer)}</h1>
-            <span>%</span>
-          </div>
-          <div>
-            <img
-              src={images}
-              alt="images"
-              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-6 z-0"
+        {listArzs.length > 0 ? (
+          listArzs.map((item: any) => {
+            const {
+              id,
+              title,
+              price,
+              user: { full_name },
+            } = item
+            return (
+              <div
+                className=" w-[350px] rounded-2xl h-[350px]  relative cardArz"
+                key={id}
+              >
+                <div className="absolute top-[-110px] left-4 bg-red-600 flex text-white px-2 text-lg font-Yek-ExtraBold text-center rounded-xl z-10">
+                  <h1>{numberConvertToPersian(arzOffer)}</h1>
+                  <span>%</span>
+                </div>
+                <div>
+                  <img
+                    src={images}
+                    alt="images"
+                    className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-6 z-0"
+                  />
+                </div>
+                <div className="flex gap-x-4 p-3 mt-32">
+                  <div className="bg-green-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
+                    <span>ارز دیجیتال</span>
+                  </div>
+                  <div className="bg-red-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
+                    <span>{title}</span>
+                  </div>
+                </div>
+                <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
+                  <LuBadgeDollarSign color="red" size={30} />
+                  <h1>ارز:</h1>
+                  <span>{title}</span>
+                </div>
+                <div className="flex gap-x-2 mr-4 my-4">
+                  <GiMoneyStack color="#27ff00" size={30} />
+                  <h1 className="text-xl font-Yek-ExtraBlack text-white">
+                    قیمت دلاری:
+                  </h1>
+                  <span className="text-xl font-Yek-ExtraBlack text-red-800">
+                    ${numberConvertToPersian(price.toLocaleString())}
+                  </span>
+                </div>
+                <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
+                  <FaUserPen color="#0000ff" size={30} />
+                  <h1>عرضه کننده:</h1>
+                  <span>{full_name}</span>
+                </div>
+                <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-[93px]">
+                  <Link to={`/arz-shop/${id}`}>
+                    <button className="flex bg-primary-300 rounded-lg px-2 py-4 items-center gap-x-2 hover:ring-[7px] transition-all duration-300">
+                      <span className="text-md text-white font-Yek-ExtraBlack">
+                        توضیحات و خرید ارز
+                      </span>
+                      <FaLongArrowAltLeft color="#fff" size={20} />
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            )
+          })
+        ) : (
+          <div className="flex justify-center items-center">
+            <ThreeDots
+              visible={true}
+              height="80"
+              width="80"
+              color="#0023d0"
+              radius="9"
+              ariaLabel="three-dots-loading"
             />
           </div>
-          <div className="flex gap-x-4 p-3 mt-32">
-            <div className="bg-green-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
-              <span>ارز دیجیتال</span>
-            </div>
-            <div className="bg-red-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
-              <span>بیت کوین</span>
-            </div>
-          </div>
-          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
-            <LuBadgeDollarSign color="red" size={30} />
-            <h1>ارز:</h1>
-            <span>ارز بیت کوین</span>
-          </div>
-          <div className="flex gap-x-2 mr-4 my-4">
-            <GiMoneyStack color="#27ff00" size={30} />
-            <h1 className="text-xl font-Yek-ExtraBlack text-white">
-              قیمت دلاری:
-            </h1>
-            <span className="text-xl font-Yek-ExtraBlack text-red-800">
-              ${numberConvertToPersian(arzPrice.toLocaleString())}
-            </span>
-          </div>
-          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
-            <FaUserPen color="#0000ff" size={30} />
-            <h1>عرضه کننده:</h1>
-            <span>محمد سیف الهی</span>
-          </div>
-          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-[93px]">
-            <button className="flex bg-primary-300 rounded-lg px-2 py-4 items-center gap-x-2 hover:ring-[7px] transition-all duration-300">
-              <span className="text-md text-white font-Yek-ExtraBlack">
-                توضیحات و خرید ارز
-              </span>
-              <FaLongArrowAltLeft color="#fff" size={20} />
-            </button>
-          </div>
-        </div>
-        <div className=" w-[350px] rounded-2xl h-[350px]  relative cardArz">
-          <div className="absolute top-[-110px] left-4 bg-red-600 flex text-white px-2 text-lg font-Yek-ExtraBold text-center rounded-xl z-10">
-            <h1>{numberConvertToPersian(arzOffer)}</h1>
-            <span>%</span>
-          </div>
-          <div>
-            <img
-              src={images}
-              alt="images"
-              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-6 z-0"
-            />
-          </div>
-          <div className="flex gap-x-4 p-3 mt-32">
-            <div className="bg-green-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
-              <span>ارز دیجیتال</span>
-            </div>
-            <div className="bg-red-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
-              <span>بیت کوین</span>
-            </div>
-          </div>
-          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
-            <LuBadgeDollarSign color="red" size={30} />
-            <h1>ارز:</h1>
-            <span>ارز بیت کوین</span>
-          </div>
-          <div className="flex gap-x-2 mr-4 my-4">
-            <GiMoneyStack color="#27ff00" size={30} />
-            <h1 className="text-xl font-Yek-ExtraBlack text-white">
-              قیمت دلاری:
-            </h1>
-            <span className="text-xl font-Yek-ExtraBlack text-red-800">
-              ${numberConvertToPersian(arzPrice.toLocaleString())}
-            </span>
-          </div>
-          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
-            <FaUserPen color="#0000ff" size={30} />
-            <h1>عرضه کننده:</h1>
-            <span>محمد سیف الهی</span>
-          </div>
-          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-[93px]">
-            <button className="flex bg-primary-300 rounded-lg px-2 py-4 items-center gap-x-2 hover:ring-[7px] transition-all duration-300">
-              <span className="text-md text-white font-Yek-ExtraBlack">
-                توضیحات و خرید ارز
-              </span>
-              <FaLongArrowAltLeft color="#fff" size={20} />
-            </button>
-          </div>
-        </div>
-        <div className=" w-[350px] rounded-2xl h-[350px]  relative cardArz">
-          <div className="absolute top-[-110px] left-4 bg-red-600 flex text-white px-2 text-lg font-Yek-ExtraBold text-center rounded-xl z-10">
-            <h1>{numberConvertToPersian(arzOffer)}</h1>
-            <span>%</span>
-          </div>
-          <div>
-            <img
-              src={images}
-              alt="images"
-              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-6 z-0"
-            />
-          </div>
-          <div className="flex gap-x-4 p-3 mt-32">
-            <div className="bg-green-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
-              <span>ارز دیجیتال</span>
-            </div>
-            <div className="bg-red-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
-              <span>بیت کوین</span>
-            </div>
-          </div>
-          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
-            <LuBadgeDollarSign color="red" size={30} />
-            <h1>ارز:</h1>
-            <span>ارز بیت کوین</span>
-          </div>
-          <div className="flex gap-x-2 mr-4 my-4">
-            <GiMoneyStack color="#27ff00" size={30} />
-            <h1 className="text-xl font-Yek-ExtraBlack text-white">
-              قیمت دلاری:
-            </h1>
-            <span className="text-xl font-Yek-ExtraBlack text-red-800">
-              ${numberConvertToPersian(arzPrice.toLocaleString())}
-            </span>
-          </div>
-          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
-            <FaUserPen color="#0000ff" size={30} />
-            <h1>عرضه کننده:</h1>
-            <span>محمد سیف الهی</span>
-          </div>
-          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-[93px]">
-            <button className="flex bg-primary-300 rounded-lg px-2 py-4 items-center gap-x-2 hover:ring-[7px] transition-all duration-300">
-              <span className="text-md text-white font-Yek-ExtraBlack">
-                توضیحات و خرید ارز
-              </span>
-              <FaLongArrowAltLeft color="#fff" size={20} />
-            </button>
-          </div>
-        </div>
-        <div className=" w-[350px] rounded-2xl h-[350px]  relative cardArz">
-          <div className="absolute top-[-110px] left-4 bg-red-600 flex text-white px-2 text-lg font-Yek-ExtraBold text-center rounded-xl z-10">
-            <h1>{numberConvertToPersian(arzOffer)}</h1>
-            <span>%</span>
-          </div>
-          <div>
-            <img
-              src={images}
-              alt="images"
-              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-6 z-0"
-            />
-          </div>
-          <div className="flex gap-x-4 p-3 mt-32">
-            <div className="bg-green-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
-              <span>ارز دیجیتال</span>
-            </div>
-            <div className="bg-red-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
-              <span>بیت کوین</span>
-            </div>
-          </div>
-          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
-            <LuBadgeDollarSign color="red" size={30} />
-            <h1>ارز:</h1>
-            <span>ارز بیت کوین</span>
-          </div>
-          <div className="flex gap-x-2 mr-4 my-4">
-            <GiMoneyStack color="#27ff00" size={30} />
-            <h1 className="text-xl font-Yek-ExtraBlack text-white">
-              قیمت دلاری:
-            </h1>
-            <span className="text-xl font-Yek-ExtraBlack text-red-800">
-              ${numberConvertToPersian(arzPrice.toLocaleString())}
-            </span>
-          </div>
-          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
-            <FaUserPen color="#0000ff" size={30} />
-            <h1>عرضه کننده:</h1>
-            <span>محمد سیف الهی</span>
-          </div>
-          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-[93px]">
-            <button className="flex bg-primary-300 rounded-lg px-2 py-4 items-center gap-x-2 hover:ring-[7px] transition-all duration-300">
-              <span className="text-md text-white font-Yek-ExtraBlack">
-                توضیحات و خرید ارز
-              </span>
-              <FaLongArrowAltLeft color="#fff" size={20} />
-            </button>
-          </div>
-        </div>
-        <div className=" w-[350px] rounded-2xl h-[350px]  relative cardArz">
-          <div className="absolute top-[-110px] left-4 bg-red-600 flex text-white px-2 text-lg font-Yek-ExtraBold text-center rounded-xl z-10">
-            <h1>{numberConvertToPersian(arzOffer)}</h1>
-            <span>%</span>
-          </div>
-          <div>
-            <img
-              src={images}
-              alt="images"
-              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-6 z-0"
-            />
-          </div>
-          <div className="flex gap-x-4 p-3 mt-32">
-            <div className="bg-green-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
-              <span>ارز دیجیتال</span>
-            </div>
-            <div className="bg-red-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
-              <span>بیت کوین</span>
-            </div>
-          </div>
-          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
-            <LuBadgeDollarSign color="red" size={30} />
-            <h1>ارز:</h1>
-            <span>ارز بیت کوین</span>
-          </div>
-          <div className="flex gap-x-2 mr-4 my-4">
-            <GiMoneyStack color="#27ff00" size={30} />
-            <h1 className="text-xl font-Yek-ExtraBlack text-white">
-              قیمت دلاری:
-            </h1>
-            <span className="text-xl font-Yek-ExtraBlack text-red-800">
-              ${numberConvertToPersian(arzPrice.toLocaleString())}
-            </span>
-          </div>
-          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
-            <FaUserPen color="#0000ff" size={30} />
-            <h1>عرضه کننده:</h1>
-            <span>محمد سیف الهی</span>
-          </div>
-          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-[93px]">
-            <button className="flex bg-primary-300 rounded-lg px-2 py-4 items-center gap-x-2 hover:ring-[7px] transition-all duration-300">
-              <span className="text-md text-white font-Yek-ExtraBlack">
-                توضیحات و خرید ارز
-              </span>
-              <FaLongArrowAltLeft color="#fff" size={20} />
-            </button>
-          </div>
-        </div>
-        <div className=" w-[350px] rounded-2xl h-[350px]  relative cardArz">
-          <div className="absolute top-[-110px] left-4 bg-red-600 flex text-white px-2 text-lg font-Yek-ExtraBold text-center rounded-xl z-10">
-            <h1>{numberConvertToPersian(arzOffer)}</h1>
-            <span>%</span>
-          </div>
-          <div>
-            <img
-              src={images}
-              alt="images"
-              className="w-[300px] h-56 object-cover rounded-xl absolute top-[-100px] right-6 z-0"
-            />
-          </div>
-          <div className="flex gap-x-4 p-3 mt-32">
-            <div className="bg-green-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
-              <span>ارز دیجیتال</span>
-            </div>
-            <div className="bg-red-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
-              <span>بیت کوین</span>
-            </div>
-          </div>
-          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white">
-            <LuBadgeDollarSign color="red" size={30} />
-            <h1>ارز:</h1>
-            <span>ارز بیت کوین</span>
-          </div>
-          <div className="flex gap-x-2 mr-4 my-4">
-            <GiMoneyStack color="#27ff00" size={30} />
-            <h1 className="text-xl font-Yek-ExtraBlack text-white">
-              قیمت دلاری:
-            </h1>
-            <span className="text-xl font-Yek-ExtraBlack text-red-800">
-              ${numberConvertToPersian(arzPrice.toLocaleString())}
-            </span>
-          </div>
-          <div className="flex gap-x-2 mr-4 text-xl font-Yek-ExtraBlack text-white mt-4">
-            <FaUserPen color="#0000ff" size={30} />
-            <h1>عرضه کننده:</h1>
-            <span>محمد سیف الهی</span>
-          </div>
-          <div className="flex items-center justify-center mb-8 absolute -bottom-16 right-[93px]">
-            <button className="flex bg-primary-300 rounded-lg px-2 py-4 items-center gap-x-2 hover:ring-[7px] transition-all duration-300">
-              <span className="text-md text-white font-Yek-ExtraBlack">
-                توضیحات و خرید ارز
-              </span>
-              <FaLongArrowAltLeft color="#fff" size={20} />
-            </button>
-          </div>
-        </div>
+        )}
       </div>
       <div className="flex justify-center mt-20 pb-2">
         <button className="bg-primary-400 flex text-white items-center gap-x-2 px-3 py-4 rounded-lg shadow-2xl hover:ring-[7px] transition-all duration-300">
