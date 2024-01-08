@@ -1,11 +1,40 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { MdVerifiedUser } from 'react-icons/md'
 import DatePickers from '../../../module/datePicker'
 import numberConvertToPersian from '../../../shared/numberConvertToPersian'
 import { Outlet } from 'react-router'
 import { Link, NavLink } from 'react-router-dom'
+import useLocalStorage from '../../../hooks/useLocalStorage'
+
+interface UserInfos {
+  username?: string
+  password?: string
+  is_staff?: string
+  full_name?: string
+}
 
 const AdminLayoutPanel: FC = () => {
+  const [userInfo, setUserInfo] = useState<UserInfos>({
+    username: '',
+    password: '',
+    is_staff: '',
+    full_name: '',
+  })
+  const getToken = useLocalStorage('', 'GET')
+  console.log(getToken)
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/digital/customer/me/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `JWT ${getToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => setUserInfo(result))
+  }, [])
+
   return (
     <div className="bg-white h-full flex justify-between">
       <div className="w-[290px] h-screen bg-white fixed top-0">
@@ -15,8 +44,12 @@ const AdminLayoutPanel: FC = () => {
         </div>
         <div className="p-8">
           <ul className="text-md font-Yek-Regular space-y-8 text-gray-600">
-            <li className='side-bar'>
-              <NavLink to="/admin-dashboard" className="flex items-center gap-x-2 p-2" end>
+            <li className="">
+              <NavLink
+                to="/admin-dashboard"
+                className="flex items-center gap-x-2 p-2"
+                end
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 22 22"
@@ -31,7 +64,7 @@ const AdminLayoutPanel: FC = () => {
                 <h1>داشبورد</h1>
               </NavLink>
             </li>
-            <li className="side-bar">
+            <li className="">
               <NavLink
                 to="/admin-dashboard/list-arz"
                 className="flex items-center gap-x-2 p-2"
@@ -52,27 +85,32 @@ const AdminLayoutPanel: FC = () => {
                 <h1>لیست محصولات ارزی</h1>
               </NavLink>
             </li>
-            <li className="flex items-center gap-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                className="w-5 h-5"
+            <li>
+              <NavLink
+                to="/admin-dashboard/list-master-cart"
+                className="flex items-center gap-x-2 p-2"
               >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-width="1.5"
-                  d="M8 9h4"
-                ></path>
-                <path
-                  fill="currentColor"
-                  d="m2.885 15.151.728-.18-.728.18Zm0-6.302.728.18-.728-.18Zm18.23 0 .728-.181-.728.18Zm0 6.302-.728-.18.728.18Zm-6 5.508-.162-.732.163.732Zm-6.23 0 .162-.732-.163.732Zm0-17.318.162.732-.163-.732Zm6.23 0 .163-.732-.162.732ZM8.432 20.558l-.163.733.163-.733Zm7.138 0 .163.733-.163-.733Zm0-17.116-.162.732.162-.732Zm-7.138 0-.163-.733.163.733Zm10.262 11.062-.134.738.134-.738Zm-.058-.011.134-.738-.134.738Zm0-4.986.134.738-.134-.738Zm.058-.01-.134-.738.134.737Zm2.307.99a.75.75 0 0 0 .601-1.374L21 10.487Zm.601 4.4A.75.75 0 1 0 21 13.513l.601 1.374Zm-5.023-2.259-.721.206.721-.206Zm0-1.256.721.206-.72-.206ZM8.593 4.174l.454-.1-.325-1.465-.454.1.325 1.465Zm6.36-.1.454.1.325-1.465-.454-.1-.325 1.464Zm.454 15.752-.454.1.325 1.465.454-.1-.325-1.465Zm-6.36.1-.454-.1-.325 1.465.454.1.325-1.464Zm-5.434-4.955a12.326 12.326 0 0 1 0-5.942l-1.455-.361a13.826 13.826 0 0 0 0 6.664l1.455-.362ZM20.387 9.03c.484 1.95.484 3.99 0 5.94l1.456.362a13.827 13.827 0 0 0 0-6.664l-1.456.362Zm-5.434 10.897a13.65 13.65 0 0 1-5.906 0l-.325 1.464c2.16.479 4.397.479 6.556 0l-.325-1.464ZM9.047 4.073a13.651 13.651 0 0 1 5.906 0l.325-1.464a15.151 15.151 0 0 0-6.556 0l.325 1.464Zm-.454 15.753a6.603 6.603 0 0 1-4.98-4.856l-1.455.362a8.103 8.103 0 0 0 6.11 5.959l.325-1.465Zm7.139 1.465a8.103 8.103 0 0 0 6.11-5.959l-1.455-.362a6.603 6.603 0 0 1-4.98 4.856l.325 1.465Zm-.325-17.117a6.603 6.603 0 0 1 4.98 4.856l1.456-.362a8.103 8.103 0 0 0-6.111-5.959l-.325 1.465ZM8.268 2.709a8.103 8.103 0 0 0-6.11 5.959l1.455.361a6.603 6.603 0 0 1 4.98-4.855l-.325-1.465Zm10.56 11.057-.059-.01-.269 1.475.059.01.269-1.475Zm-.059-3.521.059-.01-.27-1.476-.058.01.27 1.476Zm.059-.01a3.743 3.743 0 0 1 2.172.252l.601-1.374a5.244 5.244 0 0 0-3.042-.354l.269 1.475Zm-.27 5.007a5.244 5.244 0 0 0 3.043-.355L21 13.513a3.743 3.743 0 0 1-2.172.253l-.27 1.476Zm-1.259-2.82a1.538 1.538 0 0 1 0-.844l-1.442-.412a3.038 3.038 0 0 0 0 1.668l1.442-.412ZM18.5 8.77a3.38 3.38 0 0 0-2.643 2.397l1.442.412a1.88 1.88 0 0 1 1.47-1.333L18.5 8.769Zm.27 4.986a1.88 1.88 0 0 1-1.47-1.333l-1.443.412a3.38 3.38 0 0 0 2.643 2.397l.27-1.476Z"
-                ></path>
-              </svg>
-              <h1>لیست مسترکارت ها</h1>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  className="w-5 h-5"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-width="1.5"
+                    d="M8 9h4"
+                  ></path>
+                  <path
+                    fill="currentColor"
+                    d="m2.885 15.151.728-.18-.728.18Zm0-6.302.728.18-.728-.18Zm18.23 0 .728-.181-.728.18Zm0 6.302-.728-.18.728.18Zm-6 5.508-.162-.732.163.732Zm-6.23 0 .162-.732-.163.732Zm0-17.318.162.732-.163-.732Zm6.23 0 .163-.732-.162.732ZM8.432 20.558l-.163.733.163-.733Zm7.138 0 .163.733-.163-.733Zm0-17.116-.162.732.162-.732Zm-7.138 0-.163-.733.163.733Zm10.262 11.062-.134.738.134-.738Zm-.058-.011.134-.738-.134.738Zm0-4.986.134.738-.134-.738Zm.058-.01-.134-.738.134.737Zm2.307.99a.75.75 0 0 0 .601-1.374L21 10.487Zm.601 4.4A.75.75 0 1 0 21 13.513l.601 1.374Zm-5.023-2.259-.721.206.721-.206Zm0-1.256.721.206-.72-.206ZM8.593 4.174l.454-.1-.325-1.465-.454.1.325 1.465Zm6.36-.1.454.1.325-1.465-.454-.1-.325 1.464Zm.454 15.752-.454.1.325 1.465.454-.1-.325-1.465Zm-6.36.1-.454-.1-.325 1.465.454.1.325-1.464Zm-5.434-4.955a12.326 12.326 0 0 1 0-5.942l-1.455-.361a13.826 13.826 0 0 0 0 6.664l1.455-.362ZM20.387 9.03c.484 1.95.484 3.99 0 5.94l1.456.362a13.827 13.827 0 0 0 0-6.664l-1.456.362Zm-5.434 10.897a13.65 13.65 0 0 1-5.906 0l-.325 1.464c2.16.479 4.397.479 6.556 0l-.325-1.464ZM9.047 4.073a13.651 13.651 0 0 1 5.906 0l.325-1.464a15.151 15.151 0 0 0-6.556 0l.325 1.464Zm-.454 15.753a6.603 6.603 0 0 1-4.98-4.856l-1.455.362a8.103 8.103 0 0 0 6.11 5.959l.325-1.465Zm7.139 1.465a8.103 8.103 0 0 0 6.11-5.959l-1.455-.362a6.603 6.603 0 0 1-4.98 4.856l.325 1.465Zm-.325-17.117a6.603 6.603 0 0 1 4.98 4.856l1.456-.362a8.103 8.103 0 0 0-6.111-5.959l-.325 1.465ZM8.268 2.709a8.103 8.103 0 0 0-6.11 5.959l1.455.361a6.603 6.603 0 0 1 4.98-4.855l-.325-1.465Zm10.56 11.057-.059-.01-.269 1.475.059.01.269-1.475Zm-.059-3.521.059-.01-.27-1.476-.058.01.27 1.476Zm.059-.01a3.743 3.743 0 0 1 2.172.252l.601-1.374a5.244 5.244 0 0 0-3.042-.354l.269 1.475Zm-.27 5.007a5.244 5.244 0 0 0 3.043-.355L21 13.513a3.743 3.743 0 0 1-2.172.253l-.27 1.476Zm-1.259-2.82a1.538 1.538 0 0 1 0-.844l-1.442-.412a3.038 3.038 0 0 0 0 1.668l1.442-.412ZM18.5 8.77a3.38 3.38 0 0 0-2.643 2.397l1.442.412a1.88 1.88 0 0 1 1.47-1.333L18.5 8.769Zm.27 4.986a1.88 1.88 0 0 1-1.47-1.333l-1.443.412a3.38 3.38 0 0 0 2.643 2.397l.27-1.476Z"
+                  ></path>
+                </svg>
+                <h1>لیست مسترکارت ها</h1>
+              </NavLink>
             </li>
-            <li className="flex items-center gap-x-2">
+            <li className="flex items-center gap-x-2 p-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -89,7 +127,7 @@ const AdminLayoutPanel: FC = () => {
               </svg>
               <h1>لیست کامنت ها</h1>
             </li>
-            <li className="flex items-center gap-x-2">
+            <li className="flex items-center gap-x-2 p-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -106,7 +144,7 @@ const AdminLayoutPanel: FC = () => {
               </svg>
               <h1>لیست کاربرها</h1>
             </li>
-            <li className="flex items-center gap-x-2">
+            <li className="flex items-center gap-x-2 p-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -123,7 +161,7 @@ const AdminLayoutPanel: FC = () => {
               </svg>
               <h1>لیست خرید و فروش</h1>
             </li>
-            <li className="flex items-center gap-x-2">
+            <li className="flex items-center gap-x-2 p-2">
               <svg
                 stroke="currentColor"
                 fill="none"
@@ -148,19 +186,21 @@ const AdminLayoutPanel: FC = () => {
         <div className="bg-white p-4 mt-28 flex justify-between items-center">
           <div className="flex gap-x-2">
             <div className="bg-gray-300 text-center flex items-center px-3 h-9 rounded-full">
-              <h1 className="text-md font-Yek-ExtraBold">م</h1>
+              <h1 className="text-md font-Yek-ExtraBold">
+                {userInfo.full_name?.slice(0, 1)}
+              </h1>
             </div>
             <div className="space-y-1">
               <h1 className="text-md font-Yek-ExtraBlack text-gray-600">
-                محمد سیف الهی
+                {userInfo.full_name}
               </h1>
               <p className="text-sm font-Yek-SemiBold text-gray-500 text-center">
-                ادمین
+                {userInfo.is_staff === 'True' && 'ادمین'}
               </p>
             </div>
           </div>
           <div>
-            <button className='border-2 p-2 rounded-2xl'>
+            <button className="border-2 p-2 rounded-2xl">
               <Link to="/admin-dashboard/edit-info">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -201,7 +241,7 @@ const AdminLayoutPanel: FC = () => {
           <div className="flex justify-between p-6">
             <div className="flex gap-x-2 text-xl font-Yek-Bold text-gray-700">
               <h1>سلام;</h1>
-              <h1 className="border-l-2 pl-2">محمد سیف الهی</h1>
+              <h1 className="border-l-2 pl-2">{userInfo.full_name}</h1>
               <DatePickers />
             </div>
             <div className="flex items-center gap-x-4">

@@ -644,8 +644,8 @@ html,
   transition: all 0.5s linear;
 }
 
-.side-bar a.active {
+/* .side-bar a.active {
   padding: 8px;
   border-radius: 12px;
   background-color: #e7edf5;
-}
+} */

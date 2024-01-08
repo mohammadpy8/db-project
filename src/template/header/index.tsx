@@ -47,7 +47,7 @@ const Header = ({ userInfo }: any) => {
             </ul>
           </div>
           <div className="flex gap-x-4">
-            {userInfo.full_name.length > 0 ? (
+            {userInfo.is_staff.length > 0 ? (
               <Link
                 to={
                   userInfo.is_staff === 'False'

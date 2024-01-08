@@ -26,28 +26,26 @@ import ProtedtedRoutes from './module/protectedRouts'
 import AuthContextProvider from './context/AuthContextProvider'
 
 interface UserInfos {
-  username?: string,
-  password?: string,
-  is_staff?:string
-  full_name?:string
+  username?: string
+  password?: string
+  is_staff?: string
+  full_name?: string
 }
 
 const App: FC = (): JSX.Element => {
-
-
   const [userInfo, setUserInfo] = useState<UserInfos>({
-    username: "",
-    password: "",
-    is_staff:"",
-    full_name:""
-  });
+    username: '',
+    password: '',
+    is_staff: '',
+    full_name: '',
+  })
 
   return (
     <>
       <AuthContextProvider>
         <Routes>
           <Route element={<Layout userInfo={userInfo} />}>
-            <Route path="/" element={<HomePage setUserInfo={setUserInfo}/>} />
+            <Route path="/" element={<HomePage setUserInfo={setUserInfo} />} />
             <Route path="/all-arz" element={<Arzs />} />
             <Route path="/arz-shop" element={<ArzShop />} />
             <Route path="/arz-shop/:id" element={<DetailsArz />} />
@@ -57,14 +55,7 @@ const App: FC = (): JSX.Element => {
             <Route path="/login" element={<Login />} />
             <Route path="*" element={<NotFound />} />
           </Route>
-          <Route
-            path="/admin-dashboard"
-            element={
-              <ProtedtedRoutes>
-                <AdminLayoutPanel />
-              </ProtedtedRoutes>
-            }
-          >
+          <Route path="/admin-dashboard" element={<AdminLayoutPanel />}>
             <Route
               path="/admin-dashboard/dashboard"
               element={<MainAdminPanel />}
@@ -81,7 +72,7 @@ const App: FC = (): JSX.Element => {
               element={<ListMaster />}
             />
           </Route>
-          <Route path="/users-dashboard" element={<UsersLayoutPanel  />}>
+          <Route path="/users-dashboard" element={<UsersLayoutPanel />}>
             <Route
               path="/users-dashboard/dashboard"
               element={<MainUsersPanel />}

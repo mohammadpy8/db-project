@@ -1,6 +1,35 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
+import useLocalStorage from '../../../hooks/useLocalStorage'
+
+interface UserInfos {
+  username?: string
+  password?: string
+  is_staff?: string
+  full_name?: string
+}
 
 const EditInfo: FC = () => {
+  const [userInfo, setUserInfo] = useState<UserInfos>({
+    username: '',
+    password: '',
+    is_staff: '',
+    full_name: '',
+  })
+  const getToken = useLocalStorage('', 'GET')
+  console.log(getToken)
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/digital/customer/me/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `JWT ${getToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => setUserInfo(result))
+  }, [])
+
   return (
     <div className="mt-12">
       <div className="text-2xl font-Yek-ExtraBlack text-gray-600 flex justify-center">
@@ -65,9 +94,11 @@ const EditInfo: FC = () => {
         </div>
         <div className="mt-4 mr-56">
           <h1 className="text-2xl text-gray-600 font-Yek-ExtraBlack">
-            محمد سیف الهی
+            {userInfo.full_name}
           </h1>
-          <p className="text-lg font-Yek-Bold text-gray-500">ادمین</p>
+          <p className="text-lg font-Yek-Bold text-gray-500">
+            {userInfo.is_staff === 'True' && 'ادمین'}
+          </p>
         </div>
         <div className="mt-20 px-24">
           <form>
@@ -115,8 +146,10 @@ const EditInfo: FC = () => {
                 />
               </div>
             </div>
-            <div className='mt-6 pb-7'>
-              <button className='text-white bg-primary-300 p-2 w-[400px] rounded-xl font-Yek-Bold hover:ring-[6px] transition-all duration-300'>ویرایش اطلاعات</button>
+            <div className="mt-6 pb-7">
+              <button className="text-white bg-primary-300 p-2 w-[400px] rounded-xl font-Yek-Bold hover:ring-[6px] transition-all duration-300">
+                ویرایش اطلاعات
+              </button>
             </div>
           </form>
         </div>

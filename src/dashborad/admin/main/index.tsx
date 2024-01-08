@@ -1,15 +1,44 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 import DatePickers from '../../../module/datePicker'
 import numberConvertToPersian from '../../../shared/numberConvertToPersian'
 import images from '../../../assets/images/btcadmin.png'
+import useLocalStorage from '../../../hooks/useLocalStorage'
+
+interface UserInfos {
+  username?: string
+  password?: string
+  is_staff?: string
+  full_name?: string
+}
 
 const MainAdminPanel: FC = () => {
+  const [userInfo, setUserInfo] = useState<UserInfos>({
+    username: '',
+    password: '',
+    is_staff: '',
+    full_name: '',
+  })
+  const getToken = useLocalStorage('', 'GET')
+  console.log(getToken)
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/digital/customer/me/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `JWT ${getToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => setUserInfo(result))
+  }, [])
+
   return (
     <div className="p-12">
       <div className="bg-white w-[550px] h-20  rounded-xl">
         <div className="flex items-center gap-x-2 p-6">
           <h1 className="text-2xl font-Yek-ExtraBlack text-gray-600">
-            محمد سیف الهی عزیز😍;
+            عزیز {userInfo.full_name}😍;
           </h1>
           <span className="text-md font-Yek-Regular">
             به جمع تیم ارز ایرانیان خوش آمدی👋🏻
