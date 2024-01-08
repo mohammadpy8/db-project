@@ -3,6 +3,7 @@ import numberConvertToPersian from '../../../shared/numberConvertToPersian'
 import images from '../../../assets/images/btcadmin.png'
 import useLocalStorage from '../../../hooks/useLocalStorage'
 import CustomeModal from '../../../module/customModal'
+import { ThreeDots } from 'react-loader-spinner'
 
 const ListArz = () => {
   const getToken = useLocalStorage('', 'GET')
@@ -27,7 +28,7 @@ const ListArz = () => {
   }, [])
 
   const AccessArzHandle = () => {
-    fetch(`http://127.0.0.1:8000/digital/currencies/${idArz}`, {
+    fetch(`http://127.0.0.1:8000/digital/currencies/${idArz}/`, {
       method: 'PATCH',
       body: JSON.stringify({ status: 'a' }),
       headers: {
@@ -43,9 +44,9 @@ const ListArz = () => {
   }
 
   const cancelArzHandle = () => {
-    fetch(`http://127.0.0.1:8000/digital/currencies/${idArz}`, {
+    fetch(`http://127.0.0.1:8000/digital/currencies/${idArz}/`, {
       method: 'PATCH',
-      body: JSON.stringify({ status: 'c' }),
+      body: JSON.stringify({ status: 'n' }),
       headers: {
         'Content-Type': 'application/json',
         Authorization: `JWT ${getToken}`,
@@ -69,92 +70,105 @@ const ListArz = () => {
           <p>{numberConvertToPersian(listArzs.length)}</p>
         </div>
         <div className="space-y-4">
-          {listArzs.map((item: any) => {
-            const {
-              title,
-              price,
-              status,
-              id,
-              user: { full_name },
-            } = item
-            return (
-              <div
-                className="bg-gray-100 rounded-xl p-4 flex justify-between items-center"
-                key={id}
-              >
-                <div>
-                  <img
-                    src={images}
-                    alt="btc"
-                    className="w-28 h-28 rounded-full object-fill"
-                  />
-                </div>
-                <div className="text-center space-y-4">
-                  <h1 className="text-xl font-Yek-ExtraBlack text-gray-700">
-                    محصول
-                  </h1>
-                  <p className="text-lg text-gray-700 font-Yek-Regular">
-                    ارز دیجیتال {title}
-                  </p>
-                </div>
-                <div className="text-center space-y-4">
-                  <h1 className="text-xl font-Yek-ExtraBlack text-gray-700">
-                    قیمت
-                  </h1>
-                  <p className="text-lg font-Yek-Regular text-red-600">
-                    {numberConvertToPersian(price)}تومان
-                  </p>
-                </div>
-                <div className="text-center space-y-4">
-                  <h1 className="text-xl font-Yek-ExtraBlack text-gray-700">
-                    دسته بندی
-                  </h1>
-                  <div className="flex gap-x-4 p-3">
-                    <div className="bg-green-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
-                      <span>ارز دیجیتال</span>
-                    </div>
-                    <div className="bg-red-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
-                      <span>{title}</span>
+          {listArzs.length > 0 ? (
+            listArzs.map((item: any) => {
+              const {
+                title,
+                price,
+                status,
+                id,
+                user: { full_name },
+              } = item
+              return (
+                <div
+                  className="bg-gray-100 rounded-xl p-4 flex justify-between items-center"
+                  key={id}
+                >
+                  <div>
+                    <img
+                      src={images}
+                      alt="btc"
+                      className="w-28 h-28 rounded-full object-fill"
+                    />
+                  </div>
+                  <div className="text-center space-y-4">
+                    <h1 className="text-xl font-Yek-ExtraBlack text-gray-700">
+                      محصول
+                    </h1>
+                    <p className="text-lg text-gray-700 font-Yek-Regular">
+                      ارز دیجیتال {title}
+                    </p>
+                  </div>
+                  <div className="text-center space-y-4">
+                    <h1 className="text-xl font-Yek-ExtraBlack text-gray-700">
+                      قیمت
+                    </h1>
+                    <p className="text-lg font-Yek-Regular text-red-600">
+                      {numberConvertToPersian(price)}تومان
+                    </p>
+                  </div>
+                  <div className="text-center space-y-4">
+                    <h1 className="text-xl font-Yek-ExtraBlack text-gray-700">
+                      دسته بندی
+                    </h1>
+                    <div className="flex gap-x-4 p-3">
+                      <div className="bg-green-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
+                        <span>ارز دیجیتال</span>
+                      </div>
+                      <div className="bg-red-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
+                        <span>{title}</span>
+                      </div>
                     </div>
                   </div>
+                  <div className="text-center space-y-4">
+                    <h1 className="text-xl font-Yek-ExtraBlack text-gray-700">
+                      عرضه کننده
+                    </h1>
+                    <p className="text-lg text-gray-700 font-Yek-Regular">
+                      {full_name}
+                    </p>
+                  </div>
+                  <div className="text-center space-y-4">
+                    <h1 className="text-xl font-Yek-ExtraBlack text-gray-700">
+                      وضعیت
+                    </h1>
+                    {status === 'w' ? (
+                      <button
+                        className="text-lg bg-primary-300 text-white font-Yek-SemiBold p-2 rounded-xl hover:ring-[6px] transition-all duration-300"
+                        onClick={() => {
+                          setChangeModal(!changeModal)
+                          setIdArz(id)
+                        }}
+                      >
+                        در انتطار تایید
+                      </button>
+                    ) : (
+                      <button
+                        className={
+                          status === 'a'
+                            ? 'text-lg bg-green-500 text-white font-Yek-SemiBold p-2 rounded-xl'
+                            : 'text-lg bg-red-600 text-white font-Yek-SemiBold p-2 rounded-xl'
+                        }
+                      >
+                        {status === 'a' ? 'تایید شد' : 'رد شد'}
+                      </button>
+                    )}
+                  </div>
                 </div>
-                <div className="text-center space-y-4">
-                  <h1 className="text-xl font-Yek-ExtraBlack text-gray-700">
-                    عرضه کننده
-                  </h1>
-                  <p className="text-lg text-gray-700 font-Yek-Regular">
-                    {full_name}
-                  </p>
-                </div>
-                <div className="text-center space-y-4">
-                  <h1 className="text-xl font-Yek-ExtraBlack text-gray-700">
-                    وضعیت
-                  </h1>
-                  {status === 'w' ? (
-                    <button
-                      className="text-lg bg-primary-300 text-white font-Yek-SemiBold p-2 rounded-xl hover:ring-[6px] transition-all duration-300"
-                      onClick={() => {
-                        setChangeModal(!changeModal)
-                        setIdArz(id)
-                      }}
-                    >
-                      در انتطار تایید
-                    </button>
-                  ) : (
-                    <button
-                      className={
-                        status === 'a'
-                          ? 'text-lg bg-green-500 text-white font-Yek-SemiBold p-2 rounded-xl'
-                          : 'text-lg bg-red-600 text-white font-Yek-SemiBold p-2 rounded-xl'
-                      }
-                    >
-                      {status === 'a' ? 'تایید شد' : 'رد شد'}
-                    </button>
-                  )}
-                </div>
-              </div>
-            )
-          })}
+              )
+            })
+          ) : (
+            <div className="flex justify-center items-center">
+              <ThreeDots
+                visible={true}
+                height="80"
+                width="80"
+                color="#0023d0"
+                radius="9"
+                ariaLabel="three-dots-loading"
+              />
+            </div>
+          )}
           <CustomeModal
             setChangeModal={setChangeModal}
             changeModal={changeModal}
