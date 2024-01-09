@@ -42,7 +42,6 @@ const DetailsArz: FC = () => {
         console.log('id', id)
         setListArzs(result.filter((item: any) => item.id === Number(id)))
         console.log(listArzs)
-
       })
   }, [id])
 
@@ -70,7 +69,7 @@ const DetailsArz: FC = () => {
                 <span>ارز دیجیتال</span>
               </div>
               <div className="bg-red-500 rounded-xl text-md font-Yek-ExtraBlack text-white px-2 py-1">
-                <span>{lis}</span>
+                <span>{listArzs[0]?.title}</span>
               </div>
             </div>
             <div className="w-[800px] mt-4 text-[15px] font-Yek-Regular leading-7">
@@ -93,7 +92,7 @@ const DetailsArz: FC = () => {
               </div>
               <div className="flex gap-x-2 items-center">
                 <div className="text-2xl font-Yek-ExtraBlack bg-[#ff00002d] px-3 py-1 text-red-600 rounded-xl flex items-center">
-                  <h1>${numberConvertToPersian(arzPrice.toLocaleString())}</h1>
+                  <h1>${listArzs[0]?.price.toLocaleString()}</h1>
                 </div>
                 <div>
                   <span className="w-5 h-5 bg-red-500 rounded-full dateDelay block"></span>
@@ -427,7 +426,9 @@ const DetailsArz: FC = () => {
           <div className="flex gap-x-9">
             <div className="shadow-sm bg-white w-[200px] h-auto rounded-xl flex flex-col items-center py-6 space-y-6">
               <BiSolidBadgeDollar color="#0e33ea" size={60} />
-              <h1 className="text-xl font-Yek-ExtraBlack ">ارز بیت کوین</h1>
+              <h1 className="text-xl font-Yek-ExtraBlack ">
+                ارز {listArzs[0]?.title}
+              </h1>
             </div>
             <div className="shadow-sm bg-white w-[200px] h-auto rounded-xl flex flex-col items-center py-6 space-y-6">
               <BiSolidOffer color="#0e33ea" size={60} />
@@ -440,13 +441,13 @@ const DetailsArz: FC = () => {
             <div className="shadow-sm bg-white w-[200px] h-auto rounded-xl flex flex-col items-center py-6 space-y-6">
               <GiMoneyStack color="#0e33ea" size={60} />
               <h1 className="text-xl font-Yek-ExtraBlack ">
-                ${numberConvertToPersian(arzPrice.toLocaleString())}
+                ${listArzs[0]?.price.toLocaleString()}
               </h1>
             </div>
             <div className="shadow-sm bg-white w-[200px] h-auto rounded-xl flex flex-col items-center py-6 space-y-6">
               <BiSolidCategory color="#0e33ea" size={60} />
               <h1 className="text-xl font-Yek-ExtraBlack ">
-                بیت کوین - ارزدیجیتال
+                {listArzs[0]?.title} - ارزدیجیتال
               </h1>
             </div>
           </div>
@@ -458,7 +459,7 @@ const DetailsArz: FC = () => {
             </div>
             <div className="flex items-center gap-x-2 justify-center mt-4">
               <h1 className="text-xl text-gray-800 font-Yek-ExtraBold">
-                محمد سیف الهی
+                {listArzs[0]?.user?.full_name}
               </h1>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

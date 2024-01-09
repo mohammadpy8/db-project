@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import HomePage from './pages/home'
 import Layout from './layout'
@@ -24,6 +24,8 @@ import MyArz from './dashborad/users/myArz'
 import EditInfoUsers from './dashborad/users/editInfo'
 import ProtedtedRoutes from './module/protectedRouts'
 import AuthContextProvider from './context/AuthContextProvider'
+import useLocalStorage from './hooks/useLocalStorage'
+import useSaveInfoLocalStorage from './hooks/useSaveInfoLocalStorage'
 
 interface UserInfos {
   username?: string
@@ -40,12 +42,27 @@ const App: FC = (): JSX.Element => {
     full_name: '',
   })
 
+  const getToken = useLocalStorage('', 'GET')
+  console.log(getToken)
+
+  useEffect(() => {
+    fetch('http://127.0.0.1:8000/digital/customer/me/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `JWT ${getToken}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((result) => useSaveInfoLocalStorage(result, 'SET'))
+  }, [])
+
   return (
     <>
       <AuthContextProvider>
         <Routes>
-          <Route element={<Layout userInfo={userInfo} />}>
-            <Route path="/" element={<HomePage setUserInfo={setUserInfo} />} />
+          <Route element={<Layout />}>
+            <Route path="/" element={<HomePage />} />
             <Route path="/all-arz" element={<Arzs />} />
             <Route path="/arz-shop" element={<ArzShop />} />
             <Route path="/arz-shop/:id" element={<DetailsArz />} />

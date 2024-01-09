@@ -2,8 +2,12 @@ import { FC, useEffect, useState } from 'react'
 import ScrollIndicator from '../../module/scrollIndicator'
 import SliderHeader from '../sliderHeader'
 import { Link } from 'react-router-dom'
+import useSaveInfoLocalStorage from '../../hooks/useSaveInfoLocalStorage'
 
-const Header = ({ userInfo }: any) => {
+const Header = () => {
+
+  const userInfo = useSaveInfoLocalStorage("", "GET")
+
   const [scrollCount, setScrollCount] = useState<boolean>(false)
 
   useEffect(() => {
