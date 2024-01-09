@@ -19,8 +19,8 @@ const randomImageArz = (title: string) => {
   }
 };
 
-const randomImageMaster = (title: string) => {
-  switch (title) {
+const randomImageMaster = (country: string) => {
+  switch (country) {
     case "آمریکا":
       return amImage;
     case "فرانسه":
