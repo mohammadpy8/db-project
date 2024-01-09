@@ -188,7 +188,7 @@ const AdminLayoutPanel: FC = () => {
             </li>
           </ul>
         </div>
-        <div className="bg-white p-4 mt-28 flex justify-between items-center">
+        <div className="bg-white p-4 mt-2 flex justify-between items-center">
           <div className="flex gap-x-2">
             <div className="bg-gray-300 text-center flex items-center px-3 h-9 rounded-full">
               <h1 className="text-md font-Yek-ExtraBold">
