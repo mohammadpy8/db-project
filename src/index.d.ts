@@ -1,6 +1,7 @@
 /// <reference path="../../index.d.ts" />
 
 declare module '*.jpg';
+declare module '*.jpeg';
 declare module '*.svg';
 declare module '*.png';
 declare module '*.webp';
@@ -14,6 +15,8 @@ declare module "recharts"
 declare module "react-loader-spinner"
 declare module "*/rootReducer"
 declare module "react-hot-toast"
+declare module "react-router-dom"
+declare module "react"
 
 
 
