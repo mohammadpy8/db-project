@@ -15,8 +15,8 @@ declare module "recharts"
 declare module "react-loader-spinner"
 declare module "*/rootReducer"
 declare module "react-hot-toast"
-declare module "react-router-dom"
-declare module "react"
+// declare module "react-router-dom"
+// declare module "react"
 
 
 
